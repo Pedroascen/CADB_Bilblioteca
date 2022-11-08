@@ -181,8 +181,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-
         //muestra home
+        mostrarHome();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void guardarAdmin() {

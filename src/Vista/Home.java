@@ -49,9 +49,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        btnAgregarMaterial.setText("Agregar Material");
+        btnAgregarMaterial.setText("Modificar Usuario");
 
-        jButton2.setText("Ver Material");
+        jButton2.setText("Eliminar Usuario");
 
         labelBienvenida.setText("Bienvenido:");
 
@@ -101,7 +101,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(lbUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelBienvenida)
                     .addComponent(lbTipoUsuario))
                 .addGap(8, 8, 8)

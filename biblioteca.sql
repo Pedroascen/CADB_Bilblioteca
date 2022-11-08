@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 06-11-2022 a las 22:55:48
+-- Tiempo de generación: 08-11-2022 a las 01:16:56
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -54,22 +54,21 @@ INSERT INTO `rol` (`id_rol`, `nombre`) VALUES
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido` varchar(20) DEFAULT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `apellido` varchar(20) NOT NULL,
   `carnet` varchar(15) NOT NULL,
-  `contrasenia` varchar(30) DEFAULT NULL,
-  `rol_id` int(11) DEFAULT NULL,
+  `contrasenia` varchar(40) NOT NULL,
+  `rol_id` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `FK_usuario_rol_idx` (`rol_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `carnet`, `contrasenia`, `rol_id`) VALUES
-(1, 'Pedro', 'Ascencio', 'AA213054', '12345', 1),
-(2, 'Alexander', 'Antonio', 'AA213051', '12345', 3);
+(1, 'Ascen', 'Ascen', 'AA201200', '8cb2237d0679ca88db6464eac60da96345513964', 1);
 
 --
 -- Restricciones para tablas volcadas

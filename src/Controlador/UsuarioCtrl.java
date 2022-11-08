@@ -1,18 +1,17 @@
 package Controlador;
 
+import Modelo.Entidad.Usuario;
 import Modelo.UsuarioDataLogin;
 import Modelo.UsuarioSQL;
 import Vista.Login;
 import javax.swing.JOptionPane;
 
 public class UsuarioCtrl {
-
-    //instancia de la entidad
+ //instancia de la entidad
     UsuarioSQL usrsql = new UsuarioSQL();
 
     //metodo para guardar
     public boolean Guardar(String nombre, String apellido, String carnet, String contrasenia, int id_rol) {
-
         //confirmar si el resultado es true o false
         if (usrsql.registrar(nombre,apellido,carnet, contrasenia,id_rol)) {
             JOptionPane.showMessageDialog(null, "El registro se guardo con exito.");
@@ -38,5 +37,4 @@ public class UsuarioCtrl {
             return false;
         }
     }
-
 }

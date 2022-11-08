@@ -1,35 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Vista;
 
-import Controlador.UsuarioCtrl;
-import Modelo.Hash;
-import Modelo.UsuarioDataLogin;
-import javax.swing.JOptionPane;
+/**
+ *
+ * @author Jazmine
+ */
+public class ModificarUsuarios extends javax.swing.JFrame {
 
-public class RegistroUsuario extends javax.swing.JFrame {
-
-    //instancia al controlador
-    UsuarioCtrl usrcrtl = new UsuarioCtrl();
-    UsuarioDataLogin usrlog = new UsuarioDataLogin();
-    RegistroUsuario frmRegistroUser;
-    Home frmHome;
-
-    public RegistroUsuario() {
+    /**
+     * Creates new form ModificarUsuarios
+     */
+    public ModificarUsuarios() {
         initComponents();
-        setLocationRelativeTo(null);
-        LlenarUsrCombox();
-    }
-
-    //metodo para identificar al usuario logueado
-    RegistroUsuario(UsuarioDataLogin usrlog) {
-        this.usrlog = usrlog;
-        //Validamos que sea admin para poder agregar usuario
-        if (usrlog.getId_rol() == 1) {
-            initComponents();
-            setLocationRelativeTo(null);
-            LlenarUsrCombox();
-        } else {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, opcion para usuarios tipo Admin.");
-        }
     }
 
     /**
@@ -116,7 +102,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Rellene los campos para registrar un usuario nuevo");
+        jLabel3.setText("Rellene los campos para modificar un usuario registrado");
 
         btnRegistrar.setBackground(new java.awt.Color(23, 59, 102));
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,6 +135,10 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -169,20 +159,16 @@ public class RegistroUsuario extends javax.swing.JFrame {
                             .addComponent(txtContrasenia)
                             .addComponent(txtConfirmContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(58, 58, 58)
                         .addComponent(jLabel3)))
-                .addContainerGap(62, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(157, 157, 157))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoUsuario)
                     .addComponent(cboTipoRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -244,7 +230,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nuevo usuario");
+        jLabel7.setText("Modificar usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,16 +244,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(106, 106, 106))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(98, 98, 98))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(126, 126, 126)))
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addGap(90, 90, 90)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -276,7 +260,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -297,133 +281,20 @@ public class RegistroUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    //lenar combobox
-
-    private void LlenarUsrCombox() {
-        cboTipoRol.addItem("Administrador");
-        cboTipoRol.addItem("Profesor");
-        cboTipoRol.addItem("Alumno");
-    }
 
     private void btnRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMousePressed
         // TODO add your handling code here:
-        String opcion = (String) cboTipoRol.getSelectedItem();
-        //Llamada al metodo guardar
-        if (opcion.equals("Administrador")) {
-            guardarAdmin();
-            System.out.println("Selecciono un: " + opcion);
-        }
-        if (opcion.equals("Profesor")) {
-            guardarProfesor();
-            System.out.println("Selecciono un: " + opcion);
-
-        }
-        if (opcion.equals("Alumno")) {
-            guardarAlumno();
-            System.out.println("Selecciono un: " + opcion);
-
-        }
+        
     }//GEN-LAST:event_btnRegistrarMousePressed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        //muestra home
-        mostrarHome();
+        // TODO add your handling code here:
+        dispose();
+        Home home = new Home();
+        home.setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void guardarAdmin() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 1;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
-
-    private void guardarProfesor() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 2;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
-
-    private void guardarAlumno() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 3;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
-
-    //metodo para limpiar inputs
-    private void limpiarInputs() {
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtCarnet.setText("");
-        txtContrasenia.setText("");
-        txtConfirmContrasenia.setText("");
-    }
-
-    //metodo para mostrar el home
-    private void mostrarHome() {
-        //se regresa a la vista de home con los datos del logueado
-        if (frmHome == null) {
-            frmHome = new Home(usrlog);
-            frmHome.setVisible(true);
-            this.dispose();
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -442,20 +313,20 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroUsuario().setVisible(true);
+                new ModificarUsuarios().setVisible(true);
             }
         });
     }

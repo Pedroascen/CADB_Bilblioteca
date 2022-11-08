@@ -1,27 +1,20 @@
 package Controlador;
 
-import Modelo.Entidad.Usuario;
+import Modelo.UsuarioDataLogin;
 import Modelo.UsuarioSQL;
+import Vista.Login;
 import javax.swing.JOptionPane;
 
 public class UsuarioCtrl {
 
     //instancia de la entidad
-    Usuario usr = new Usuario();
     UsuarioSQL usrsql = new UsuarioSQL();
 
     //metodo para guardar
     public boolean Guardar(String nombre, String apellido, String carnet, String contrasenia, int id_rol) {
 
-        //datos que vienen de la vista para guardar
-        usr.setNombre(nombre);
-        usr.setApellido(apellido);
-        usr.setCarnet(carnet);
-        usr.setContrasenia(contrasenia);
-        usr.setId_rol(id_rol);
-
         //confirmar si el resultado es true o false
-        if (usrsql.registrar(usr)) {
+        if (usrsql.registrar(nombre,apellido,carnet, contrasenia,id_rol)) {
             JOptionPane.showMessageDialog(null, "El registro se guardo con exito.");
             return true;
         } else {
@@ -32,9 +25,12 @@ public class UsuarioCtrl {
 
     //metodo para iniciar sesion
     public boolean Login(String carnet, String contrasenia) {
-        usr.setCarnet(carnet);
-        usr.setContrasenia(contrasenia);
-        if (usrsql.login(usr)) {
+        UsuarioDataLogin usrlog = new UsuarioDataLogin();
+        Login frmLogin = new Login();
+        usrlog.setCarnet(carnet);
+        usrlog.setContrasenia(contrasenia);
+        if (usrsql.login(usrlog)) {
+            frmLogin.mostrarHome(usrlog);
             //JOptionPane.showMessageDialog(null, "El usuario ingreso con exito.");
             return true;
         } else {

@@ -1,21 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-/**
- *
- * @author Ascencio
- */
+import Modelo.UsuarioDataLogin;
+import javax.swing.JOptionPane;
+
 public class Home extends javax.swing.JFrame {
-    
+
+    //instacias de objetos
     RegistroUsuario frmRegistro;
-    
+    UsuarioDataLogin usrlog = new UsuarioDataLogin();
+
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public Home(UsuarioDataLogin usrlog) {
+        this.usrlog = usrlog;
+        //JOptionPane.showMessageDialog(null, "Intenta guardar un registro: " + usrlog.getId_rol()); //To change body of generated methods, choose Tools | Templates.
+        initComponents();
+        setLocationRelativeTo(null);
+        lbTipoUsuario.setText(usrlog.getNombre_TipoUser());
     }
 
     /**
@@ -32,6 +36,9 @@ public class Home extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         labelBienvenida = new javax.swing.JLabel();
         lbUsuario = new javax.swing.JLabel();
+        lbTipoUsuario = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,52 +55,73 @@ public class Home extends javax.swing.JFrame {
 
         labelBienvenida.setText("Bienvenido:");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbUsuario))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnAgregarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAgregarMaterial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAgregarMaterial)
-                                .addComponent(btnAgregarUsuario))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jButton2))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
+                        .addGap(87, 87, 87)
                         .addComponent(labelBienvenida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbUsuario)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
+                .addComponent(lbUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBienvenida)
-                    .addComponent(lbUsuario))
-                .addGap(42, 42, 42)
-                .addComponent(btnAgregarUsuario)
-                .addGap(18, 18, 18)
-                .addComponent(btnAgregarMaterial)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(109, Short.MAX_VALUE))
+                    .addComponent(lbTipoUsuario))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarUsuario)
+                    .addComponent(btnAgregarMaterial)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioMouseClicked
-        
+
         //muestra formulario para agregar user
-        if(frmRegistro==null){
-            frmRegistro = new RegistroUsuario();
+        if (frmRegistro == null) {
+            frmRegistro = new RegistroUsuario(usrlog);
             frmRegistro.setVisible(true);
             this.dispose();
         }
@@ -138,7 +166,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarMaterial;
     private javax.swing.JButton btnAgregarUsuario;
     private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelBienvenida;
+    private javax.swing.JLabel lbTipoUsuario;
     private javax.swing.JLabel lbUsuario;
     // End of variables declaration//GEN-END:variables
 }

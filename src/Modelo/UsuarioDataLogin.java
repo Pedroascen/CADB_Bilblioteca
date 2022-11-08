@@ -1,6 +1,6 @@
-package Modelo.Entidad;
+package Modelo;
 
-public class Usuario {
+public class UsuarioDataLogin {
     //atributos de Usuario
     private int id_usuario;
     private int id_rol;
@@ -8,17 +8,19 @@ public class Usuario {
     private String apellido;
     private String carnet;
     private String contrasenia;
+    private String nombre_TipoUser;
     
     //constructores
-    public Usuario(){
+    public UsuarioDataLogin(){
     }
     
-    public Usuario(int id_rol, String nombre, String apellido,String carnet,String contrasenia){
+    public UsuarioDataLogin(int id_rol, String nombre, String apellido,String carnet,String contrasenia,String nombre_tipo){
         this.id_rol=id_rol;
         this.nombre=nombre;
         this.apellido=apellido;
         this.carnet=carnet;
         this.contrasenia=contrasenia;
+        this.nombre_TipoUser = nombre_tipo;
     }
     
     //getters y setters
@@ -69,4 +71,13 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    public String getNombre_TipoUser() {
+        return nombre_TipoUser;
+    }
+
+    public void setNombre_TipoUser(String nombre_TipoUser) {
+        this.nombre_TipoUser = nombre_TipoUser;
+    }
+    
 }

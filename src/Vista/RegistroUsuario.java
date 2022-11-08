@@ -1,19 +1,32 @@
 package Vista;
 
 import Controlador.UsuarioCtrl;
+import Modelo.Hash;
+import Modelo.UsuarioDataLogin;
 import javax.swing.JOptionPane;
 
 public class RegistroUsuario extends javax.swing.JFrame {
 
     //instancia al controlador
     UsuarioCtrl usrcrtl = new UsuarioCtrl();
+    UsuarioDataLogin usrlog = new UsuarioDataLogin();
     RegistroUsuario frmRegistroUser;
     Home frmHome;
 
     public RegistroUsuario() {
         initComponents();
         setLocationRelativeTo(null);
-        LlenarUsrCombox();
+        //LlenarUsrCombox();
+    }
+
+    RegistroUsuario(UsuarioDataLogin usrlog) {
+        this.usrlog=usrlog;
+        //JOptionPane.showMessageDialog(null, "Intenta guardar un registro: " + usrlog.getId_rol()); //To change body of generated methods, choose Tools | Templates.
+        if (usrlog.getId_rol() == 1) {
+            initComponents();
+            setLocationRelativeTo(null);
+            LlenarUsrCombox();
+        }
     }
 
     /**
@@ -169,12 +182,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
 
-        //muestra formulario para agregar user
-        if(frmHome==null){
-            frmHome = new Home();
-            frmHome.setVisible(true);
-            this.dispose();
-        }
+        //muestra home
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void guardarAdmin() {
@@ -186,13 +194,17 @@ public class RegistroUsuario extends javax.swing.JFrame {
         } else {
             //comparamos la contrasenia
             if (contra.equals(contraConfirm)) {
+                //ciframos la contraseña
+                String nuevaContra = Hash.sha1(contra);
+                //enviamos los datos
                 String nombre = txtNombre.getText();
                 String apellido = txtApellido.getText();
                 String carnet = txtCarnet.getText();
-                String contrasenia = contra;
+                String contrasenia = nuevaContra;
                 int id_rol = 1;
                 usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
                 limpiarInputs();
+                mostrarHome();
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
             }
@@ -208,13 +220,17 @@ public class RegistroUsuario extends javax.swing.JFrame {
         } else {
             //comparamos la contrasenia
             if (contra.equals(contraConfirm)) {
+                //ciframos la contraseña
+                String nuevaContra = Hash.sha1(contra);
+                //enviamos los datos
                 String nombre = txtNombre.getText();
                 String apellido = txtApellido.getText();
                 String carnet = txtCarnet.getText();
-                String contrasenia = contra;
+                String contrasenia = nuevaContra;
                 int id_rol = 2;
                 usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
                 limpiarInputs();
+                mostrarHome();
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
             }
@@ -230,13 +246,17 @@ public class RegistroUsuario extends javax.swing.JFrame {
         } else {
             //comparamos la contrasenia
             if (contra.equals(contraConfirm)) {
+                //ciframos la contraseña
+                String nuevaContra = Hash.sha1(contra);
+                //enviamos los datos
                 String nombre = txtNombre.getText();
                 String apellido = txtApellido.getText();
                 String carnet = txtCarnet.getText();
-                String contrasenia = contra;
+                String contrasenia = nuevaContra;
                 int id_rol = 3;
                 usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
                 limpiarInputs();
+                mostrarHome();
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
             }
@@ -249,6 +269,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
         txtCarnet.setText("");
         txtContrasenia.setText("");
         txtConfirmContrasenia.setText("");
+    }
+    
+    private void mostrarHome(){
+        if (frmHome == null) {
+            frmHome = new Home(usrlog);
+            frmHome.setVisible(true);
+            this.dispose();
+        }
     }
 
     /**

@@ -1,12 +1,15 @@
 package Vista;
 
 import Controlador.UsuarioCtrl;
+import Modelo.Hash;
+import Modelo.UsuarioDataLogin;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
     //instancia al controlador
     UsuarioCtrl usrcrtl = new UsuarioCtrl();
+    UsuarioDataLogin usrlog;
     Home frmHome;
 
     public Login() {
@@ -96,20 +99,43 @@ public class Login extends javax.swing.JFrame {
         //creacion de variables para ingresar
         String carnet = txtCarnet.getText();
         String contra = new String(txtContrasenia.getPassword());
+        //cifrado de contrasenia
+        String contraCif = Hash.sha1(contra);
+        //System.out.println(contraCif);
         //validamos que no esten los campos vacios
         if (!txtCarnet.getText().equals("") && !txtContrasenia.equals("")) {
             //se envian los datos al controlador a travez del metodo
-            if(usrcrtl.Login(carnet, contra)==true){
+            if (usrcrtl.Login(carnet, contraCif)) {
                 //se oculta el login
                 this.dispose();
-                //se muestra home
-                Home frmHome = new Home();
-                frmHome.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los campos no pueden ser nulos.");
         }
     }//GEN-LAST:event_btnIngresarMouseClicked
+    //metodo para identificar tipo de usuario en home
+    public void mostrarHome(UsuarioDataLogin usrlog) {
+        //JOptionPane.showMessageDialog(null, "Bienvenido: " + usr.getId_rol());
+        if (usrlog.getId_rol() == 1) {
+            //JOptionPane.showMessageDialog(null, "Bienvenido: Administrador:" + usrlog.getId_rol());
+            //se muestra home para admin
+            Home frmHome = new Home(usrlog);
+            frmHome.setVisible(true);
+        }
+
+        if (usrlog.getId_rol() == 2) {
+            JOptionPane.showMessageDialog(null, "Bienvenido: Profesor:" + usrlog.getId_rol());
+            //Home frmHome = new Home(usrlog);
+            //frmHome.setVisible(true);
+        }
+
+        if (usrlog.getId_rol() == 3) {
+            JOptionPane.showMessageDialog(null, "Bienvenido: Alumno:" + usrlog.getId_rol());
+            //Home frmHome = new Home(usrlog);
+            //frmHome.setVisible(true);
+        }
+
+    }
 
     /**
      * @param args the command line arguments

@@ -1,6 +1,5 @@
 package Modelo;
 
-import Modelo.Entidad.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +19,7 @@ public class UsuarioSQL extends Conexion {
             //se crea la conexion con la base
             conn = Conexion.getConnection();
             //se declara la sentencia sql
-            stmt = conn.prepareStatement("INSERT INTO usuarios (nombre,apellido,carnet,contrasenia,rol_id) VALUES(?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO usuario (nombre,apellido,carnet,contrasena,id_rol) VALUES(?,?,?,?,?)");
             int i = 1;//contador para la columnas para guardar registro
 
             stmt.setString(i++, nombre);
@@ -53,18 +52,17 @@ public class UsuarioSQL extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT u.id_usuario,u.carnet,u.contrasenia,u.rol_id,r.nombre FROM usuarios AS u INNER JOIN rol AS r ON u.rol_id = r.id_rol WHERE carnet = ?");
+            stmt = conn.prepareStatement("SELECT u.carnet,u.contrasena,u.id_rol,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE carnet = ?");
 
             int i = 1;//contador para la columnas para guardar registro
             stmt.setString(i++, usrlog.getCarnet());
             rs = stmt.executeQuery();
 
              while(rs.next()) {
-                if (usrlog.getContrasenia().equals(rs.getString(3))) {
-                    usrlog.setId_usuario(rs.getInt(1));
-                    usrlog.setCarnet(rs.getString(2));
-                    usrlog.setId_rol(rs.getInt(4));
-                    usrlog.setNombre_TipoUser(rs.getString(5));
+                if (usrlog.getContrasenia().equals(rs.getString(2))) {
+                    usrlog.setCarnet(rs.getString(1));
+                    usrlog.setId_rol(rs.getInt(3));
+                    usrlog.setNombre_TipoUser(rs.getString(4));
                     return true;
                 }
             }

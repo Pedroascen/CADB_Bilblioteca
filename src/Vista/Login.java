@@ -190,7 +190,7 @@ public class Login extends javax.swing.JFrame {
         String contra = new String(txtContrasenia.getPassword());
         //cifrado de contrasenia
         String contraCif = Hash.sha1(contra);
-        System.out.println(contraCif);
+        //System.out.println(contraCif);
         //validamos que no esten los campos vacios
         if (!txtCarnet.getText().equals("") && !txtContrasenia.equals("")) {
             //se envian los datos al controlador a travez del metodo
@@ -199,9 +199,10 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
             }
         } else {
+            txtCarnet.setText("");
+            txtContrasenia.setText("");
             JOptionPane.showMessageDialog(null, "Los campos no pueden ser nulos.");
         }
-
     }//GEN-LAST:event_btnIngresarMousePressed
 
     //metodo para identificar tipo de usuario en home
@@ -214,15 +215,15 @@ public class Login extends javax.swing.JFrame {
         }
 
         if (usrlog.getId_rol() == 2) {
-            JOptionPane.showMessageDialog(null, "Bienvenido: Profesor:" + usrlog.getId_rol());
-            //Home frmHome = new Home(usrlog);
-            //frmHome.setVisible(true);
+            //JOptionPane.showMessageDialog(null, "Bienvenido: Profesor:" + usrlog.getId_rol());
+            HomeUsuarios frmHomeUser = new HomeUsuarios();
+            frmHomeUser.setVisible(true);
         }
 
         if (usrlog.getId_rol() == 3) {
-            JOptionPane.showMessageDialog(null, "Bienvenido: Alumno:" + usrlog.getId_rol());
-            //Home frmHome = new Home(usrlog);
-            //frmHome.setVisible(true);
+            //JOptionPane.showMessageDialog(null, "Bienvenido: Alumno:" + usrlog.getId_rol());
+            HomeUsuarios frmHomeUser = new HomeUsuarios();
+            frmHomeUser.setVisible(true);
         }
     }
 

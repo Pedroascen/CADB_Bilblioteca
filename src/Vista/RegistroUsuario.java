@@ -9,27 +9,12 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     //instancia al controlador
     UsuarioCtrl usrcrtl = new UsuarioCtrl();
-    UsuarioDataLogin usrlog = new UsuarioDataLogin();
     RegistroUsuario frmRegistroUser;
-    Home frmHome;
 
     public RegistroUsuario() {
         initComponents();
-        setLocationRelativeTo(null);
         LlenarUsrCombox();
-    }
-
-    //metodo para identificar al usuario logueado
-    RegistroUsuario(UsuarioDataLogin usrlog) {
-        this.usrlog = usrlog;
-        //Validamos que sea admin para poder agregar usuario
-        if (usrlog.getId_rol() == 1) {
-            initComponents();
-            setLocationRelativeTo(null);
-            LlenarUsrCombox();
-        } else {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, opcion para usuarios tipo Admin.");
-        }
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -328,7 +313,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         //muestra home
-        mostrarHome();
+        Home frmHome = new Home();
+        frmHome.setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void guardarAdmin() {
@@ -413,16 +399,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         txtCarnet.setText("");
         txtContrasenia.setText("");
         txtConfirmContrasenia.setText("");
-    }
-
-    //metodo para mostrar el home
-    private void mostrarHome() {
-        //se regresa a la vista de home con los datos del logueado
-        if (frmHome == null) {
-            frmHome = new Home(usrlog);
-            frmHome.setVisible(true);
-            this.dispose();
-        }
     }
 
     /**

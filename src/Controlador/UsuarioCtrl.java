@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.Entidad.Usuario;
 import Modelo.UsuarioDataLogin;
 import Modelo.UsuarioSQL;
 import Vista.Login;

@@ -6,31 +6,32 @@
 package Vista;
 
 import Modelo.UsuarioDataLogin;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ascencio
  */
 public class Home extends javax.swing.JFrame {
-    
+
     //instacias de objetos
     RegistroUsuario frmRegistro;
     UsuarioDataLogin usrlog = new UsuarioDataLogin();
-    
+
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
+    //metodo donde pasamos la informacion del logueado
     public Home(UsuarioDataLogin usrlog) {
         this.usrlog = usrlog;
-        //JOptionPane.showMessageDialog(null, "Bienvenido: " + usrlog.getNombre_TipoUser()); //To change body of generated methods, choose Tools | Templates.
-        initComponents();
-        setLocationRelativeTo(null);
-        lbTipoUsuario.setText(usrlog.getNombre_TipoUser());
+        //Validamos que sea admin para poder agregar usuario
+        if (usrlog.getId_rol() == 1) {
+            initComponents();
+            setLocationRelativeTo(null);
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,6 +64,7 @@ public class Home extends javax.swing.JFrame {
         lblAdministrarUsuario = new javax.swing.JLabel();
         labelBienvenida1 = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -234,6 +236,7 @@ public class Home extends javax.swing.JFrame {
 
         lbTipoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lbTipoUsuario.setForeground(new java.awt.Color(23, 59, 102));
+        lbTipoUsuario.setText("Aministrador");
 
         jPanel6.setBackground(new java.awt.Color(28, 70, 120));
 
@@ -364,13 +367,20 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 510));
 
         iconUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_test_account_110px_2.png"))); // NOI18N
-        jPanel1.add(iconUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        jPanel1.add(iconUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Administrador");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,8 +394,8 @@ public class Home extends javax.swing.JFrame {
     private void btnAgregarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioMousePressed
         // TODO add your handling code here:
         //muestra formulario para agregar user
-        if(frmRegistro==null){
-            frmRegistro = new RegistroUsuario(usrlog);
+        if (frmRegistro == null) {
+            frmRegistro = new RegistroUsuario();
             frmRegistro.setVisible(true);
             this.dispose();
         }
@@ -396,8 +406,8 @@ public class Home extends javax.swing.JFrame {
         dispose();
         AdministrarUsuario administrar = new AdministrarUsuario();
         administrar.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_btnAdministrarUsuarioMousePressed
 
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
@@ -405,14 +415,14 @@ public class Home extends javax.swing.JFrame {
         dispose();
         Login login = new Login();
         login.setVisible(true);
-           
-        
+
+
     }//GEN-LAST:event_btnCerrarSesionMousePressed
 
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
         // TODO add your handling code here:
         dispose();
-        Lista lista = new Lista();
+        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
         lista.setVisible(true);
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
@@ -469,6 +479,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel iconAdministrarUsuarios;
     private javax.swing.JLabel iconAgregarUsuario;
     private javax.swing.JLabel iconUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

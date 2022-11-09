@@ -27,21 +27,260 @@ public class HomeUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnCerrarSesion = new javax.swing.JPanel();
+        lblCerrarSesion = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        labelBienvenida = new javax.swing.JLabel();
+        btnPrestamos = new javax.swing.JPanel();
+        lblPrestamos = new javax.swing.JLabel();
+        btnListaEjemplares = new javax.swing.JPanel();
+        lblListaEjemplares = new javax.swing.JLabel();
+        btnDevoluciones = new javax.swing.JPanel();
+        lblDevoluciones = new javax.swing.JLabel();
+        labelBienvenida1 = new javax.swing.JLabel();
+        lbTipoUsuario = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(23, 59, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCerrarSesion.setBackground(new java.awt.Color(28, 70, 120));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMousePressed(evt);
+            }
+        });
+        btnCerrarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
+        lblCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_logout_20px.png"))); // NOI18N
+        lblCerrarSesion.setText("Cerrar sesión");
+        lblCerrarSesion.setIconTextGap(6);
+        lblCerrarSesion.setInheritsPopupMenu(false);
+        btnCerrarSesion.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 11, -1, 26));
+
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 191, 48));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        labelBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelBienvenida.setForeground(new java.awt.Color(23, 59, 102));
+
+        btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
+        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblPrestamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
+        lblPrestamos.setForeground(new java.awt.Color(255, 255, 255));
+        lblPrestamos.setText("Préstamos");
+        lblPrestamos.setIconTextGap(6);
+
+        javax.swing.GroupLayout btnPrestamosLayout = new javax.swing.GroupLayout(btnPrestamos);
+        btnPrestamos.setLayout(btnPrestamosLayout);
+        btnPrestamosLayout.setHorizontalGroup(
+            btnPrestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPrestamosLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(lblPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        btnPrestamosLayout.setVerticalGroup(
+            btnPrestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPrestamosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPrestamos, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btnListaEjemplares.setBackground(new java.awt.Color(28, 70, 120));
+        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnListaEjemplaresMousePressed(evt);
+            }
+        });
+
+        lblListaEjemplares.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
+        lblListaEjemplares.setForeground(new java.awt.Color(255, 255, 255));
+        lblListaEjemplares.setText("Consulta de ejemplares");
+        lblListaEjemplares.setIconTextGap(6);
+
+        javax.swing.GroupLayout btnListaEjemplaresLayout = new javax.swing.GroupLayout(btnListaEjemplares);
+        btnListaEjemplares.setLayout(btnListaEjemplaresLayout);
+        btnListaEjemplaresLayout.setHorizontalGroup(
+            btnListaEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnListaEjemplaresLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblListaEjemplares)
+                .addGap(48, 48, 48))
+        );
+        btnListaEjemplaresLayout.setVerticalGroup(
+            btnListaEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnListaEjemplaresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblListaEjemplares, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
+        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblDevoluciones.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
+        lblDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
+        lblDevoluciones.setText("Devoluciones");
+        lblDevoluciones.setIconTextGap(6);
+
+        javax.swing.GroupLayout btnDevolucionesLayout = new javax.swing.GroupLayout(btnDevoluciones);
+        btnDevoluciones.setLayout(btnDevolucionesLayout);
+        btnDevolucionesLayout.setHorizontalGroup(
+            btnDevolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDevolucionesLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(lblDevoluciones)
+                .addGap(22, 22, 22))
+        );
+        btnDevolucionesLayout.setVerticalGroup(
+            btnDevolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDevolucionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblDevoluciones, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        labelBienvenida1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelBienvenida1.setForeground(new java.awt.Color(0, 51, 102));
+        labelBienvenida1.setText("Bienvenido: ");
+
+        lbTipoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        lbTipoUsuario.setForeground(new java.awt.Color(0, 51, 102));
+
+        jPanel12.setBackground(new java.awt.Color(28, 70, 120));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 572, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_search_property_100px.png"))); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_borrow_book_80px.png"))); // NOI18N
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_return_book_80px.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(labelBienvenida))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(labelBienvenida1)
+                                .addGap(13, 13, 13)
+                                .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jLabel2)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(92, 92, 92)
+                                        .addComponent(jLabel3))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(btnPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(79, 79, 79)
+                                        .addComponent(btnDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4)
+                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelBienvenida1)
+                    .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelBienvenida)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(28, 28, 28)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(131, 131, 131))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 770, 530));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/logo white150px.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 140, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 904, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
+        // TODO add your handling code here:
+        dispose();
+        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
+        lista.setVisible(true);
+    }//GEN-LAST:event_btnListaEjemplaresMousePressed
+
+    private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
+        // TODO add your handling code here:
+        dispose();
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionMousePressed
 
     /**
      * @param args the command line arguments
@@ -79,5 +318,28 @@ public class HomeUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnCerrarSesion;
+    private javax.swing.JPanel btnDevoluciones;
+    private javax.swing.JPanel btnListaEjemplares;
+    private javax.swing.JPanel btnPrestamos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel labelBienvenida;
+    private javax.swing.JLabel labelBienvenida1;
+    private javax.swing.JLabel lbTipoUsuario;
+    private javax.swing.JLabel lblCerrarSesion;
+    private javax.swing.JLabel lblDevoluciones;
+    private javax.swing.JLabel lblListaEjemplares;
+    private javax.swing.JLabel lblPrestamos;
     // End of variables declaration//GEN-END:variables
 }

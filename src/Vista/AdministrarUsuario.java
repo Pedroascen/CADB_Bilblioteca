@@ -5,19 +5,25 @@
  */
 package Vista;
 
+import Controlador.UsuarioCtrl;
+import Modelo.UsuarioDataLogin;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jazmine
  */
 public class AdministrarUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdministrarUsuario
-     */
+    //instancia al controlador
+    UsuarioCtrl usrcrtl = new UsuarioCtrl();
+    UsuarioDataLogin usrlog = new UsuarioDataLogin();
+    RegistroUsuario frmRegistroUser;
+    Home frmHome;
+    
     public AdministrarUsuario() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -359,8 +365,9 @@ public class AdministrarUsuario extends javax.swing.JFrame {
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
         // TODO add your handling code here:
         dispose();
-        Home home = new Home();
-        home.setVisible(true);
+        Home frmHome = new Home();
+        frmHome.setVisible(true);
+         
     }//GEN-LAST:event_btnHomeMousePressed
 
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
@@ -373,7 +380,7 @@ public class AdministrarUsuario extends javax.swing.JFrame {
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
         // TODO add your handling code here:
         dispose();
-        Lista lista = new Lista();
+        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
         lista.setVisible(true);
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
@@ -389,7 +396,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         dispose();
         ModificarUsuarios modif = new ModificarUsuarios();
         modif.setVisible(true);
-     
     }//GEN-LAST:event_lblAdministrarUsuario1MousePressed
 
     private void btnAgregarEjemplarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarEjemplarMousePressed

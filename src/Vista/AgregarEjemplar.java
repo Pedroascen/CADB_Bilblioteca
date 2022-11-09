@@ -5,15 +5,16 @@
  */
 package Vista;
 
+import Modelo.UsuarioDataLogin;
+
 /**
  *
  * @author Jazmine
  */
 public class AgregarEjemplar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AgregarEjemplar
-     */
+    //instacias de objetos
+    
     public AgregarEjemplar() {
         initComponents();
     }
@@ -60,6 +61,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         btnLibro4 = new javax.swing.JPanel();
         lblAdministrarUsuario4 = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -293,8 +295,9 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         btnLibroLayout.setHorizontalGroup(
             btnLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLibroLayout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(lblAdministrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(lblAdministrarUsuario)
+                .addGap(25, 25, 25))
         );
         btnLibroLayout.setVerticalGroup(
             btnLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +494,12 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
 
         iconUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_test_account_110px_2.png"))); // NOI18N
-        jPanel1.add(iconUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        jPanel1.add(iconUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setText("Administrador");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -517,6 +525,9 @@ public class AgregarEjemplar extends javax.swing.JFrame {
 
     private void btnLibroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLibroMousePressed
         // TODO add your handling code here:
+        dispose();
+        AgregarLibro addLibro = new AgregarLibro();
+        addLibro.setVisible(true);
     }//GEN-LAST:event_btnLibroMousePressed
 
     private void btnObraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnObraMousePressed
@@ -545,7 +556,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
         // TODO add your handling code here:
         dispose();
-        Lista lista = new Lista();
+        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
         lista.setVisible(true);
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
@@ -610,6 +621,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

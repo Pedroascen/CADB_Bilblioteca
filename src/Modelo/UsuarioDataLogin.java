@@ -2,7 +2,6 @@ package Modelo;
 
 public class UsuarioDataLogin {
     //atributos de Usuario
-    private int id_usuario;
     private int id_rol;
     private String nombre;
     private String apellido;
@@ -23,15 +22,7 @@ public class UsuarioDataLogin {
         this.nombre_TipoUser = nombre_tipo;
     }
     
-    //getters y setters
-     public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    
+    //getters y setters 
     public int getId_rol() {
         return id_rol;
     }

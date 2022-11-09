@@ -5,15 +5,18 @@
  */
 package Vista;
 
+import Controlador.UsuarioCtrl;
+import Modelo.UsuarioDataLogin;
+
 /**
  *
  * @author Jazmine
  */
 public class ModificarUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificarUsuarios
-     */
+     //instancia al controlador
+    UsuarioCtrl usrcrtl = new UsuarioCtrl();
+    
     public ModificarUsuarios() {
         initComponents();
     }

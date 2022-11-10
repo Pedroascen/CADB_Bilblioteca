@@ -1,15 +1,18 @@
 package Modelo;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class UsuarioSQL extends Conexion {
 
     private final String SQL_SELECT = "SELECT u.carnet,u.nombre, u.apellido,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id";
+    private final String SQL_SELECT_BY_CARNET = "SELECT nombre,apellido,carnet,contrasena,id_rol FROM usuario WHERE carnet = ?";
 
     //metodo para validar usuario en login
     public boolean login(UsuarioDataLogin usrlog) {
@@ -82,6 +85,40 @@ public class UsuarioSQL extends Conexion {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
+    }
+
+    //metodo para obtener usuario por carnet
+    public ArrayList obtenerUsuarioPorCarnet(String Icarnet) {
+        //inicializacion de las variables
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList lstusr = new ArrayList();
+        int rows = 0;
+        try {
+            //se inicia la conexion con la base
+            conn = Conexion.getConnection();
+            //llamando sentencia sql
+            stmt = conn.prepareStatement(SQL_SELECT_BY_CARNET);
+            stmt.setString(1, Icarnet);
+            //ejecutando
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                lstusr.add(rs.getString(1));
+                lstusr.add(rs.getString(2));
+                lstusr.add(rs.getString(3));
+                lstusr.add(rs.getString(4));
+                lstusr.add(rs.getInt(5));
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+
+        } finally {
+            Conexion.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(rs);
+        }
+        return lstusr;
     }
 
     //metodo para listar estudiantes en tablas

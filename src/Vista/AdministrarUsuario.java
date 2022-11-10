@@ -18,6 +18,7 @@ public class AdministrarUsuario extends javax.swing.JFrame {
 
     //instancia al controlador
     UsuarioSQL usrsql = new UsuarioSQL();
+    UsuarioCtrl usrctrl = new UsuarioCtrl();
     UsuarioDataLogin usrlog = new UsuarioDataLogin();
     RegistroUsuario frmRegistroUser;
     Home frmHome;
@@ -395,6 +396,9 @@ public class AdministrarUsuario extends javax.swing.JFrame {
 
     private void lblAdministrarUsuario1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAdministrarUsuario1MousePressed
         // TODO add your handling code here:
+        
+        String carnet = JOptionPane.showInputDialog(null, "Ingrese el carnet del usuario a modificar: ");
+        usrctrl.ObtenerUsuarioPorCarnet(carnet);
         dispose();
         ModificarUsuarios modif = new ModificarUsuarios();
         modif.setVisible(true);

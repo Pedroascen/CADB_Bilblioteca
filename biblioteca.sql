@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-11-2022 a las 04:31:53
+-- Tiempo de generación: 10-11-2022 a las 23:55:30
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -22,6 +22,40 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `biblioteca`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `new_upd_libro`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_libro` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` INT, `cejemp` INT, `autor` VARCHAR(100), `npaginas` INT, `editorial` VARCHAR(50), `pais` VARCHAR(25), `isbn` INT, `anio` INT, `edicion` INT, `idioma` VARCHAR(15), `materia` VARCHAR(15), `descripcion` VARCHAR(250))  BEGIN
+DECLARE lcodmaterial varchar(10);
+DECLARE lastID INT Default 0;
+
+IF LENGTH(codmaterial) = 0 THEN
+	SELECT max(IdLibro) INTO lastID from libro;
+	SET lastID = IFNULL(lastID, 0) + 1;
+    SET lcodmaterial = CONCAT('LIB', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
+    
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+	VALUES (lcodmaterial, titulo, 1, ufisica, cejemp, cejemp, 0, 1);
+
+	INSERT INTO `biblioteca`.`libro`(`IdLibro`,`codigoMaterialL`,`Autor(es)`,`NumeroPaginas`,`Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Materia`, `Descripcion`)
+	VALUES(lastID, lcodmaterial, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion);
+    
+ELSE
+	SET SQL_SAFE_UPDATES = 0; 
+	UPDATE `biblioteca`.`material` SET `Titulo` = titulo, `ubicacionFisica` = ufisica, `cantidadEjemplares` = cejemp WHERE `codigoMaterial` = codmaterial;
+   
+   UPDATE `biblioteca`.`libro` 
+   SET `Autor(es)` = autor, `NumeroPaginas` = npaginas, `Editorial` = editorial, `Pais` = pais, `ISBN` = isbn, `AnioPublicacion` = anio, `Edicion` = edicion, `Idioma` = idioma, `Materia` = materia, `Descripcion` = descripcion
+   WHERE `codigoMaterialL` = codmaterial;
+END IF;
+
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -92,7 +126,8 @@ CREATE TABLE IF NOT EXISTS `material` (
   `ubicacionFisica` int(11) NOT NULL,
   `cantidadEjemplares` int(11) NOT NULL,
   `cantidadDisponibles` int(11) NOT NULL,
-  `estado` varchar(3) NOT NULL,
+  `cantidadPrestados` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`codigoMaterial`),
   KEY `codigoTipoMaterial_idx` (`codigoTipoMaterial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

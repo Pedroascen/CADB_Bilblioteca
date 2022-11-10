@@ -406,8 +406,6 @@ public class Home extends javax.swing.JFrame {
         dispose();
         AdministrarUsuario administrar = new AdministrarUsuario();
         administrar.setVisible(true);
-
-
     }//GEN-LAST:event_btnAdministrarUsuarioMousePressed
 
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed

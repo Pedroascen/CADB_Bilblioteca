@@ -3,9 +3,51 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 public class UsuarioSQL extends Conexion {
+
+    private final String SQL_SELECT = "SELECT u.carnet,u.nombre, u.apellido,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id";
+
+    //metodo para validar usuario en login
+    public boolean login(UsuarioDataLogin usrlog) {
+        //inicializacion de las variables
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT u.carnet,u.contrasena,u.id_rol,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE carnet = ?");
+
+            int i = 1;//contador para la columnas para guardar registro
+            stmt.setString(i++, usrlog.getCarnet());
+            rs = stmt.executeQuery();
+            //se recorre el registro obtenido por el carnet
+            while (rs.next()) {
+                //se valida la contrasenia
+                if (usrlog.getContrasenia().equals(rs.getString(2))) {
+                    usrlog.setCarnet(rs.getString(1));
+                    usrlog.setId_rol(rs.getInt(3));
+                    usrlog.setNombre_TipoUser(rs.getString(4));
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            System.err.println(sqle);
+            return false;
+            //cerramos la conexion
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(rs);
+            Conexion.close(conn);
+        }
+    }
 
     //metodo para registrar usuarios
     public boolean registrar(String nombre, String apellido, String carnet, String contrasenia, int id_rol) {
@@ -42,39 +84,44 @@ public class UsuarioSQL extends Conexion {
         }
     }
 
-    //metodo para validar usuario en login
-    public boolean login(UsuarioDataLogin usrlog) {
+    //metodo para listar estudiantes en tablas
+    public DefaultTableModel obtenerUsuarios() {
         //inicializacion de las variables
+        DefaultTableModel dtm = new DefaultTableModel();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        int rows = 0;
-
         try {
+            //se inicia la conexion con la base
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT u.carnet,u.contrasena,u.id_rol,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id WHERE carnet = ?");
-
-            int i = 1;//contador para la columnas para guardar registro
-            stmt.setString(i++, usrlog.getCarnet());
+            //llamando sentencia sql
+            stmt = conn.prepareStatement(SQL_SELECT);
+            //ejecutando
             rs = stmt.executeQuery();
-
-             while(rs.next()) {
-                if (usrlog.getContrasenia().equals(rs.getString(2))) {
-                    usrlog.setCarnet(rs.getString(1));
-                    usrlog.setId_rol(rs.getInt(3));
-                    usrlog.setNombre_TipoUser(rs.getString(4));
-                    return true;
-                }
+            //obteniendo valores en ResultSetMetaData para DefaultTable
+            ResultSetMetaData meta = rs.getMetaData();
+            int numeroColumnas = meta.getColumnCount();
+            //Formando encabezado para DefaultTable
+            for (int i = 1; i <= numeroColumnas; i++) {
+                dtm.addColumn(meta.getColumnLabel(i));
             }
-            return false;
+            //creando las filas segun los datos obtenidos
+            while (rs.next()) {
+                Object[] fila = new Object[numeroColumnas];
+                for (int i = 0; i < numeroColumnas; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                //se agrega el regitro en la fila de la tabla
+                dtm.addRow(fila);
+            }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
-            System.err.println(sqle);
-            return false;
-        //cerramos la conexion
+
         } finally {
-            Conexion.close(stmt);
             Conexion.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(rs);
         }
+        return dtm;
     }
 }

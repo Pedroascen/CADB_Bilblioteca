@@ -16,6 +16,7 @@ public class HomeUsuarios extends javax.swing.JFrame {
      */
     public HomeUsuarios() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -295,8 +295,8 @@ public class ModificarUsuarios extends javax.swing.JFrame {
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         // TODO add your handling code here:
         dispose();
-        Home home = new Home();
-        home.setVisible(true);
+        AdministrarUsuario administrar = new AdministrarUsuario();
+        administrar.setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**

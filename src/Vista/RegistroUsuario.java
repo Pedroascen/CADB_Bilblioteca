@@ -315,6 +315,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         //muestra home
         Home frmHome = new Home();
         frmHome.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void guardarAdmin() {

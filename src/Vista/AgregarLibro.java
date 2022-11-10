@@ -71,6 +71,8 @@ public class AgregarLibro extends javax.swing.JFrame {
         txtUbicacion = new javax.swing.JTextField();
         txtCantEjemplares = new javax.swing.JTextField();
         txtCantDisponible = new javax.swing.JTextField();
+        lblCantDisponible1 = new javax.swing.JLabel();
+        txtIdLibro = new javax.swing.JTextField();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -401,6 +403,13 @@ public class AgregarLibro extends javax.swing.JFrame {
         txtCantDisponible.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantDisponible.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
 
+        lblCantDisponible1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblCantDisponible1.setForeground(new java.awt.Color(23, 59, 102));
+        lblCantDisponible1.setText("Libro id");
+
+        txtIdLibro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIdLibro.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
         lblTItuloLayout.setHorizontalGroup(
@@ -410,10 +419,6 @@ public class AgregarLibro extends javax.swing.JFrame {
                     .addGroup(lblTItuloLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblTItuloLayout.createSequentialGroup()
-                                .addComponent(lblAnioPub)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtAnioPub, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(lblTItuloLayout.createSequentialGroup()
                                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -450,15 +455,10 @@ public class AgregarLibro extends javax.swing.JFrame {
                                         .addComponent(lblEdicion)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtEdicion))
-                                    .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
-                                            .addComponent(lblCantEjemplares)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtCantEjemplares))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
-                                            .addComponent(lblCantDisponible)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtCantDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(lblTItuloLayout.createSequentialGroup()
+                                        .addComponent(lblCantEjemplares)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCantEjemplares))
                                     .addGroup(lblTItuloLayout.createSequentialGroup()
                                         .addComponent(lblIdioma)
                                         .addGap(18, 18, 18)
@@ -470,23 +470,35 @@ public class AgregarLibro extends javax.swing.JFrame {
                                     .addGroup(lblTItuloLayout.createSequentialGroup()
                                         .addComponent(lblMaterial)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(lblTItuloLayout.createSequentialGroup()
+                                        .addComponent(lblCantDisponible)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCantDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(lblTItuloLayout.createSequentialGroup()
+                                .addComponent(lblAnioPub)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAnioPub, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(lblCantDisponible1)
+                                .addGap(103, 103, 103)
+                                .addComponent(txtIdLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lblTItuloLayout.createSequentialGroup()
+                                .addGap(313, 313, 313)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(lblTItuloLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblListaRegistrados)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(lblTItuloLayout.createSequentialGroup()
-                        .addGap(387, 387, 387)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(lblListaRegistrados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(48, 48, 48)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -501,9 +513,9 @@ public class AgregarLibro extends javax.swing.JFrame {
                             .addComponent(lblAutor)
                             .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNumPags)
-                            .addComponent(txtNumPags, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNumPags, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumPags))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEditorial)
@@ -529,17 +541,20 @@ public class AgregarLibro extends javax.swing.JFrame {
                             .addComponent(lblUbicacion)
                             .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCantEjemplares)
+                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantEjemplares, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCantEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCantDisponible)
                             .addComponent(txtCantDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAnioPub)
-                    .addComponent(txtAnioPub, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblAnioPub)
+                        .addComponent(txtAnioPub, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCantDisponible1))
+                    .addComponent(txtIdLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -647,6 +662,7 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnioPub;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCantDisponible;
+    private javax.swing.JLabel lblCantDisponible1;
     private javax.swing.JLabel lblCantEjemplares;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblDevoluciones;
@@ -671,6 +687,7 @@ public class AgregarLibro extends javax.swing.JFrame {
     public static javax.swing.JTextField txtEdicion;
     public static javax.swing.JTextField txtEditorial;
     public static javax.swing.JTextField txtISBN;
+    public static javax.swing.JTextField txtIdLibro;
     public static javax.swing.JTextField txtIdioma;
     public static javax.swing.JTextField txtMateria;
     public static javax.swing.JTextField txtNumPags;

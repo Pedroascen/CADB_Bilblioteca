@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.UsuarioCtrl;
 import Modelo.UsuarioDataLogin;
+import Modelo.UsuarioSQL;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,13 +17,14 @@ import javax.swing.JOptionPane;
 public class AdministrarUsuario extends javax.swing.JFrame {
 
     //instancia al controlador
-    UsuarioCtrl usrcrtl = new UsuarioCtrl();
+    UsuarioSQL usrsql = new UsuarioSQL();
     UsuarioDataLogin usrlog = new UsuarioDataLogin();
     RegistroUsuario frmRegistroUser;
     Home frmHome;
     
     public AdministrarUsuario() {
         initComponents();
+        tblUsuarios.setModel(usrsql.obtenerUsuarios());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +52,7 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         lblListaRegistrados = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUsuarios = new javax.swing.JTable();
         btnModificarUsuario = new javax.swing.JPanel();
         lblAdministrarUsuario1 = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
@@ -269,7 +271,7 @@ public class AdministrarUsuario extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -280,8 +282,8 @@ public class AdministrarUsuario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane1.setViewportView(jTable1);
+        tblUsuarios.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(tblUsuarios);
 
         btnModificarUsuario.setBackground(new java.awt.Color(28, 70, 120));
         btnModificarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -453,7 +455,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAdministrarUsuario1;
     private javax.swing.JLabel lblAgregarEjemplar;
     private javax.swing.JLabel lblCerrarSesion;
@@ -462,5 +463,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblListaRegistrados;
     private javax.swing.JLabel lblPrestamos;
+    private javax.swing.JTable tblUsuarios;
     // End of variables declaration//GEN-END:variables
 }

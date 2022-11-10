@@ -186,31 +186,31 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMousePressed
         // TODO add your handling code here:
-        String carnet = txtCarnet.getText();
-        String contra = new String(txtContrasenia.getPassword());
-        //cifrado de contrasenia
-        String contraCif = Hash.sha1(contra);
-        //System.out.println(contraCif);
+        String carnet = "";
+        String contra = "";
         //validamos que no esten los campos vacios
-        if (!txtCarnet.getText().equals("") && !txtContrasenia.equals("")) {
+        if (txtCarnet.getText() != null && String.valueOf(txtContrasenia.getPassword()) != null) {
+            carnet = txtCarnet.getText();
+            contra = new String(txtContrasenia.getPassword());
+            //cifrado de contrasenia
+            String contraCif = Hash.sha1(contra);
+            //System.out.println(contraCif);
             //se envian los datos al controlador a travez del metodo
             if (usrcrtl.Login(carnet, contraCif)) {
                 //se oculta el login
                 this.dispose();
             }
         } else {
-            txtCarnet.setText("");
-            txtContrasenia.setText("");
             JOptionPane.showMessageDialog(null, "Los campos no pueden ser nulos.");
         }
     }//GEN-LAST:event_btnIngresarMousePressed
 
     //metodo para identificar tipo de usuario en home
     public void mostrarHome(UsuarioDataLogin usrlog) {
-         if (usrlog.getId_rol() == 1) {
+        if (usrlog.getId_rol() == 1) {
             //JOptionPane.showMessageDialog(null, "Bienvenido: Administrador:" + usrlog.getId_rol());
             //se muestra home para admin
-            Home frmHome = new Home(usrlog);
+            Home frmHome = new Home();
             frmHome.setVisible(true);
         }
 

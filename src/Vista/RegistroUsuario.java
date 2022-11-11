@@ -294,20 +294,37 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void btnRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMousePressed
         // TODO add your handling code here:
         String opcion = (String) cboTipoRol.getSelectedItem();
-        //Llamada al metodo guardar
-        if (opcion.equals("Administrador")) {
-            guardarAdmin();
-            System.out.println("Selecciono un: " + opcion);
-        }
-        if (opcion.equals("Profesor")) {
-            guardarProfesor();
-            System.out.println("Selecciono un: " + opcion);
-
-        }
-        if (opcion.equals("Alumno")) {
-            guardarAlumno();
-            System.out.println("Selecciono un: " + opcion);
-
+        String contra = new String(txtContrasenia.getPassword());
+        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
+        //validar campos vacios
+        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || contra.equals("") || contraConfirm.equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
+        } else {
+            //comparamos la contrasenia
+            if (contra.equals(contraConfirm)) {
+                //ciframos la contraseña
+                String nuevaContra = Hash.sha1(contra);
+                //enviamos los datos
+                String nombre = txtNombre.getText();
+                String apellido = txtApellido.getText();
+                String carnet = txtCarnet.getText();
+                String contrasenia = nuevaContra;
+                int id_rol = 0;
+                if (opcion.equals("Administrador")) {
+                    id_rol = 1;
+                }
+                if (opcion.equals("Profesor")) {
+                    id_rol = 2;
+                }
+                if (opcion.equals("Alumno")) {
+                    id_rol = 3;
+                }
+                //JOptionPane.showMessageDialog(null, "El rol es."+id_rol);
+                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
+                limpiarInputs();
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            }
         }
     }//GEN-LAST:event_btnRegistrarMousePressed
 
@@ -317,81 +334,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         frmHome.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void guardarAdmin() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 1;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
-
-    private void guardarProfesor() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 2;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
-
-    private void guardarAlumno() {
-        String contra = new String(txtContrasenia.getPassword());
-        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
-        //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || txtContrasenia.equals("") || txtConfirmContrasenia.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
-        } else {
-            //comparamos la contrasenia
-            if (contra.equals(contraConfirm)) {
-                //ciframos la contraseña
-                String nuevaContra = Hash.sha1(contra);
-                //enviamos los datos
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
-                String contrasenia = nuevaContra;
-                int id_rol = 3;
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
-                limpiarInputs();
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
-            }
-        }
-    }
 
     //metodo para limpiar inputs
     private void limpiarInputs() {

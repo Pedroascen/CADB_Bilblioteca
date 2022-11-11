@@ -200,10 +200,11 @@ public class HomeUsuarios extends javax.swing.JFrame {
                                 .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addGap(46, 46, 46)
-                                        .addComponent(jLabel2)))
+                                        .addComponent(jLabel2))
+                                    .addComponent(btnListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addGap(92, 92, 92)
@@ -272,8 +273,8 @@ public class HomeUsuarios extends javax.swing.JFrame {
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
         // TODO add your handling code here:
         dispose();
-        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
-        lista.setVisible(true);
+        ConsultaEjemplaresUsuarios listauser = new ConsultaEjemplaresUsuarios();
+        listauser.setVisible(true);
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
@@ -328,13 +329,8 @@ public class HomeUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel labelBienvenida;
     private javax.swing.JLabel labelBienvenida1;
     private javax.swing.JLabel lbTipoUsuario;

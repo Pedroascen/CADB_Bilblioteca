@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.UsuarioDataLogin;
 import Modelo.UsuarioSQL;
+import Vista.AdministrarUsuario;
 import Vista.Login;
 import Vista.ModificarUsuarios;
 import java.util.ArrayList;
@@ -39,6 +40,19 @@ public class UsuarioCtrl {
             return false;
         }
     }
+    
+    //metodo para guardar
+    public boolean Actualizar(String carnet, String nombre, String apellido,  String contrasenia, int id_rol) {
+        //confirmar si el resultado es true o false
+        if (usrsql.actualizar(carnet, nombre, apellido, contrasenia, id_rol)) {
+            JOptionPane.showMessageDialog(null, "El usuario: "+carnet+" se actualizo con exito.");
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, ""+carnet+":"+nombre+":"+apellido+":"+contrasenia+":"+id_rol);
+            JOptionPane.showMessageDialog(null, "El registro no se pudo actualizar...");
+            return false;
+        }
+    }
 
     //metodo para listar en tabla
     public boolean ListarUsuario() {
@@ -55,25 +69,26 @@ public class UsuarioCtrl {
         //arreglo para los datos del usuario
         ArrayList lstusr = new ArrayList<>();
         //llamando a la vista del formulario
-        ModificarUsuarios modif = new ModificarUsuarios();
+        ModificarUsuarios modusr = new ModificarUsuarios();
         //variables a mostrar
-        String nombre = "", apellido = "", contrasena = "";
-        int id_rol=0;
+        String nombre = "", apellido = "", contrasena = "", id_rol = "";
         if (usrsql.obtenerUsuarioPorCarnet(carnet).size() > 0) {
             lstusr = usrsql.obtenerUsuarioPorCarnet(carnet);
-            
             for (int i = 0; i < lstusr.size(); i++) {
+                nombre = (String) lstusr.get(0);
                 apellido = (String) lstusr.get(1);
-                nombre = (String) lstusr.get(2);
-                carnet = (String) lstusr.get(3);
-                contrasena = (String) lstusr.get(4);
-                //id_rol = (int) lstusr.get(5);
+                carnet = (String) lstusr.get(2);
+                contrasena = (String) lstusr.get(3);
+                id_rol = (String) lstusr.get(4);
             }
-            //JOptionPane.showMessageDialog(null, "Hay usuarios que cargar."+String.valueOf(id_rol));
+            modusr.mostrarDatos(carnet, nombre, apellido, contrasena, id_rol);
+            modusr.setVisible(true);
+            //JOptionPane.showMessageDialog(null, "Hay usuarios que cargar." + id_rol);
+            return true;
         } else {
             JOptionPane.showMessageDialog(null, "No hay registros que mostrar.");
+            return false;
         }
-        return true;
     }
 
 }

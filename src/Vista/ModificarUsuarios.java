@@ -6,7 +6,14 @@
 package Vista;
 
 import Controlador.UsuarioCtrl;
+import Modelo.Hash;
 import Modelo.UsuarioDataLogin;
+import static Vista.RegistroUsuario.txtApellido;
+import static Vista.RegistroUsuario.txtCarnet;
+import static Vista.RegistroUsuario.txtConfirmContrasenia;
+import static Vista.RegistroUsuario.txtContrasenia;
+import static Vista.RegistroUsuario.txtNombre;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,11 +21,12 @@ import Modelo.UsuarioDataLogin;
  */
 public class ModificarUsuarios extends javax.swing.JFrame {
 
-     //instancia al controlador
+    //instancia al controlador
     UsuarioCtrl usrcrtl = new UsuarioCtrl();
-    
+
     public ModificarUsuarios() {
         initComponents();
+        LlenarUsrCombox();
     }
 
     /**
@@ -86,6 +94,8 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         jLabelCarnet.setForeground(new java.awt.Color(23, 59, 102));
         jLabelCarnet.setText("Carnet:");
 
+        txtCarnet.setEditable(false);
+        txtCarnet.setBackground(new java.awt.Color(204, 204, 204));
         txtCarnet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCarnet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
@@ -288,8 +298,41 @@ public class ModificarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMousePressed
-        // TODO add your handling code here:
-        
+        String opcion = (String) cboTipoRol.getSelectedItem();
+        String contra = new String(txtContrasenia.getPassword());
+        String contraConfirm = new String(txtConfirmContrasenia.getPassword());
+        //validar campos vacios
+        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || contra.equals("") || contraConfirm.equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacios.");
+        } else {
+            //comparamos la contrasenia
+            if (contra.equals(contraConfirm)) {
+                //ciframos la contraseña
+                String nuevaContra = Hash.sha1(contra);
+                //enviamos los datos
+                int id_rol = 0;
+                String nombre = txtNombre.getText();
+                String apellido = txtApellido.getText();
+                String carnet = txtCarnet.getText();
+                String contrasena = nuevaContra;
+                if (opcion.equals("Administrador")) {
+                    id_rol = 1;
+                }
+                if (opcion.equals("Profesor")) {
+                    id_rol = 2;
+                }
+                if (opcion.equals("Alumno")) {
+                    id_rol = 3;
+                }
+                usrcrtl.Actualizar(carnet, nombre, apellido, contrasena, id_rol);
+                dispose();
+               //AdministrarUsuario administrar = new AdministrarUsuario();
+                //administrar.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            }
+        }
+
     }//GEN-LAST:event_btnRegistrarMousePressed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -298,6 +341,33 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         AdministrarUsuario administrar = new AdministrarUsuario();
         administrar.setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
+
+    public void mostrarDatos(String carnet, String nombre, String apellido, String contrasena, String rol_id) {
+        int idRol = Integer.parseInt(rol_id);
+        //JOptionPane.showMessageDialog(null, carnet);
+        if (idRol != 0) {
+            cboTipoRol.setSelectedIndex(idRol - 1);
+            txtNombre.setText(nombre);
+            txtApellido.setText(apellido);
+            txtCarnet.setText(carnet);
+            //JOptionPane.showMessageDialog(null, "Modificar Admin");
+        }
+    }
+
+    private void LlenarUsrCombox() {
+        cboTipoRol.addItem("Administrador");
+        cboTipoRol.addItem("Profesor");
+        cboTipoRol.addItem("Alumno");
+    }
+
+    //metodo para limpiar inputs
+    private void limpiarInputs() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCarnet.setText("");
+        txtContrasenia.setText("");
+        txtConfirmContrasenia.setText("");
+    }
 
     /**
      * @param args the command line arguments

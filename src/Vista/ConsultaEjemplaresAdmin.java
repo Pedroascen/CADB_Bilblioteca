@@ -283,6 +283,11 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         lblConsultar.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultar.setText("Consultar");
         lblConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblConsultarMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnConsultarLayout = new javax.swing.GroupLayout(btnConsultar);
         btnConsultar.setLayout(btnConsultarLayout);
@@ -486,6 +491,13 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         AgregarEjemplar agregar = new AgregarEjemplar();
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
+
+    private void lblConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultarMousePressed
+        // TODO add your handling code here:
+        dispose();
+        ResultadoConsultaAdmin resultadmin = new ResultadoConsultaAdmin();
+        resultadmin.setVisible(true);
+    }//GEN-LAST:event_lblConsultarMousePressed
 
     /**
      * @param args the command line arguments

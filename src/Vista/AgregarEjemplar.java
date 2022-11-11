@@ -53,13 +53,13 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnObra = new javax.swing.JPanel();
-        lblAdministrarUsuario1 = new javax.swing.JLabel();
+        lblObra = new javax.swing.JLabel();
         btnTesis = new javax.swing.JPanel();
-        lblAdministrarUsuario2 = new javax.swing.JLabel();
+        lblTesis = new javax.swing.JLabel();
         btnRevista = new javax.swing.JPanel();
-        lblAdministrarUsuario3 = new javax.swing.JLabel();
-        btnLibro4 = new javax.swing.JPanel();
-        lblAdministrarUsuario4 = new javax.swing.JLabel();
+        lblRevista = new javax.swing.JLabel();
+        btnCD = new javax.swing.JPanel();
+        lblCD = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -279,6 +279,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
 
         btnLibro.setBackground(new java.awt.Color(28, 70, 120));
         btnLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLibro.setDoubleBuffered(false);
         btnLibro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnLibroMousePressed(evt);
@@ -320,16 +321,22 @@ public class AgregarEjemplar extends javax.swing.JFrame {
 
         btnObra.setBackground(new java.awt.Color(28, 70, 120));
         btnObra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnObra.setDoubleBuffered(false);
         btnObra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnObraMousePressed(evt);
             }
         });
 
-        lblAdministrarUsuario1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblAdministrarUsuario1.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuario1.setText("Obra literaria");
-        lblAdministrarUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblObra.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        lblObra.setForeground(new java.awt.Color(255, 255, 255));
+        lblObra.setText("Obra literaria");
+        lblObra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblObra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblObraMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnObraLayout = new javax.swing.GroupLayout(btnObra);
         btnObra.setLayout(btnObraLayout);
@@ -337,26 +344,32 @@ public class AgregarEjemplar extends javax.swing.JFrame {
             btnObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnObraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblAdministrarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblObra, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
         btnObraLayout.setVerticalGroup(
             btnObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAdministrarUsuario1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(lblObra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         btnTesis.setBackground(new java.awt.Color(28, 70, 120));
         btnTesis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTesis.setDoubleBuffered(false);
         btnTesis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnTesisMousePressed(evt);
             }
         });
 
-        lblAdministrarUsuario2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblAdministrarUsuario2.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuario2.setText("Tesis");
-        lblAdministrarUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblTesis.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        lblTesis.setForeground(new java.awt.Color(255, 255, 255));
+        lblTesis.setText("Tesis");
+        lblTesis.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblTesis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTesisMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnTesisLayout = new javax.swing.GroupLayout(btnTesis);
         btnTesis.setLayout(btnTesisLayout);
@@ -364,25 +377,31 @@ public class AgregarEjemplar extends javax.swing.JFrame {
             btnTesisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnTesisLayout.createSequentialGroup()
                 .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(lblAdministrarUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTesis, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnTesisLayout.setVerticalGroup(
             btnTesisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAdministrarUsuario2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(lblTesis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         btnRevista.setBackground(new java.awt.Color(28, 70, 120));
         btnRevista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRevista.setDoubleBuffered(false);
         btnRevista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnRevistaMousePressed(evt);
             }
         });
 
-        lblAdministrarUsuario3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblAdministrarUsuario3.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuario3.setText("Revista");
-        lblAdministrarUsuario3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblRevista.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        lblRevista.setForeground(new java.awt.Color(255, 255, 255));
+        lblRevista.setText("Revista");
+        lblRevista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblRevista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblRevistaMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnRevistaLayout = new javax.swing.GroupLayout(btnRevista);
         btnRevista.setLayout(btnRevistaLayout);
@@ -390,39 +409,40 @@ public class AgregarEjemplar extends javax.swing.JFrame {
             btnRevistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnRevistaLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(lblAdministrarUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnRevistaLayout.setVerticalGroup(
             btnRevistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAdministrarUsuario3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(lblRevista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
-        btnLibro4.setBackground(new java.awt.Color(28, 70, 120));
-        btnLibro4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLibro4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCD.setBackground(new java.awt.Color(28, 70, 120));
+        btnCD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCD.setDoubleBuffered(false);
+        btnCD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnLibro4MousePressed(evt);
+                btnCDMousePressed(evt);
             }
         });
 
-        lblAdministrarUsuario4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblAdministrarUsuario4.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuario4.setText("CD");
-        lblAdministrarUsuario4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblCD.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        lblCD.setForeground(new java.awt.Color(255, 255, 255));
+        lblCD.setText("CD");
+        lblCD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout btnLibro4Layout = new javax.swing.GroupLayout(btnLibro4);
-        btnLibro4.setLayout(btnLibro4Layout);
-        btnLibro4Layout.setHorizontalGroup(
-            btnLibro4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLibro4Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnCDLayout = new javax.swing.GroupLayout(btnCD);
+        btnCD.setLayout(btnCDLayout);
+        btnCDLayout.setHorizontalGroup(
+            btnCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCDLayout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(lblAdministrarUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCD, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        btnLibro4Layout.setVerticalGroup(
-            btnLibro4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAdministrarUsuario4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        btnCDLayout.setVerticalGroup(
+            btnCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -462,7 +482,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(btnLibro4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -487,7 +507,7 @@ public class AgregarEjemplar extends javax.swing.JFrame {
                     .addComponent(btnObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTesis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLibro4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 
@@ -542,9 +562,12 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRevistaMousePressed
 
-    private void btnLibro4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLibro4MousePressed
+    private void btnCDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCDMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLibro4MousePressed
+        dispose();
+        AgregarCD cd = new AgregarCD();
+        cd.setVisible(true);
+    }//GEN-LAST:event_btnCDMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
         // TODO add your handling code here:
@@ -566,6 +589,27 @@ public class AgregarEjemplar extends javax.swing.JFrame {
         AgregarEjemplar agregar = new AgregarEjemplar();
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
+
+    private void lblObraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblObraMousePressed
+        // TODO add your handling code here:
+        dispose();
+        AgregarObra obra = new AgregarObra();
+        obra.setVisible(true);
+    }//GEN-LAST:event_lblObraMousePressed
+
+    private void lblTesisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTesisMousePressed
+        // TODO add your handling code here:
+        dispose();
+        AgregarTesis tesis = new AgregarTesis();
+        tesis.setVisible(true);
+    }//GEN-LAST:event_lblTesisMousePressed
+
+    private void lblRevistaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevistaMousePressed
+        // TODO add your handling code here:
+        dispose();
+        AgregarRevista revista = new AgregarRevista();
+        revista.setVisible(true);
+    }//GEN-LAST:event_lblRevistaMousePressed
 
     /**
      * @param args the command line arguments
@@ -604,11 +648,11 @@ public class AgregarEjemplar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAgregarEjemplar;
+    private javax.swing.JPanel btnCD;
     private javax.swing.JPanel btnCerrarSesion;
     private javax.swing.JPanel btnDevoluciones;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnLibro;
-    private javax.swing.JPanel btnLibro4;
     private javax.swing.JPanel btnListaEjemplares;
     private javax.swing.JPanel btnObra;
     private javax.swing.JPanel btnPrestamos;
@@ -626,16 +670,16 @@ public class AgregarEjemplar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblAdministrarUsuario;
-    private javax.swing.JLabel lblAdministrarUsuario1;
-    private javax.swing.JLabel lblAdministrarUsuario2;
-    private javax.swing.JLabel lblAdministrarUsuario3;
-    private javax.swing.JLabel lblAdministrarUsuario4;
     private javax.swing.JLabel lblAgregarEjemplar;
+    private javax.swing.JLabel lblCD;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblDevoluciones;
     private javax.swing.JLabel lblEjemplarnuevo;
     private javax.swing.JLabel lblListaEjemplares;
     private javax.swing.JLabel lblListaEjemplares1;
+    private javax.swing.JLabel lblObra;
     private javax.swing.JLabel lblPrestamos;
+    private javax.swing.JLabel lblRevista;
+    private javax.swing.JLabel lblTesis;
     // End of variables declaration//GEN-END:variables
 }

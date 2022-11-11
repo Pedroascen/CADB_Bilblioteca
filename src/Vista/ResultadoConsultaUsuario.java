@@ -9,12 +9,12 @@ package Vista;
  *
  * @author Jazmine
  */
-public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
+public class ResultadoConsultaUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaEjemplaresUsuarios
+     * Creates new form ResultadoConsultaUsuario
      */
-    public ConsultaEjemplaresUsuarios() {
+    public ResultadoConsultaUsuario() {
         initComponents();
     }
 
@@ -41,10 +41,6 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
         lblAutor = new javax.swing.JLabel();
         lblMaterial = new javax.swing.JLabel();
         lblIdioma = new javax.swing.JLabel();
-        lblFiltro = new javax.swing.JLabel();
-        rbtnTitulo = new javax.swing.JRadioButton();
-        rbtnAutor = new javax.swing.JRadioButton();
-        rbtnClasificacion = new javax.swing.JRadioButton();
         cboMaterial = new javax.swing.JComboBox<>();
         cboIdioma = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
@@ -129,7 +125,7 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
 
         lblListaRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lblListaRegistrados.setForeground(new java.awt.Color(23, 59, 102));
-        lblListaRegistrados.setText("Consulta de ejemplares registrados");
+        lblListaRegistrados.setText("Resultados de consulta");
 
         jPanel6.setBackground(new java.awt.Color(28, 70, 120));
 
@@ -156,11 +152,6 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
         lblConsultar.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultar.setText("Consultar");
         lblConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblConsultarMousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout btnConsultarLayout = new javax.swing.GroupLayout(btnConsultar);
         btnConsultar.setLayout(btnConsultarLayout);
@@ -191,27 +182,6 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
         lblIdioma.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblIdioma.setForeground(new java.awt.Color(23, 59, 102));
         lblIdioma.setText("Idioma:");
-
-        lblFiltro.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblFiltro.setForeground(new java.awt.Color(23, 59, 102));
-        lblFiltro.setText("Ordenar resultados por:");
-
-        rbtnTitulo.setBackground(new java.awt.Color(255, 255, 255));
-        rbtnTitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        rbtnTitulo.setText("Título");
-        rbtnTitulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnTituloActionPerformed(evt);
-            }
-        });
-
-        rbtnAutor.setBackground(new java.awt.Color(255, 255, 255));
-        rbtnAutor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        rbtnAutor.setText("Autor");
-
-        rbtnClasificacion.setBackground(new java.awt.Color(255, 255, 255));
-        rbtnClasificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        rbtnClasificacion.setText("Clasificación");
 
         cboMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libro", "Obra", "Revista", "Tesis", "CD" }));
@@ -263,19 +233,9 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(lblTItuloLayout.createSequentialGroup()
-                        .addComponent(lblFiltro)
-                        .addGap(18, 18, 18)
-                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblTItuloLayout.createSequentialGroup()
-                                .addComponent(rbtnTitulo)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnAutor)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbtnClasificacion))
-                            .addGroup(lblTItuloLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(187, 187, 187)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,13 +260,7 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdioma)
                     .addComponent(cboIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFiltro)
-                    .addComponent(rbtnTitulo)
-                    .addComponent(rbtnAutor)
-                    .addComponent(rbtnClasificacion))
-                .addGap(33, 33, 33)
+                .addGap(89, 89, 89)
                 .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
@@ -331,6 +285,13 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
+        // TODO add your handling code here:
+        dispose();
+        HomeUsuarios homeuser = new HomeUsuarios();
+        homeuser.setVisible(true);
+    }//GEN-LAST:event_btnHomeMousePressed
+
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
         // TODO add your handling code here:
         dispose();
@@ -341,24 +302,6 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
     private void btnConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarMousePressed
-
-    private void rbtnTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnTituloActionPerformed
-
-    private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
-        // TODO add your handling code here:
-        dispose();
-        HomeUsuarios homeuser = new HomeUsuarios();
-        homeuser.setVisible(true);
-    }//GEN-LAST:event_btnHomeMousePressed
-
-    private void lblConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultarMousePressed
-        // TODO add your handling code here:
-        dispose();
-        ResultadoConsultaUsuario resultuser = new ResultadoConsultaUsuario();
-        resultuser.setVisible(true);
-    }//GEN-LAST:event_lblConsultarMousePressed
 
     /**
      * @param args the command line arguments
@@ -377,20 +320,20 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaEjemplaresUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoConsultaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaEjemplaresUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoConsultaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaEjemplaresUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoConsultaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaEjemplaresUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoConsultaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaEjemplaresUsuarios().setVisible(true);
+                new ResultadoConsultaUsuario().setVisible(true);
             }
         });
     }
@@ -409,15 +352,11 @@ public class ConsultaEjemplaresUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblConsultar;
-    private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblIdioma;
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblListaRegistrados;
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JPanel lblTItulo;
     private javax.swing.JLabel lbltitulo;
-    private javax.swing.JRadioButton rbtnAutor;
-    private javax.swing.JRadioButton rbtnClasificacion;
-    private javax.swing.JRadioButton rbtnTitulo;
     // End of variables declaration//GEN-END:variables
 }

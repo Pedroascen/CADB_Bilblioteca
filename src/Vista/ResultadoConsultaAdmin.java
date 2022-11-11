@@ -5,6 +5,22 @@
  */
 package Vista;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
+
+
+
 /**
  *
  * @author Jazmine
@@ -43,16 +59,8 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         lblTItulo = new javax.swing.JPanel();
         lblListaRegistrados = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        btnConsultar = new javax.swing.JPanel();
-        lblConsultar = new javax.swing.JLabel();
-        lbltitulo = new javax.swing.JLabel();
-        lblAutor = new javax.swing.JLabel();
-        lblMaterial = new javax.swing.JLabel();
-        lblIdioma = new javax.swing.JLabel();
-        cboMaterial = new javax.swing.JComboBox<>();
-        cboIdioma = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblConsulta = new javax.swing.JTable();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -131,6 +139,11 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
         btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnPrestamosMousePressed(evt);
+            }
+        });
 
         lblPrestamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblPrestamos.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,6 +200,11 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
         btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDevolucionesMousePressed(evt);
+            }
+        });
 
         lblDevoluciones.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
@@ -266,130 +284,41 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        btnConsultar.setBackground(new java.awt.Color(28, 70, 120));
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnConsultarMousePressed(evt);
+        tblConsulta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-
-        lblConsultar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblConsultar.setForeground(new java.awt.Color(255, 255, 255));
-        lblConsultar.setText("Consultar");
-        lblConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout btnConsultarLayout = new javax.swing.GroupLayout(btnConsultar);
-        btnConsultar.setLayout(btnConsultarLayout);
-        btnConsultarLayout.setHorizontalGroup(
-            btnConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnConsultarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblConsultar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        btnConsultarLayout.setVerticalGroup(
-            btnConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-        );
-
-        lbltitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lbltitulo.setForeground(new java.awt.Color(23, 59, 102));
-        lbltitulo.setText("Título:");
-
-        lblAutor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblAutor.setForeground(new java.awt.Color(23, 59, 102));
-        lblAutor.setText("Autor(es):");
-
-        lblMaterial.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblMaterial.setForeground(new java.awt.Color(23, 59, 102));
-        lblMaterial.setText("Material:");
-
-        lblIdioma.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblIdioma.setForeground(new java.awt.Color(23, 59, 102));
-        lblIdioma.setText("Idioma:");
-
-        cboMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libro", "Obra", "Revista", "Tesis", "CD" }));
-        cboMaterial.setSelectedIndex(-1);
-        cboMaterial.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        cboIdioma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboIdioma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Inglés" }));
-        cboIdioma.setSelectedIndex(-1);
-        cboIdioma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
-
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        ));
+        jScrollPane1.setViewportView(tblConsulta);
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
         lblTItuloLayout.setHorizontalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblTItuloLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
-                                    .addComponent(lblAutor)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField2))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
-                                    .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblIdioma)
-                                        .addComponent(lblMaterial)
-                                        .addComponent(lbltitulo))
-                                    .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTItuloLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cboIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(72, 72, 72))
-                                        .addGroup(lblTItuloLayout.createSequentialGroup()
-                                            .addGap(24, 24, 24)
-                                            .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(lblTItuloLayout.createSequentialGroup()
-                                .addGap(189, 189, 189)
-                                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(lblTItuloLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblListaRegistrados)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(68, 68, 68))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblListaRegistrados))
+                .addGap(476, 476, 476))
         );
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
                 .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(lblListaRegistrados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbltitulo)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAutor)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaterial)
-                    .addComponent(cboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIdioma)
-                    .addComponent(cboIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
-                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         jPanel1.add(lblTItulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -438,9 +367,20 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
 
-    private void btnConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMousePressed
+    private void btnPrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamosMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultarMousePressed
+        dispose();
+        PrestamosAdmin prestamos = new PrestamosAdmin();
+        prestamos.setVisible(true);
+    }//GEN-LAST:event_btnPrestamosMousePressed
+
+    private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
+        // TODO add your handling code here:
+        dispose();
+        DevolucionesAdmin dev = new DevolucionesAdmin();
+        dev.setVisible(true);    
+        
+    }//GEN-LAST:event_btnDevolucionesMousePressed
 
     /**
      * @param args the command line arguments
@@ -475,36 +415,37 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
                 new ResultadoConsultaAdmin().setVisible(true);
             }
         });
+        
+        
+         
+        
+        
+        
     }
+    
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAgregarEjemplar;
     private javax.swing.JPanel btnCerrarSesion;
-    private javax.swing.JPanel btnConsultar;
     private javax.swing.JPanel btnDevoluciones;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnListaEjemplares;
     private javax.swing.JPanel btnPrestamos;
-    private javax.swing.JComboBox<String> cboIdioma;
-    private javax.swing.JComboBox<String> cboMaterial;
     private javax.swing.JLabel iconUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAgregarEjemplar;
-    private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblConsultar;
     private javax.swing.JLabel lblDevoluciones;
-    private javax.swing.JLabel lblIdioma;
     private javax.swing.JLabel lblListaEjemplares;
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblListaRegistrados;
-    private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblPrestamos;
     private javax.swing.JPanel lblTItulo;
-    private javax.swing.JLabel lbltitulo;
+    private javax.swing.JTable tblConsulta;
     // End of variables declaration//GEN-END:variables
 }

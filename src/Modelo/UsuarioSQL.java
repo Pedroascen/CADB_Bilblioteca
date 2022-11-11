@@ -103,11 +103,11 @@ public class UsuarioSQL extends Conexion {
             //se declara la sentencia sql
             stmt = conn.prepareStatement(SQL_UPDATE);
             int i = 1;//contador para la columnas para guardar registro
-            stmt.setString(i++, carnet);
             stmt.setString(i++, nombre);
             stmt.setString(i++, apellido);
             stmt.setString(i++, contrasena);
-            stmt.setInt(i, id_rol);
+            stmt.setInt(i++, id_rol);
+            stmt.setString(i, carnet);
             //ejecutando el query
             rows = stmt.executeUpdate();
             //mensaje de salida

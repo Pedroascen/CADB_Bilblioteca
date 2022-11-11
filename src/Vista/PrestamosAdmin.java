@@ -5,28 +5,19 @@
  */
 package Vista;
 
-import Controlador.UsuarioCtrl;
-import Modelo.UsuarioDataLogin;
-import Modelo.UsuarioSQL;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Jazmine
  */
-public class AdministrarUsuario extends javax.swing.JFrame {
+public class PrestamosAdmin extends javax.swing.JFrame {
 
-    //instancia al controlador
-    UsuarioSQL usrsql = new UsuarioSQL();
-    UsuarioCtrl usrctrl = new UsuarioCtrl();
-    UsuarioDataLogin usrlog = new UsuarioDataLogin();
-    RegistroUsuario frmRegistroUser;
-    Home frmHome;
-    
-    public AdministrarUsuario() {
+    /**
+     * Creates new form PrestamosAdmin
+     */
+    public PrestamosAdmin() {
         initComponents();
-        tblUsuarios.setModel(usrsql.obtenerUsuarios());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,12 +41,16 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         btnAgregarEjemplar = new javax.swing.JPanel();
         lblAgregarEjemplar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        lblListaRegistrados = new javax.swing.JLabel();
+        labelBienvenida = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblUsuarios = new javax.swing.JTable();
-        btnModificarUsuario = new javax.swing.JPanel();
-        lblAdministrarUsuario1 = new javax.swing.JLabel();
+        labelBienvenida1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelCarnet = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabelCarnet1 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        btnPrestamo1 = new javax.swing.JPanel();
+        lblPrestamo1 = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -134,11 +129,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
         btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnPrestamosMousePressed(evt);
-            }
-        });
 
         lblPrestamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblPrestamos.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,8 +175,8 @@ public class AdministrarUsuario extends javax.swing.JFrame {
             btnListaEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnListaEjemplaresLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(lblListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(lblListaEjemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         btnListaEjemplaresLayout.setVerticalGroup(
             btnListaEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,9 +256,8 @@ public class AdministrarUsuario extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblListaRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        lblListaRegistrados.setForeground(new java.awt.Color(23, 59, 102));
-        lblListaRegistrados.setText("Lista de usuarios registrados");
+        labelBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelBienvenida.setForeground(new java.awt.Color(23, 59, 102));
 
         jPanel6.setBackground(new java.awt.Color(28, 70, 120));
 
@@ -283,50 +272,53 @@ public class AdministrarUsuario extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ));
-        tblUsuarios.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane1.setViewportView(tblUsuarios);
+        labelBienvenida1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        labelBienvenida1.setForeground(new java.awt.Color(23, 59, 102));
+        labelBienvenida1.setText("Ingresar un préstamo");
 
-        btnModificarUsuario.setBackground(new java.awt.Color(28, 70, 120));
-        btnModificarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnModificarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Ingrese el ID del material que se desea prestar y el carnet del usuario correspondiente");
+
+        jLabelCarnet.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabelCarnet.setForeground(new java.awt.Color(23, 59, 102));
+        jLabelCarnet.setText("Carnet:");
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabelCarnet1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabelCarnet1.setForeground(new java.awt.Color(23, 59, 102));
+        jLabelCarnet1.setText("ID del material:");
+
+        txtNombre1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNombre1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        btnPrestamo1.setBackground(new java.awt.Color(28, 70, 120));
+        btnPrestamo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamo1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnModificarUsuarioMousePressed(evt);
+                btnPrestamo1MousePressed(evt);
             }
         });
 
-        lblAdministrarUsuario1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        lblAdministrarUsuario1.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuario1.setText("Modificar");
-        lblAdministrarUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblAdministrarUsuario1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblAdministrarUsuario1MousePressed(evt);
-            }
-        });
+        lblPrestamo1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        lblPrestamo1.setForeground(new java.awt.Color(255, 255, 255));
+        lblPrestamo1.setText("Préstamo");
+        lblPrestamo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout btnModificarUsuarioLayout = new javax.swing.GroupLayout(btnModificarUsuario);
-        btnModificarUsuario.setLayout(btnModificarUsuarioLayout);
-        btnModificarUsuarioLayout.setHorizontalGroup(
-            btnModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModificarUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblAdministrarUsuario1)
-                .addContainerGap())
+        javax.swing.GroupLayout btnPrestamo1Layout = new javax.swing.GroupLayout(btnPrestamo1);
+        btnPrestamo1.setLayout(btnPrestamo1Layout);
+        btnPrestamo1Layout.setHorizontalGroup(
+            btnPrestamo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnPrestamo1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPrestamo1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        btnModificarUsuarioLayout.setVerticalGroup(
-            btnModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAdministrarUsuario1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        btnPrestamo1Layout.setVerticalGroup(
+            btnPrestamo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblPrestamo1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -334,26 +326,51 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblListaRegistrados)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(labelBienvenida1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelBienvenida))
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabelCarnet1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabelCarnet)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(297, 297, 297))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addComponent(lblListaRegistrados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelBienvenida1)
+                    .addComponent(labelBienvenida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(btnModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(66, 66, 66)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCarnet1)
+                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCarnet)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -381,14 +398,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
-        // TODO add your handling code here:
-        dispose();
-        Home frmHome = new Home();
-        frmHome.setVisible(true);
-         
-    }//GEN-LAST:event_btnHomeMousePressed
-
     private void btnCerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMousePressed
         // TODO add your handling code here:
         dispose();
@@ -403,23 +412,6 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         lista.setVisible(true);
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
-    private void btnModificarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarUsuarioMousePressed
-        // TODO add your handling code here:
-        dispose();
-        ModificarUsuarios modif = new ModificarUsuarios();
-        modif.setVisible(true);
-    }//GEN-LAST:event_btnModificarUsuarioMousePressed
-
-    private void lblAdministrarUsuario1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAdministrarUsuario1MousePressed
-        // TODO add your handling code here:
-        String carnet = JOptionPane.showInputDialog(null, "Ingrese el carnet del usuario a modificar: ");
-        if(usrctrl.ObtenerUsuarioPorCarnet(carnet)){
-        dispose();
-        //ModificarUsuarios modif = new ModificarUsuarios();
-        //modif.setVisible(true);
-        }
-    }//GEN-LAST:event_lblAdministrarUsuario1MousePressed
-
     private void btnAgregarEjemplarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarEjemplarMousePressed
         // TODO add your handling code here:
         dispose();
@@ -427,20 +419,24 @@ public class AdministrarUsuario extends javax.swing.JFrame {
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
 
-    private void btnPrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamosMousePressed
+    private void btnPrestamo1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamo1MousePressed
         // TODO add your handling code here:
-        dispose();
-        PrestamosAdmin prestamos = new PrestamosAdmin();
-        prestamos.setVisible(true);
-    
-    }//GEN-LAST:event_btnPrestamosMousePressed
+       
+    }//GEN-LAST:event_btnPrestamo1MousePressed
 
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
         // TODO add your handling code here:
         dispose();
         DevolucionesAdmin dev = new DevolucionesAdmin();
-        dev.setVisible(true);     
+        dev.setVisible(true);
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
+        // TODO add your handling code here:
+        dispose();
+        Home home = new Home();
+        home.setVisible(true);
+    }//GEN-LAST:event_btnHomeMousePressed
 
     /**
      * @param args the command line arguments
@@ -459,20 +455,20 @@ public class AdministrarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministrarUsuario().setVisible(true);
+                new PrestamosAdmin().setVisible(true);
             }
         });
     }
@@ -483,22 +479,26 @@ public class AdministrarUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel btnDevoluciones;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnListaEjemplares;
-    private javax.swing.JPanel btnModificarUsuario;
+    private javax.swing.JPanel btnPrestamo1;
     private javax.swing.JPanel btnPrestamos;
     private javax.swing.JLabel iconUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelCarnet;
+    private javax.swing.JLabel jLabelCarnet1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAdministrarUsuario1;
+    private javax.swing.JLabel labelBienvenida;
+    private javax.swing.JLabel labelBienvenida1;
     private javax.swing.JLabel lblAgregarEjemplar;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblDevoluciones;
     private javax.swing.JLabel lblListaEjemplares;
     private javax.swing.JLabel lblListaEjemplares1;
-    private javax.swing.JLabel lblListaRegistrados;
+    private javax.swing.JLabel lblPrestamo1;
     private javax.swing.JLabel lblPrestamos;
-    private javax.swing.JTable tblUsuarios;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtNombre1;
     // End of variables declaration//GEN-END:variables
 }

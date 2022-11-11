@@ -147,6 +147,11 @@ public class AgregarTesis extends javax.swing.JFrame {
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
         btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnPrestamosMousePressed(evt);
+            }
+        });
 
         lblPrestamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblPrestamos.setForeground(new java.awt.Color(255, 255, 255));
@@ -208,6 +213,11 @@ public class AgregarTesis extends javax.swing.JFrame {
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
         btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDevolucionesMousePressed(evt);
+            }
+        });
 
         lblDevoluciones.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
@@ -595,6 +605,20 @@ public class AgregarTesis extends javax.swing.JFrame {
     private void txtUniversidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniversidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUniversidadActionPerformed
+
+    private void btnPrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamosMousePressed
+        // TODO add your handling code here:
+        dispose();
+        PrestamosAdmin prestamos = new PrestamosAdmin();
+        prestamos.setVisible(true);
+    }//GEN-LAST:event_btnPrestamosMousePressed
+
+    private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
+        // TODO add your handling code here:
+        dispose();
+        DevolucionesAdmin dev = new DevolucionesAdmin();
+        dev.setVisible(true);         
+    }//GEN-LAST:event_btnDevolucionesMousePressed
 
     /**
      * @param args the command line arguments

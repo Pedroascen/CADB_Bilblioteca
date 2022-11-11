@@ -5,11 +5,17 @@
  */
 package Vista;
 
+import Controlador.LibroCtrl;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jazmine
  */
 public class AgregarLibro extends javax.swing.JFrame {
+
+    //instancias de clases para acceder a metodos
+    LibroCtrl libroctrl = new LibroCtrl();
 
     /**
      * Creates new form AgregarLibro
@@ -354,6 +360,11 @@ public class AgregarLibro extends javax.swing.JFrame {
 
         txtNumPags.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNumPags.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtNumPags.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumPagsKeyTyped(evt);
+            }
+        });
 
         lblISBN.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblISBN.setForeground(new java.awt.Color(23, 59, 102));
@@ -599,7 +610,26 @@ public class AgregarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMousePressed
 
     private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
-        // TODO add your handling code here:
+        String codMaterial = "";
+        String titulo = txtTitulo.getText();
+        String ubfisica = txtUbicacion.getText();
+        String cejemplar = txtCantEjemplares.getText();
+        String autor = txtAutor.getText();
+        String npaginas = txtNumPags.getText();
+        String editorial = txtEditorial.getText();
+        String pais = txtPais.getText();
+        String isbn = txtISBN.getText();
+        String anio = txtAnioPub.getText();
+        String edicion = txtEdicion.getText();
+        String idioma = txtIdioma.getText();
+        String materia = txtMateria.getText();
+        String descripcion = txtDescripcion.getText();
+        if (!titulo.equals("") && !ubfisica.equals("") && !cejemplar.equals("") && !autor.equals("") && !npaginas.equals("") && !editorial.equals("") && !pais.equals("") && !isbn.equals("") && !anio.equals("") && !edicion.equals("") && !idioma.equals("") && !materia.equals("") && !descripcion.equals("")) {
+            //JOptionPane.showMessageDialog(null, "Los datos son: ");
+            libroctrl.guardar_update(codMaterial, titulo, ubfisica, cejemplar, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
+        }
     }//GEN-LAST:event_btnAgregarMousePressed
 
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
@@ -621,15 +651,24 @@ public class AgregarLibro extends javax.swing.JFrame {
         dispose();
         PrestamosAdmin prestamos = new PrestamosAdmin();
         prestamos.setVisible(true);
-        
+
     }//GEN-LAST:event_btnPrestamosMousePressed
 
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
         // TODO add your handling code here:
-         dispose();
+        dispose();
         DevolucionesAdmin dev = new DevolucionesAdmin();
-        dev.setVisible(true);     
+        dev.setVisible(true);
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void txtNumPagsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPagsKeyTyped
+        // TODO add your handling code here:
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumPagsKeyTyped
 
     /**
      * @param args the command line arguments

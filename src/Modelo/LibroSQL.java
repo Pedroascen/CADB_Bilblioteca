@@ -8,12 +8,12 @@ import java.sql.SQLException;
 public class LibroSQL {
     //declaracion de sentencias sql y procedimientos almacenados 
     private final String SQL_CREATE_UPDATE =
-            "call new_upd_libro('?','?','?','?','?','?','?');";
+            "call new_upd_libro('?','?','?','?','?','?','?','?','?','?','?','?','?','?');";
     private final String SQL_DELETE
             = "DELETE FROM libro WHERE codigoMaterialL=?";
     
     //metodos para insertar y actualizar
-    public int insert_update(String codMaterial, String titulo, String ufisica, String cejemp, String autor,String npaginas, String editorial,String pais, String isbn, String anio, String edicion, String idioma, String materia, String descripcion){
+    public boolean insert_update(String codMaterial, String titulo, String ufisica, String cejemp, String autor,String npaginas, String editorial,String pais, String isbn, String anio, String edicion, String idioma, String materia, String descripcion){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -22,18 +22,18 @@ public class LibroSQL {
         try {
             conn = Conexion.getConnection();
             //llamada al procedimiento almacenado  call new_upd_libro('"+codMaterial+"','"+titulo+"','"+autor+"','"+npaginas+"','"+editorial+"','"+isbn+"','"+anio+"');
-            stmt = conn.prepareStatement("");
-           
-            //System.out.println(codMaterial+" "+titulo+" "+autor+" "+String.valueOf(npaginas)+" "+editorial+" "+" "+String.valueOf(isbn)+" "+String.valueOf(anio));
+            stmt = conn.prepareStatement("call new_upd_libro('"+codMaterial+"','"+titulo+"','"+ufisica+"','"+cejemp+"','"+autor+"','"+npaginas+"','"+editorial+"','"+pais+"','"+isbn+"','"+anio+"','"+edicion+"','"+idioma+"','"+materia+"','"+descripcion+"');");
+            System.out.println(codMaterial+", "+titulo+", "+ufisica+", "+cejemp+", "+autor+", "+npaginas+", "+editorial+", "+pais+", "+isbn+", "+anio+", "+edicion+", "+idioma+", "+materia+","+ descripcion);
             System.out.println("Ejecutando query.");
-            rows = stmt.executeUpdate();//no registros afectados
-            System.out.println("No Registros afectados: "+rows);
+            stmt.executeQuery();//no registros afectados
+            //System.out.println("No Registros afectados: "+rows);
+            return true;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+            return false;
         } finally{
             Conexion.close(stmt);
             Conexion.close(conn);
-        }       
-    return rows;
+        }      
     }
 }

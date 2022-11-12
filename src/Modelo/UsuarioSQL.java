@@ -55,7 +55,7 @@ public class UsuarioSQL extends Conexion {
     }
 
     //metodo para registrar usuarios
-    public boolean registrar(String nombre, String apellido, String carnet, String contrasenia, int id_rol) {
+    public boolean registrar(String nombre, String apellido, String contrasenia, int id_rol) {
         //inicializacion de las variables
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -63,21 +63,13 @@ public class UsuarioSQL extends Conexion {
         int rows = 0;
 
         try {
-            //se crea la conexion con la base
+            //se crea la conexion con la base +"','"+descripcion+"');"
             conn = Conexion.getConnection();
             //se declara la sentencia sql
-            stmt = conn.prepareStatement("INSERT INTO usuario (nombre,apellido,carnet,contrasena,id_rol) VALUES(?,?,?,?,?)");
-            int i = 1;//contador para la columnas para guardar registro
-
-            stmt.setString(i++, nombre);
-            stmt.setString(i++, apellido);
-            stmt.setString(i++, carnet);
-            stmt.setString(i++, contrasenia);
-            stmt.setInt(i++, id_rol);
-            rows = stmt.executeUpdate();
+            stmt = conn.prepareStatement("call new_user('"+nombre+"','"+apellido+"','"+contrasenia+"','"+id_rol+"');");
+            stmt.executeQuery();
             System.out.println("No Registros afectados: " + rows);
             return true;
-
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             System.err.println(sqle);

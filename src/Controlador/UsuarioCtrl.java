@@ -30,9 +30,9 @@ public class UsuarioCtrl {
     }
 
     //metodo para guardar
-    public boolean Guardar(String nombre, String apellido, String carnet, String contrasenia, int id_rol) {
+    public boolean Guardar(String nombre, String apellido, String contrasenia, int id_rol) {
         //confirmar si el resultado es true o false
-        if (usrsql.registrar(nombre, apellido, carnet, contrasenia, id_rol)) {
+        if (usrsql.registrar(nombre, apellido, contrasenia, id_rol)) {
             JOptionPane.showMessageDialog(null, "El registro se guardo con exito.");
             return true;
         } else {

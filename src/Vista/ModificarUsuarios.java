@@ -9,7 +9,6 @@ import Controlador.UsuarioCtrl;
 import Modelo.Hash;
 import Modelo.UsuarioDataLogin;
 import static Vista.RegistroUsuario.txtApellido;
-import static Vista.RegistroUsuario.txtCarnet;
 import static Vista.RegistroUsuario.txtConfirmContrasenia;
 import static Vista.RegistroUsuario.txtContrasenia;
 import static Vista.RegistroUsuario.txtNombre;

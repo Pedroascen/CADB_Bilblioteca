@@ -34,8 +34,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jLabelApellido = new javax.swing.JLabel();
-        jLabelCarnet = new javax.swing.JLabel();
-        txtCarnet = new javax.swing.JTextField();
         txtContrasenia = new javax.swing.JPasswordField();
         jLabelContraseña = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -77,13 +75,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabelApellido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabelApellido.setForeground(new java.awt.Color(23, 59, 102));
         jLabelApellido.setText("Apellido:");
-
-        jLabelCarnet.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabelCarnet.setForeground(new java.awt.Color(23, 59, 102));
-        jLabelCarnet.setText("Carnet:");
-
-        txtCarnet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtCarnet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         txtContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtContrasenia.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -139,20 +130,24 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTipoUsuario)
-                            .addComponent(jLabelNombre)
-                            .addComponent(jLabelApellido)
-                            .addComponent(jLabelContraseña)
-                            .addComponent(jLabelCarnet)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboTipoRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNombre)
-                            .addComponent(txtApellido)
-                            .addComponent(txtCarnet)
-                            .addComponent(txtContrasenia)
-                            .addComponent(txtConfirmContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelTipoUsuario)
+                                    .addComponent(jLabelNombre)
+                                    .addComponent(jLabelApellido))
+                                .addGap(7, 7, 7)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboTipoRol, 0, 189, Short.MAX_VALUE)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtApellido)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelContraseña)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtContrasenia)
+                                    .addComponent(txtConfirmContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jLabel3)))
@@ -160,7 +155,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(157, 157, 157))
+                .addGap(141, 141, 141))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,10 +175,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addComponent(jLabelApellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCarnet)
-                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelContraseña)
                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,9 +182,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtConfirmContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(49, 49, 49)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addGap(119, 119, 119))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
@@ -297,7 +288,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         String contra = new String(txtContrasenia.getPassword());
         String contraConfirm = new String(txtConfirmContrasenia.getPassword());
         //validar campos vacios
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || txtCarnet.getText().equals("") || contra.equals("") || contraConfirm.equals("")) {
+        if (txtNombre.getText().equals("") || txtApellido.getText().equals("") || contra.equals("") || contraConfirm.equals("")) {
             JOptionPane.showMessageDialog(null, "Hay campos vacios.");
         } else {
             //comparamos la contrasenia
@@ -307,7 +298,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 //enviamos los datos
                 String nombre = txtNombre.getText();
                 String apellido = txtApellido.getText();
-                String carnet = txtCarnet.getText();
                 String contrasenia = nuevaContra;
                 int id_rol = 0;
                 if (opcion.equals("Administrador")) {
@@ -320,7 +310,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     id_rol = 3;
                 }
                 //JOptionPane.showMessageDialog(null, "El rol es."+id_rol);
-                usrcrtl.Guardar(nombre, apellido, carnet, contrasenia, id_rol);
+                usrcrtl.Guardar(nombre, apellido, contrasenia, id_rol);
                 limpiarInputs();
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
@@ -339,7 +329,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void limpiarInputs() {
         txtNombre.setText("");
         txtApellido.setText("");
-        txtCarnet.setText("");
         txtContrasenia.setText("");
         txtConfirmContrasenia.setText("");
     }
@@ -391,14 +380,12 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelApellido;
-    private javax.swing.JLabel jLabelCarnet;
     private javax.swing.JLabel jLabelContraseña;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelTipoUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JTextField txtApellido;
-    public static javax.swing.JTextField txtCarnet;
     public static javax.swing.JPasswordField txtConfirmContrasenia;
     public static javax.swing.JPasswordField txtContrasenia;
     public static javax.swing.JTextField txtNombre;

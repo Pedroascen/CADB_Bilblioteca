@@ -40,15 +40,15 @@ public class UsuarioCtrl {
             return false;
         }
     }
-    
+
     //metodo para guardar
-    public boolean Actualizar(String carnet, String nombre, String apellido,  String contrasenia, int id_rol) {
+    public boolean Actualizar(String carnet, String nombre, String apellido, String contrasenia, int id_rol) {
         //confirmar si el resultado es true o false
         if (usrsql.actualizar(carnet, nombre, apellido, contrasenia, id_rol)) {
-            JOptionPane.showMessageDialog(null, "El usuario: "+carnet+" se actualizo con exito.");
+            JOptionPane.showMessageDialog(null, "El usuario: " + carnet + " se actualizo con exito.");
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, ""+carnet+":"+nombre+":"+apellido+":"+contrasenia+":"+id_rol);
+            JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasenia + ":" + id_rol);
             JOptionPane.showMessageDialog(null, "El registro no se pudo actualizar...");
             return false;
         }

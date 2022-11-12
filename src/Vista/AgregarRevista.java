@@ -5,12 +5,21 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+import Controlador.RevistaCtrl;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  *
  * @author Jazmine
  */
 public class AgregarRevista extends javax.swing.JFrame {
-
+    
+    //Instancia para acceder a los métodos
+    RevistaCtrl revistactrl = new RevistaCtrl();
+    
     /**
      * Creates new form AgregarRevista
      */
@@ -54,7 +63,7 @@ public class AgregarRevista extends javax.swing.JFrame {
         lblTamanio = new javax.swing.JLabel();
         txtEditorial = new javax.swing.JTextField();
         txtISSN = new javax.swing.JTextField();
-        txFechaPub = new javax.swing.JTextField();
+        txtFechaPub = new javax.swing.JTextField();
         txtTamanio = new javax.swing.JTextField();
         txtPeriodicidad = new javax.swing.JTextField();
         lblIdioma = new javax.swing.JLabel();
@@ -350,9 +359,14 @@ public class AgregarRevista extends javax.swing.JFrame {
 
         txtISSN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtISSN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtISSN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtISSNKeyTyped(evt);
+            }
+        });
 
-        txFechaPub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txFechaPub.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtFechaPub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtFechaPub.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         txtTamanio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTamanio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -418,7 +432,7 @@ public class AgregarRevista extends javax.swing.JFrame {
                             .addGroup(lblTItuloLayout.createSequentialGroup()
                                 .addComponent(lblFechaPub)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txFechaPub, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFechaPub, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(lblTItuloLayout.createSequentialGroup()
                                 .addComponent(lblPeriodicidad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -477,7 +491,7 @@ public class AgregarRevista extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFechaPub)
-                            .addComponent(txFechaPub, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFechaPub, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTamanio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,8 +549,62 @@ public class AgregarRevista extends javax.swing.JFrame {
 
     private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
         // TODO add your handling code here:
+        String codMaterial = "";
+        String titulo = txtTitulo.getText();
+        String ufisica = txtUbicacion.getText();
+        String cejemp = txtCantEjemplares.getText();
+        String editorial = txtEditorial.getText();
+        String issn = txtISSN.getText();
+        String idioma = txtIdioma.getText();
+        String tamano = txtTamanio.getText();
+        String periodicidad = txtPeriodicidad.getText();
+        String fechapublicacion = txtFechaPub.getText();
+        
+        //JOptionPane.showMessageDialog(null, "Los datos son: ");
+        if (txtISSN.getText().length() > 10) {
+            JOptionPane.showMessageDialog(null, "El ISSN no puede ser mayor a 10 caracteres.");
+            txtISSN.setText("");
+            issn = "";
+        }
+        if(ValidarFecha(fechapublicacion)==false){
+            JOptionPane.showMessageDialog(null, "Ingrese formato (yyyy-mm-dd) para fecha publicacion: ");
+            txtFechaPub.setText("");
+            fechapublicacion="";
+        }
+        
+        if (!titulo.equals("") && !ufisica.equals("") && !cejemp.equals("") && !editorial.equals("") && !issn.equals("") && !idioma.equals("") && !tamano.equals("") && !periodicidad.equals("") && !fechapublicacion.equals("")) {
+            revistactrl.guardar_update(codMaterial, titulo, ufisica, cejemp, editorial, issn, idioma, tamano, periodicidad, fechapublicacion);
+            limpiarInputs();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
+        }
+       
     }//GEN-LAST:event_btnAgregarMousePressed
 
+      public void limpiarInputs(){
+        txtTitulo.setText("");
+        txtUbicacion.setText("");
+        txtCantEjemplares.setText("");
+        txtEditorial.setText("");
+        txtISSN.setText("");
+        txtIdioma.setText("");
+        txtTamanio.setText("");
+        txtPeriodicidad.setText("");
+        txtFechaPub.setText("");
+    }
+    private boolean ValidarFecha(String fechaPublic){
+        try {
+            LocalDate fecha = LocalDate.parse(fechaPublic, DateTimeFormatter.ISO_LOCAL_DATE);
+            System.out.println("Fecha correcta!!");
+            System.out.println("Dia: " + fecha.getDayOfMonth());
+            System.out.println("Mes: " + fecha.getMonthValue());
+            System.out.println("Año: " + fecha.getYear());
+            return true;
+        } catch (DateTimeParseException ex) {
+            System.out.println("ERROR. No se pudo crear FECHA con esa entrada.");
+            return false;
+        }
+    }
     private void btnAgregarEjemplarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarEjemplarMousePressed
         // TODO add your handling code here:
         dispose();
@@ -558,6 +626,14 @@ public class AgregarRevista extends javax.swing.JFrame {
         DevolucionesAdmin dev = new DevolucionesAdmin();
         dev.setVisible(true);         
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void txtISSNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtISSNKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtISSNKeyTyped
 
     /**
      * @param args the command line arguments
@@ -624,9 +700,9 @@ public class AgregarRevista extends javax.swing.JFrame {
     private javax.swing.JLabel lblTamanio;
     private javax.swing.JLabel lblUbicacion;
     private javax.swing.JLabel lbltitulo;
-    public static javax.swing.JTextField txFechaPub;
     public static javax.swing.JTextField txtCantEjemplares;
     public static javax.swing.JTextField txtEditorial;
+    public static javax.swing.JTextField txtFechaPub;
     public static javax.swing.JTextField txtISSN;
     public static javax.swing.JTextField txtIdioma;
     public static javax.swing.JTextField txtPeriodicidad;

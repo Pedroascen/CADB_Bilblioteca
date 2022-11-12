@@ -15,7 +15,7 @@ public class UsuarioSQL extends Conexion {
     private final String SQL_SELECT = "SELECT u.carnet,u.nombre, u.apellido,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id";
     private final String SQL_SELECT_BY_CARNET = "SELECT nombre,apellido,carnet,contrasena,id_rol FROM usuario WHERE carnet = ?";
     private final String SQL_UPDATE = "UPDATE usuario SET nombre=?, apellido=?, contrasena=?, id_rol=? WHERE carnet=?";
-    
+
     //metodo para validar usuario en login
     public boolean login(UsuarioDataLogin usrlog) {
         //inicializacion de las variables
@@ -66,7 +66,7 @@ public class UsuarioSQL extends Conexion {
             //se crea la conexion con la base +"','"+descripcion+"');"
             conn = Conexion.getConnection();
             //se declara la sentencia sql
-            stmt = conn.prepareStatement("call new_user('"+nombre+"','"+apellido+"','"+contrasenia+"','"+id_rol+"');");
+            stmt = conn.prepareStatement("call new_user('" + nombre + "','" + apellido + "','" + contrasenia + "','" + id_rol + "');");
             stmt.executeQuery();
             System.out.println("No Registros afectados: " + rows);
             return true;
@@ -80,7 +80,7 @@ public class UsuarioSQL extends Conexion {
             Conexion.close(conn);
         }
     }
-    
+
     //metodo para actualizar usuarios
     public boolean actualizar(String carnet, String nombre, String apellido, String contrasena, int id_rol) {
         //inicializacion de las variables
@@ -105,9 +105,9 @@ public class UsuarioSQL extends Conexion {
             //mensaje de salida
             System.out.println("No Registros afectados: " + rows);
             return true;
-            
+
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, ""+carnet+":"+nombre+":"+apellido+":"+contrasena+":"+id_rol);
+            JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasena + ":" + id_rol);
             sqle.printStackTrace();
             System.err.println(sqle);
             return false;
@@ -138,7 +138,7 @@ public class UsuarioSQL extends Conexion {
             while (rs.next()) {
                 int id_rol = rs.getInt(5);
                 String idRol = String.valueOf(id_rol);
-                
+
                 lstusr.add(rs.getString(1));
                 lstusr.add(rs.getString(2));
                 lstusr.add(rs.getString(3));

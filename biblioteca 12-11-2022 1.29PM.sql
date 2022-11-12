@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-11-2022 a las 02:23:46
+-- Tiempo de generación: 12-11-2022 a las 19:28:48
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -335,6 +335,8 @@ INSERT INTO `material` (`codigoMaterial`, `Titulo`, `codigoTipoMaterial`, `ubica
 ('LIB0000003', 'Programacion ', 1, 'Piso 1', 2, 2, 0, 1),
 ('LIB0000004', 'Example', 1, 'Piso 2', 15, 15, 0, 1),
 ('OBR0000001', 'Hanse y Gretel', 2, 'Paso 1', 2, 0, 2, 1),
+('REV0000001', 'La vegas', 3, 'Piso 2', 4, 0, 4, 1),
+('REV0000002', 'Paisajes', 3, 'Estante 3', 5, 0, 5, 1),
 ('TES0000001', 'Tesis 1', 5, 'Piso 2', 3, 0, 3, 1);
 
 -- --------------------------------------------------------
@@ -457,6 +459,14 @@ CREATE TABLE IF NOT EXISTS `revista` (
 --
 
 TRUNCATE TABLE `revista`;
+--
+-- Volcado de datos para la tabla `revista`
+--
+
+INSERT INTO `revista` (`IdRevista`, `codigoMaterialR`, `Editorial`, `ISSN`, `Idioma`, `Tamano`, `Periodicidad`, `FechaPublicacion`) VALUES
+(1, 'REV0000001', 'Ejemplo', 1234567892, 'Español', '300', '12 junio', '2022-12-20'),
+(2, 'REV0000002', 'Hermanos', 1234567891, 'Español', '20x30 cm', '20 enero', '2010-11-15');
+
 -- --------------------------------------------------------
 
 --
@@ -577,8 +587,11 @@ TRUNCATE TABLE `usuario`;
 
 INSERT INTO `usuario` (`carnet`, `nombre`, `apellido`, `contrasena`, `id_rol`) VALUES
 ('admin', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1),
+('JC220004', 'Juan', 'Carlos ', '12345', 1),
+('JC220005', 'Juan Manuel', 'Pericles', '8cb2237d0679ca88db6464eac60da96345513964', 3),
 ('profesor', 'profesor', 'profesor', '8cb2237d0679ca88db6464eac60da96345513964', 2),
-('RA220003', 'Rocio', 'Abrego', '1234', 3);
+('RA220003', 'Rivera', 'Antonio', '8cb2237d0679ca88db6464eac60da96345513964', 2),
+('RA220006', 'Rafael', 'Alfonso', '8cb2237d0679ca88db6464eac60da96345513964', 2);
 
 --
 -- Restricciones para tablas volcadas

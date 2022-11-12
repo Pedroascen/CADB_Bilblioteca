@@ -440,7 +440,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblFechaPub" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txFechaPub" min="-2" pref="165" max="-2" attributes="0"/>
+                                      <Component id="txtFechaPub" min="-2" pref="165" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblPeriodicidad" min="-2" max="-2" attributes="0"/>
@@ -517,7 +517,7 @@
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblFechaPub" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txFechaPub" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtFechaPub" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -722,11 +722,14 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtISSNKeyTyped"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="txFechaPub">
+            <Component class="javax.swing.JTextField" name="txtFechaPub">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>

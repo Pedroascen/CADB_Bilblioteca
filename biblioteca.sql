@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-11-2022 a las 23:55:30
+-- Tiempo de generación: 12-11-2022 a las 02:23:46
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -27,8 +27,36 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `new_upd_cd`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_cd` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` VARCHAR(20), `cejemp` INT, `autor` VARCHAR(250), `paispubli` VARCHAR(25), `ciudadpub` VARCHAR(25), `anio_publi` INT(4), `volumen` INT, `idioma` VARCHAR(15), `tema` VARCHAR(25))  BEGIN
+DECLARE lcodmaterial varchar(10);
+DECLARE lastID INT Default 0;
+
+IF LENGTH(codmaterial) = 0 THEN
+	SELECT max(idCD) INTO lastID from cd;
+	SET lastID = IFNULL(lastID, 0) + 1;
+    SET lcodmaterial = CONCAT('CDS', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
+    
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+	VALUES (lcodmaterial, titulo, 4, ufisica, cejemp, cejemp, 0, 1);
+
+	INSERT INTO `biblioteca`.`cd`(`IdCD`,`codigoMaterialC`,`Autor(es)`,`pais_publicacion`,`ciudad_publicacion`, `anio_publicacion`, `volumen`, `idioma`, `tema`)
+	VALUES(lastID, lcodmaterial, autor, paispubli, ciudadpub, anio_publi, volumen, idioma, tema);
+    
+ELSE
+	SET SQL_SAFE_UPDATES = 0; 
+	UPDATE `biblioteca`.`material` SET `Titulo` = titulo, `ubicacionFisica` = ufisica, `cantidadEjemplares` = cejemp WHERE `codigoMaterial` = codmaterial;
+   
+   UPDATE `biblioteca`.`cd` 
+   SET `Autor(es)` = autor, `pais_publicacion` = paispubli, `ciudad_publicacion` = ciudadpub, `anio_publicacion` = anio_publi, `volumen`=volumen, `idioma`=idioma, `tema`=tema
+   WHERE `codigoMaterialC` = codmaterial;
+END IF;
+
+
+END$$
+
 DROP PROCEDURE IF EXISTS `new_upd_libro`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_libro` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` INT, `cejemp` INT, `autor` VARCHAR(100), `npaginas` INT, `editorial` VARCHAR(50), `pais` VARCHAR(25), `isbn` INT, `anio` INT, `edicion` INT, `idioma` VARCHAR(15), `materia` VARCHAR(15), `descripcion` VARCHAR(250))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_libro` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` VARCHAR(20), `cejemp` INT, `autor` VARCHAR(100), `npaginas` INT, `editorial` VARCHAR(50), `pais` VARCHAR(25), `isbn` INT, `anio` INT, `edicion` INT, `idioma` VARCHAR(15), `materia` VARCHAR(15), `descripcion` VARCHAR(250))  BEGIN
 DECLARE lcodmaterial varchar(10);
 DECLARE lastID INT Default 0;
 
@@ -38,7 +66,7 @@ IF LENGTH(codmaterial) = 0 THEN
     SET lcodmaterial = CONCAT('LIB', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
     
     INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
-	VALUES (lcodmaterial, titulo, 1, ufisica, cejemp, cejemp, 0, 1);
+	VALUES (lcodmaterial, titulo, 1, ufisica, cejemp, 0, cejemp, 1);
 
 	INSERT INTO `biblioteca`.`libro`(`IdLibro`,`codigoMaterialL`,`Autor(es)`,`NumeroPaginas`,`Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Materia`, `Descripcion`)
 	VALUES(lastID, lcodmaterial, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion);
@@ -51,6 +79,148 @@ ELSE
    SET `Autor(es)` = autor, `NumeroPaginas` = npaginas, `Editorial` = editorial, `Pais` = pais, `ISBN` = isbn, `AnioPublicacion` = anio, `Edicion` = edicion, `Idioma` = idioma, `Materia` = materia, `Descripcion` = descripcion
    WHERE `codigoMaterialL` = codmaterial;
 END IF;
+
+
+END$$
+
+DROP PROCEDURE IF EXISTS `new_upd_obra`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_obra` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` VARCHAR(20), `cejemp` INT, `autor` VARCHAR(100), `npaginas` INT, `editorial` VARCHAR(45), `pais` VARCHAR(25), `isbn` INT, `anio` INT, `edicion` INT, `idioma` VARCHAR(15), `genero` VARCHAR(15))  BEGIN
+DECLARE lcodmaterial varchar(10);
+DECLARE lastID INT Default 0;
+
+IF LENGTH(codmaterial) = 0 THEN
+	SELECT max(IdObra) INTO lastID from Obra;
+	SET lastID = IFNULL(lastID, 0) + 1;
+    SET lcodmaterial = CONCAT('OBR', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
+    
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+	VALUES (lcodmaterial, titulo, 2, ufisica, cejemp, cejemp, 0, 1);
+
+	INSERT INTO `biblioteca`.`obra`(`IdObra`,`codigoMaterialO`,`Autor(es)`,`NumeroPaginas`,`Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `genero`)
+	VALUES(lastID, lcodmaterial, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, genero);
+    
+ELSE
+	SET SQL_SAFE_UPDATES = 0; 
+	UPDATE `biblioteca`.`material` SET `Titulo` = titulo, `ubicacionFisica` = ufisica, `cantidadEjemplares` = cejemp WHERE `codigoMaterial` = codmaterial;
+   
+   UPDATE `biblioteca`.`obra` 
+   SET `Autor(es)` = autor, `NumeroPaginas` = npaginas, `Editorial` = editorial, `Pais` = pais, `ISBN` = isbn, `AnioPublicacion` = anio, `Edicion` = edicion, `Idioma` = idioma, `Genero` = genero
+   WHERE `codigoMaterialO` = codmaterial;
+END IF;
+
+
+END$$
+
+DROP PROCEDURE IF EXISTS `new_upd_revista`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_revista` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` VARCHAR(20), `cejemp` INT, `editorial` VARCHAR(50), `issn` INT, `idioma` VARCHAR(15), `tamano` VARCHAR(50), `periodicidad` VARCHAR(20), `fechapublicacion` DATE)  BEGIN
+DECLARE lcodmaterial varchar(10);
+DECLARE lastID INT Default 0;
+
+IF LENGTH(codmaterial) = 0 THEN
+	SELECT max(IdRevista) INTO lastID from revista;
+	SET lastID = IFNULL(lastID, 0) + 1;
+    SET lcodmaterial = CONCAT('REV', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
+    
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+	VALUES (lcodmaterial, titulo, 3, ufisica, cejemp, cejemp, 0, 1);
+
+	INSERT INTO `biblioteca`.`revista`(`IdRevista`,`codigoMaterialR`,`Editorial`,`ISSN`,`Idioma`,`tamano`, `Periodicidad`, `FechaPublicacion`)
+	VALUES(lastID, lcodmaterial, editorial, issn, idioma, tamano, periodicidad, fechapublicacion);
+    
+ELSE
+	SET SQL_SAFE_UPDATES = 0; 
+	UPDATE `biblioteca`.`material` SET `Titulo` = titulo, `ubicacionFisica` = ufisica, `cantidadEjemplares` = cejemp WHERE `codigoMaterial` = codmaterial;
+   
+   UPDATE `biblioteca`.`revista` 
+   SET `Editorial` = editorial, `ISSN` = issn, `Idioma` = idioma, `Tamano` = tamano, `Periodicidad` = periodicidad, `FechaPublicacion` = fechapublicacion
+   WHERE `codigoMaterialR` = codmaterial;
+END IF;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `new_upd_tesis`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_upd_tesis` (`codmaterial` VARCHAR(8), `titulo` VARCHAR(100), `ufisica` VARCHAR(20), `cejemp` INT, `autor` VARCHAR(250), `pais` VARCHAR(25), `ciudad` VARCHAR(25), `universidad` VARCHAR(250), `carrera` VARCHAR(250), `idioma` VARCHAR(15), `fechaPublicacion` DATE, `numeroPaginas` INT, `descripcion` VARCHAR(250), `palabrasclave` VARCHAR(250))  BEGIN
+DECLARE lcodmaterial varchar(10);
+DECLARE lastID INT Default 0;
+
+IF LENGTH(codmaterial) = 0 THEN
+	SELECT max(IdTesis) INTO lastID from tesis;
+	SET lastID = IFNULL(lastID, 0) + 1;
+    SET lcodmaterial = CONCAT('TES', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
+    
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+	VALUES (lcodmaterial, titulo, 5, ufisica, cejemp, cejemp, 0, 1);
+
+	INSERT INTO `biblioteca`.`tesis`(`IdTesis`,`codigoMaterialT`,`Autor(es)`,`Pais`,`Ciudad`, `Universidad`, `Carrera`, `Idioma`, `FechaPublicacion`, `NumeroPaginas`, `Descripcion`, `Palabras clave`)
+	VALUES(lastID, lcodmaterial, autor, pais, ciudad, universidad, carrera, idioma, FechaPublicacion, numeroPaginas, descripcion, palabrasclave);
+    
+ELSE
+	SET SQL_SAFE_UPDATES = 0; 
+	UPDATE `biblioteca`.`material` SET `Titulo` = titulo, `ubicacionFisica` = ufisica, `cantidadEjemplares` = cejemp WHERE `codigoMaterial` = codmaterial;
+   
+   UPDATE `biblioteca`.`tesis` 
+   SET `Autor(es)` = autor, `Pais` = Pais, `Ciudad` = ciudad, `Universidad` = Universidad, `Carrera` = Carrera, `Idioma` = idioma, `FechaPublicacion` = FechaPublicacion, `NumeroPaginas` = NumeroPaginas, `Descripcion` = Descripcion, `Palabras clave` = Palabrasclave
+   WHERE `codigoMaterialT` = codmaterial;
+END IF;
+
+
+END$$
+
+DROP PROCEDURE IF EXISTS `new_user`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user` (`uNombre` VARCHAR(25), `uApellido` VARCHAR(25), `uPassword` VARCHAR(40), `uRolId` INT)  BEGIN
+DECLARE CarnetID varchar(8);
+DECLARE cYear varchar(4) Default YEAR(CURDATE());
+
+DECLARE sequence varchar(4);
+DECLARE tUsers INT Default 0;
+SELECT count(*) INTO tUsers from `biblioteca`.`usuario`;
+SET tUsers = IFNULL(tUsers, 0) + 1;
+SET sequence = CONVERT(LPAD(CONVERT(tUsers, CHAR(4)), 4, '0'), CHAR(4));
+
+SET CarnetID = upper(substring(uNombre, 1, 1));
+SET CarnetID = concat(CarnetID, upper(substring(uApellido, 1, 1)));
+SET CarnetID = concat(CarnetID, upper(substring(cYear, 3, 2)));
+SET CarnetID = concat(CarnetID, sequence);
+
+
+INSERT INTO `biblioteca`.`usuario`
+(`carnet`,`nombre`,`apellido`,`contrasena`,`id_rol`)
+VALUES (CarnetID,uNombre,uApellido,uPassword,uRolId);
+
+select CarnetID as CarnetID;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `prestamo`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prestamo` (`materialId` VARCHAR(10), `carnetId` VARCHAR(8))  BEGIN
+DECLARE tiempolimit INT Default 0;
+DECLARE fechafin date;
+DECLARE lastID INT Default 0;
+
+DECLARE cDisponible INT Default 0;
+DECLARE cPrestado INT Default 0;
+
+SELECT privilegios.tiempo_limite INTO tiempolimit
+FROM  `biblioteca`.`usuario` 
+INNER JOIN `biblioteca`.`privilegios` ON `usuario`.`id_rol` = `privilegios`.`rol_id` 
+WHERE `usuario`.`carnet` = carnetId
+limit 1;
+
+SELECT max(id) INTO lastID from prestamo;
+SELECT max(cantidadDisponibles) INTO cDisponible from material WHERE codigoMaterial = materialId;
+SELECT max(cantidadPrestados) INTO cPrestado from material WHERE codigoMaterial = materialId;
+SET cPrestado = IFNULL(cPrestado, 0) + 1;
+
+SET fechafin = DATE_ADD(CURDATE(), INTERVAL tiempolimit DAY);
+
+INSERT INTO `biblioteca`.`prestamo`
+(`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fin`, `estado`, `mora`,`fecha_devolucion`)
+VALUES
+(lastID, carnetId, materialId, CURDATE(), fechafin, 1, 0, null);
+
+UPDATE `biblioteca`.`material` SET `cantidadDisponibles` = (cDisponible - 1), `cantidadPrestados` = cPrestado 
+WHERE `codigoMaterial` = materialId;
+
 
 
 END$$
@@ -83,6 +253,13 @@ CREATE TABLE IF NOT EXISTS `cd` (
 --
 
 TRUNCATE TABLE `cd`;
+--
+-- Volcado de datos para la tabla `cd`
+--
+
+INSERT INTO `cd` (`IdCD`, `CodigoMaterialC`, `Autor(es)`, `pais_publicacion`, `ciudad_publicacion`, `anio_publicacion`, `volumen`, `idioma`, `tema`) VALUES
+(1, 'CDS0000001', 'Anonimo', 'USA', 'California', 2017, 2, 'Ingles', 'SOAD');
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +289,16 @@ CREATE TABLE IF NOT EXISTS `libro` (
 --
 
 TRUNCATE TABLE `libro`;
+--
+-- Volcado de datos para la tabla `libro`
+--
+
+INSERT INTO `libro` (`IdLibro`, `codigoMaterialL`, `Autor(es)`, `NumeroPaginas`, `Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Materia`, `Descripcion`) VALUES
+(1, 'LIB0000001', 'Miguel de Cervantes', 500, 'Test', 'España', 12, 1970, 11, 'Español', 'Literatura', 'Las aventuras de Don Quijote y Sancho Panza'),
+(2, 'LIB0000002', 'Miguel de Cervantes', 500, 'Test', 'España', 12, 1970, 11, 'Español', 'Literatura', 'Las aventuras de Don Quijote y Sancho Panza'),
+(3, 'LIB0000003', 'Anonimo', 300, 'Hermanos', 'El Salvador', 123, 2015, 1, 'Español', 'Informatica', 'Introduccion a la Prorgamacion'),
+(4, 'LIB0000004', 'Example', 200, 'Example', 'Example', 1212312312, 2015, 1, 'Example', 'Example', 'Example');
+
 -- --------------------------------------------------------
 
 --
@@ -123,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `material` (
   `codigoMaterial` varchar(10) NOT NULL,
   `Titulo` varchar(60) NOT NULL,
   `codigoTipoMaterial` int(11) NOT NULL,
-  `ubicacionFisica` int(11) NOT NULL,
+  `ubicacionFisica` varchar(20) NOT NULL,
   `cantidadEjemplares` int(11) NOT NULL,
   `cantidadDisponibles` int(11) NOT NULL,
   `cantidadPrestados` int(11) NOT NULL,
@@ -137,6 +324,19 @@ CREATE TABLE IF NOT EXISTS `material` (
 --
 
 TRUNCATE TABLE `material`;
+--
+-- Volcado de datos para la tabla `material`
+--
+
+INSERT INTO `material` (`codigoMaterial`, `Titulo`, `codigoTipoMaterial`, `ubicacionFisica`, `cantidadEjemplares`, `cantidadDisponibles`, `cantidadPrestados`, `estado`) VALUES
+('CDS0000001', 'Musica Punk', 4, 'Piso 3', 5, 0, 5, 1),
+('LIB0000001', 'Don Quijote de la Mancha', 1, '44', 10, 0, 10, 1),
+('LIB0000002', 'Don Quijote de la Mancha', 1, 'E-44-5', 10, 9, 1, 1),
+('LIB0000003', 'Programacion ', 1, 'Piso 1', 2, 2, 0, 1),
+('LIB0000004', 'Example', 1, 'Piso 2', 15, 15, 0, 1),
+('OBR0000001', 'Hanse y Gretel', 2, 'Paso 1', 2, 0, 2, 1),
+('TES0000001', 'Tesis 1', 5, 'Piso 2', 3, 0, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -165,6 +365,13 @@ CREATE TABLE IF NOT EXISTS `obra` (
 --
 
 TRUNCATE TABLE `obra`;
+--
+-- Volcado de datos para la tabla `obra`
+--
+
+INSERT INTO `obra` (`IdObra`, `codigoMaterialO`, `Autor(es)`, `NumeroPaginas`, `Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Genero`) VALUES
+(1, 'OBR0000001', 'Anonimo', 300, 'Hermanos ', 'El Salvador', 123323123, 2015, 1, 'Español', 'Fantasia');
+
 -- --------------------------------------------------------
 
 --
@@ -180,17 +387,24 @@ CREATE TABLE IF NOT EXISTS `prestamo` (
   `fecha_fin` date NOT NULL,
   `estado` int(11) NOT NULL,
   `mora` double NOT NULL,
-  `fecha_devolucion` date NOT NULL,
+  `fecha_devolucion` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `carnet_idx` (`carnet`),
   KEY `codmaterial_idx` (`codmaterial`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Truncar tablas antes de insertar `prestamo`
 --
 
 TRUNCATE TABLE `prestamo`;
+--
+-- Volcado de datos para la tabla `prestamo`
+--
+
+INSERT INTO `prestamo` (`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fin`, `estado`, `mora`, `fecha_devolucion`) VALUES
+(1, 'RA220003', 'LIB0000002', '2022-11-11', '2022-11-18', 1, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -299,6 +513,13 @@ CREATE TABLE IF NOT EXISTS `tesis` (
 --
 
 TRUNCATE TABLE `tesis`;
+--
+-- Volcado de datos para la tabla `tesis`
+--
+
+INSERT INTO `tesis` (`IdTesis`, `codigoMaterialT`, `Autor(es)`, `Pais`, `Ciudad`, `Universidad`, `Carrera`, `Idioma`, `FechaPublicacion`, `NumeroPaginas`, `Descripcion`, `Palabras clave`) VALUES
+(1, 'TES0000001', 'Anonimo', 'El Salvador', 'El Salvador', 'UES', 'Tecnico en Sistema', 'Español', '2022-12-20', 300, 'Tesis 1', 'Tesis 1');
+
 -- --------------------------------------------------------
 
 --
@@ -356,7 +577,8 @@ TRUNCATE TABLE `usuario`;
 
 INSERT INTO `usuario` (`carnet`, `nombre`, `apellido`, `contrasena`, `id_rol`) VALUES
 ('admin', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1),
-('profesor', 'profesor', 'profesor', '8cb2237d0679ca88db6464eac60da96345513964', 2);
+('profesor', 'profesor', 'profesor', '8cb2237d0679ca88db6464eac60da96345513964', 2),
+('RA220003', 'Rocio', 'Abrego', '1234', 3);
 
 --
 -- Restricciones para tablas volcadas

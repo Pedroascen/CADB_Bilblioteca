@@ -7,10 +7,6 @@ package Controlador;
 import Modelo.RevistaSQL;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Jazmine
- */
 public class RevistaCtrl {
     
     //Instancia al modelo

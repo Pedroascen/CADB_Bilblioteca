@@ -5,15 +5,18 @@
  */
 package Vista;
 
+import Controlador.CdCtrl;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jazmine
  */
 public class AgregarCD extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AgregarCD
-     */
+    //instancia al controlador
+    CdCtrl cdctrl = new CdCtrl();
+
     public AgregarCD() {
         initComponents();
     }
@@ -358,12 +361,22 @@ public class AgregarCD extends javax.swing.JFrame {
 
         txtVolumen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtVolumen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtVolumen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVolumenKeyTyped(evt);
+            }
+        });
 
         txtAnioPub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAnioPub.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtAnioPub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnioPubActionPerformed(evt);
+            }
+        });
+        txtAnioPub.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnioPubKeyTyped(evt);
             }
         });
 
@@ -394,6 +407,11 @@ public class AgregarCD extends javax.swing.JFrame {
 
         txtCantEjemplares.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantEjemplares.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+        txtCantEjemplares.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantEjemplaresKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
@@ -559,8 +577,44 @@ public class AgregarCD extends javax.swing.JFrame {
 
     private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
         // TODO add your handling code here:
+        String codMaterial = "";
+        String titulo = txtTitulo.getText();
+        String ubfisica = txtUbicacion.getText();
+        String cejemplar = txtCantEjemplares.getText();
+        String autor = txtAutor.getText();
+        String paispubli = txtPaisPub.getText();
+        String ciudadpub = txtCiudad.getText();
+        String anio_publi = txtAnioPub.getText();
+        String volumen = txtVolumen.getText();
+        String idioma = txtIdioma.getText();
+        String tema = txtTema.getText();
+
+        //agregar
+        if (txtAnioPub.getText().length() > 4) {
+            JOptionPane.showMessageDialog(null, "El año no puede ser mayor a 4 caracteres.");
+            txtAnioPub.setText("");
+            anio_publi = "";
+        }
+        if (!titulo.equals("") && !ubfisica.equals("") && !cejemplar.equals("") && !autor.equals("") && !paispubli.equals("") && !ciudadpub.equals("") && !anio_publi.equals("") && !volumen.equals("") && !idioma.equals("") && !tema.equals("")) {
+            cdctrl.guardar_update(codMaterial, titulo, ubfisica, cejemplar, autor, paispubli, ciudadpub, anio_publi, volumen, idioma, tema);
+            limpiarInputs();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
+        }
     }//GEN-LAST:event_btnAgregarMousePressed
 
+    private void limpiarInputs() {
+        txtTitulo.setText("");
+        txtUbicacion.setText("");
+        txtCantEjemplares.setText("");
+        txtAutor.setText("");
+        txtPaisPub.setText("");
+        txtCiudad.setText("");
+        txtAnioPub.setText("");
+        txtVolumen.setText("");
+        txtIdioma.setText("");
+        txtTema.setText("");
+    }
     private void txtAnioPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnioPubActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnioPubActionPerformed
@@ -583,8 +637,32 @@ public class AgregarCD extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         DevolucionesAdmin dev = new DevolucionesAdmin();
-        dev.setVisible(true);       
+        dev.setVisible(true);
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void txtCantEjemplaresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantEjemplaresKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantEjemplaresKeyTyped
+
+    private void txtAnioPubKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioPubKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAnioPubKeyTyped
+
+    private void txtVolumenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVolumenKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtVolumenKeyTyped
 
     /**
      * @param args the command line arguments

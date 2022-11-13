@@ -666,6 +666,7 @@ public class AgregarLibro extends javax.swing.JFrame {
             txtEdicion.setText("");
             edicion = "";
         }
+        //mandamos datos al controlador
         if (!titulo.equals("") && !ubfisica.equals("") && !cejemplar.equals("") && !autor.equals("") && !npaginas.equals("") && !editorial.equals("") && !pais.equals("") && !isbn.equals("") && !anio.equals("") && !edicion.equals("") && !idioma.equals("") && !materia.equals("") && !descripcion.equals("")) {
             libroctrl.guardar_update(codMaterial, titulo, ubfisica, cejemplar, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion);
             limpiarInputs();

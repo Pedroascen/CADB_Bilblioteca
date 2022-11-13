@@ -23,13 +23,13 @@ public class LibroSQL {
             stmt = conn.prepareStatement("call new_upd_libro('"+codMaterial+"','"+titulo+"','"+ufisica+"','"+cejemp+"','"+autor+"','"+npaginas+"','"+editorial+"','"+pais+"','"+isbn+"','"+anio+"','"+edicion+"','"+idioma+"','"+materia+"','"+descripcion+"');");
             System.out.println(codMaterial+", "+titulo+", "+ufisica+", "+cejemp+", "+autor+", "+npaginas+", "+editorial+", "+pais+", "+isbn+", "+anio+", "+edicion+", "+idioma+", "+materia+","+ descripcion);
             System.out.println("Ejecutando query.");
-            stmt.executeQuery();//no registros afectados
-            //System.out.println("No Registros afectados: "+rows);
+            rows = stmt.executeUpdate();//no registros afectados
+            System.out.println("No Registros afectados: "+rows);
             return true;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             return false;
-        } finally{
+        } finally {
             Conexion.close(stmt);
             Conexion.close(conn);
         }      

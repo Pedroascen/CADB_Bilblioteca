@@ -5,12 +5,16 @@
  */
 package Vista;
 
+import Controlador.ObraCtrl;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jazmine
  */
 public class AgregarObra extends javax.swing.JFrame {
-
+//Instanciando al controlador
+    ObraCtrl obractrl=new ObraCtrl();
     /**
      * Creates new form AgregarObra
      */
@@ -352,6 +356,11 @@ public class AgregarObra extends javax.swing.JFrame {
 
         txtNumPags.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNumPags.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtNumPags.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumPagsKeyTyped(evt);
+            }
+        });
 
         lblISBN.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblISBN.setForeground(new java.awt.Color(23, 59, 102));
@@ -370,12 +379,27 @@ public class AgregarObra extends javax.swing.JFrame {
 
         txtISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtISBN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtISBN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtISBNKeyTyped(evt);
+            }
+        });
 
         txtAnioPub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAnioPub.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtAnioPub.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnioPubKeyTyped(evt);
+            }
+        });
 
         txtEdicion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtEdicion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtEdicion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdicionKeyTyped(evt);
+            }
+        });
 
         txtPais.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPais.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -407,6 +431,11 @@ public class AgregarObra extends javax.swing.JFrame {
 
         txtCantEjemplares.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantEjemplares.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+        txtCantEjemplares.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantEjemplaresKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
@@ -589,9 +618,66 @@ public class AgregarObra extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListaEjemplaresMousePressed
 
     private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
-        // TODO add your handling code here:
+        String codMaterial="";
+        String titulo=txtTitulo.getText();
+        String ufisica=txtUbicacion.getText();
+        String cejemp=txtCantEjemplares.getText();
+        String autor=txtAutor.getText();
+        String npaginas=txtNumPags.getText();
+        String editorial=txtEditorial.getText();
+        String pais=txtPais.getText();
+        String isbn=txtISBN.getText();
+        String anio=txtAnioPub.getText();
+        String edicion=txtEdicion.getText();
+        String idioma=txtIdioma.getText();
+        String genero=txtGenero.getText();
+        
+        //agregar
+        //JOptionPane.showMessageDialog(null, "Los datos son: ");
+        if (txtISBN.getText().length() > 10) {
+            JOptionPane.showMessageDialog(null, "El ISBN no puede ser mayor a 10 caracteres.");
+            txtISBN.setText("");
+            isbn = "";
+        }
+        if (txtAnioPub.getText().length() > 4) {
+            JOptionPane.showMessageDialog(null, "El año no puede ser mayor a 4 caracteres.");
+            txtAnioPub.setText("");
+            anio = "";
+        }
+        if (txtEdicion.getText().length() > 4) {
+            JOptionPane.showMessageDialog(null, "La edicion no puede ser mayor a 4 caracteres.");
+            txtEdicion.setText("");
+            edicion = "";
+        }
+        if (txtGenero.getText().length() > 15) {
+            JOptionPane.showMessageDialog(null, "El campo genero no puede ser mayor a 15 caracteres.");
+            txtGenero.setText("");
+            genero = "";
+        }
+        
+        //Validando campos vacios
+        if (!titulo.equals("") && !ufisica.equals("") && !cejemp.equals("") && !autor.equals("") && !npaginas.equals("") && !editorial.equals("") && !pais.equals("") && !isbn.equals("") && !anio.equals("") && !edicion.equals("") && !idioma.equals("") && !genero.equals("") ) {
+            obractrl.guardar_update(codMaterial, titulo, ufisica, cejemp, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, genero );
+            limpiarInputs();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
+        }
     }//GEN-LAST:event_btnAgregarMousePressed
-
+    public void limpiarInputs(){
+        txtTitulo.setText("");
+        txtUbicacion.setText("");
+        txtCantEjemplares.setText("");
+        txtAutor.setText("");
+        txtNumPags.setText("");
+        txtEditorial.setText("");
+        txtEditorial.setText("");
+        txtPais.setText("");
+        txtISBN.setText("");
+        txtAnioPub.setText("");
+        txtEdicion.setText("");
+        txtIdioma.setText("");
+        txtGenero.setText("");
+    }
     private void btnAgregarEjemplarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarEjemplarMousePressed
         // TODO add your handling code here:
         dispose();
@@ -604,16 +690,56 @@ public class AgregarObra extends javax.swing.JFrame {
         dispose();
         PrestamosAdmin prestamos = new PrestamosAdmin();
         prestamos.setVisible(true);
-                      
+
     }//GEN-LAST:event_btnPrestamosMousePressed
 
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
         // TODO add your handling code here:
         dispose();
         DevolucionesAdmin dev = new DevolucionesAdmin();
-        dev.setVisible(true);          
-        
+        dev.setVisible(true);
+
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void txtNumPagsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPagsKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumPagsKeyTyped
+
+    private void txtISBNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtISBNKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtISBNKeyTyped
+
+    private void txtAnioPubKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioPubKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAnioPubKeyTyped
+
+    private void txtEdicionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdicionKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEdicionKeyTyped
+
+    private void txtCantEjemplaresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantEjemplaresKeyTyped
+        //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantEjemplaresKeyTyped
 
     /**
      * @param args the command line arguments

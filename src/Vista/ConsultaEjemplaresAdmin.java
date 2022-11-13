@@ -5,7 +5,12 @@
  */
 package Vista;
 
-import Modelo.UsuarioDataLogin;
+import Controlador.ConsultaEjemplaresCtrl;
+import Modelo.ConsultaEjemplares;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.swing.DefaultListModel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -17,6 +22,9 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
     
     public ConsultaEjemplaresAdmin() {
         initComponents();
+        buttonGroup1.add(rbtnAutor);
+        buttonGroup1.add(rbtnClasificacion);
+        buttonGroup1.add(rbtnTitulo);
     }
 
     /**
@@ -28,6 +36,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnHome = new javax.swing.JPanel();
         lblListaEjemplares1 = new javax.swing.JLabel();
@@ -56,8 +65,8 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         rbtnClasificacion = new javax.swing.JRadioButton();
         cboMaterial = new javax.swing.JComboBox<>();
         cboIdioma = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        txtAutores = new javax.swing.JTextField();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -68,7 +77,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHome.setBackground(new java.awt.Color(28, 70, 120));
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnHomeMousePressed(evt);
@@ -101,7 +110,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 260, 48));
 
         btnCerrarSesion.setBackground(new java.awt.Color(28, 70, 120));
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMousePressed(evt);
@@ -135,7 +144,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 48));
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
-        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnPrestamosMousePressed(evt);
@@ -168,7 +177,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.add(btnPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 260, 48));
 
         btnListaEjemplares.setBackground(new java.awt.Color(28, 70, 120));
-        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblListaEjemplares.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
         lblListaEjemplares.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +205,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.add(btnListaEjemplares, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 48));
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
-        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnDevolucionesMousePressed(evt);
@@ -229,7 +238,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         jPanel1.add(btnDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 260, 48));
 
         btnAgregarEjemplar.setBackground(new java.awt.Color(28, 70, 120));
-        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAgregarEjemplar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnAgregarEjemplarMousePressed(evt);
@@ -282,7 +291,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         );
 
         btnConsultar.setBackground(new java.awt.Color(28, 70, 120));
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnConsultarMousePressed(evt);
@@ -293,11 +302,6 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         lblConsultar.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultar.setText("Consultar");
         lblConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblConsultarMousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout btnConsultarLayout = new javax.swing.GroupLayout(btnConsultar);
         btnConsultar.setLayout(btnConsultarLayout);
@@ -335,7 +339,10 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
 
         rbtnTitulo.setBackground(new java.awt.Color(255, 255, 255));
         rbtnTitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        rbtnTitulo.setMnemonic('1');
+        rbtnTitulo.setSelected(true);
         rbtnTitulo.setText("Título");
+        rbtnTitulo.setToolTipText("");
         rbtnTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnTituloActionPerformed(evt);
@@ -344,27 +351,27 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
 
         rbtnAutor.setBackground(new java.awt.Color(255, 255, 255));
         rbtnAutor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        rbtnAutor.setMnemonic('2');
         rbtnAutor.setText("Autor");
 
         rbtnClasificacion.setBackground(new java.awt.Color(255, 255, 255));
         rbtnClasificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        rbtnClasificacion.setMnemonic('3');
         rbtnClasificacion.setText("Clasificación");
 
         cboMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libro", "Obra", "Revista", "Tesis", "CD" }));
-        cboMaterial.setSelectedIndex(-1);
+        cboMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Libro", "Obra", "Revista", "Tesis", "CD" }));
         cboMaterial.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         cboIdioma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboIdioma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Inglés" }));
-        cboIdioma.setSelectedIndex(-1);
+        cboIdioma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Español", "Inglés" }));
         cboIdioma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTitulo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtAutores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAutores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
@@ -392,7 +399,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
                                     .addComponent(lblAutor)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField2))
+                                    .addComponent(txtAutores))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
                                     .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblIdioma)
@@ -406,7 +413,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
                                         .addGroup(lblTItuloLayout.createSequentialGroup()
                                             .addGap(24, 24, 24)
                                             .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(cboMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(lblTItuloLayout.createSequentialGroup()
                                 .addGap(189, 189, 189)
@@ -416,18 +423,18 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addComponent(lblListaRegistrados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltitulo)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAutor)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaterial)
@@ -481,7 +488,37 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMousePressed
 
     private void btnConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMousePressed
-        // TODO add your handling code here:
+        ConsultaEjemplaresCtrl ce = new ConsultaEjemplaresCtrl();
+        String titulo = "", autor = "", tipoMaterial = "", idioma = "";
+        String orderby = "";
+        titulo = txtTitulo.getText();
+        autor = txtAutores.getText();
+        tipoMaterial = cboMaterial.getSelectedItem().toString();
+        idioma = cboIdioma.getSelectedItem().toString();
+        
+        // Recorremos el buttonGroup para obtener el que está seleccionado
+        for (Enumeration e = buttonGroup1.getElements(); e.hasMoreElements();) {
+            JRadioButton b = (JRadioButton) e.nextElement();
+            if (b.getModel() == buttonGroup1.getSelection()) {
+              orderby = b.getText();
+            }
+        }
+        ArrayList<ConsultaEjemplares> resultado = ce.ObtenerEjemplaresCtrl(titulo, autor, tipoMaterial, idioma, orderby);
+        
+        
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        for (int i = 0; i < resultado.size(); i++){
+            String lineResult = "<html><div style='border: 1px solid black; padding: 5px; margin: 5px;'><h2 style='color: blue;'>"+ resultado.get(i).getTitulo() +"</h2><p style='color: black; font-size: 14px;'>"+ resultado.get(i).getMaterialInfo() +"</p></div></html>";
+            listModel.addElement(lineResult);
+        }
+ 
+        //create the list
+        dispose();
+        ResultadoConsultaAdmin re = new ResultadoConsultaAdmin();
+        re.lstEjemplares.setModel(listModel);
+        re.setVisible(true);
+        
     }//GEN-LAST:event_btnConsultarMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
@@ -491,23 +528,12 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeMousePressed
 
-    private void rbtnTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnTituloActionPerformed
-
     private void btnAgregarEjemplarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarEjemplarMousePressed
         // TODO add your handling code here:
         dispose();
         AgregarEjemplar agregar = new AgregarEjemplar();
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
-
-    private void lblConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultarMousePressed
-        // TODO add your handling code here:
-        dispose();
-        ResultadoConsultaAdmin resultadmin = new ResultadoConsultaAdmin();
-        resultadmin.setVisible(true);
-    }//GEN-LAST:event_lblConsultarMousePressed
 
     private void btnPrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamosMousePressed
         // TODO add your handling code here:
@@ -523,6 +549,10 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         DevolucionesAdmin dev = new DevolucionesAdmin();
         dev.setVisible(true);          
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void rbtnTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnTituloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -568,14 +598,13 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnListaEjemplares;
     private javax.swing.JPanel btnPrestamos;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboIdioma;
     private javax.swing.JComboBox<String> cboMaterial;
     private javax.swing.JLabel iconUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblAgregarEjemplar;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCerrarSesion;
@@ -593,5 +622,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtnAutor;
     private javax.swing.JRadioButton rbtnClasificacion;
     private javax.swing.JRadioButton rbtnTitulo;
+    private javax.swing.JTextField txtAutores;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

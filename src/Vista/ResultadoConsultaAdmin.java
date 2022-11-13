@@ -19,8 +19,6 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-
-
 /**
  *
  * @author Jazmine
@@ -59,8 +57,9 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         lblTItulo = new javax.swing.JPanel();
         lblListaRegistrados = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsulta = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstEjemplares = new javax.swing.JList<>();
+        btnConsutarEjemplares = new javax.swing.JButton();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -71,7 +70,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHome.setBackground(new java.awt.Color(28, 70, 120));
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnHomeMousePressed(evt);
@@ -104,7 +103,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 260, 48));
 
         btnCerrarSesion.setBackground(new java.awt.Color(28, 70, 120));
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMousePressed(evt);
@@ -138,7 +137,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 48));
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
-        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnPrestamosMousePressed(evt);
@@ -171,7 +170,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.add(btnPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 260, 48));
 
         btnListaEjemplares.setBackground(new java.awt.Color(28, 70, 120));
-        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblListaEjemplares.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
         lblListaEjemplares.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +198,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.add(btnListaEjemplares, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 48));
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
-        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnDevolucionesMousePressed(evt);
@@ -232,7 +231,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel1.add(btnDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 260, 48));
 
         btnAgregarEjemplar.setBackground(new java.awt.Color(28, 70, 120));
-        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAgregarEjemplar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnAgregarEjemplarMousePressed(evt);
@@ -284,18 +283,22 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        tblConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        lstEjemplares.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lstEjemplares.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstEjemplares.setToolTipText("");
+        lstEjemplares.setSelectionBackground(new java.awt.Color(255, 255, 204));
+        jScrollPane2.setViewportView(lstEjemplares);
+
+        btnConsutarEjemplares.setText("+ Consultar");
+        btnConsutarEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsutarEjemplaresMousePressed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tblConsulta);
+        });
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
@@ -304,21 +307,27 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
             .addGroup(lblTItuloLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblListaRegistrados))
-                .addGap(476, 476, 476))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(lblTItuloLayout.createSequentialGroup()
+                            .addComponent(lblListaRegistrados)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConsutarEjemplares))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(436, 436, 436))
         );
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addComponent(lblListaRegistrados)
+                .addContainerGap(105, Short.MAX_VALUE)
+                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblListaRegistrados)
+                    .addComponent(btnConsutarEjemplares))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.add(lblTItulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -378,9 +387,16 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         DevolucionesAdmin dev = new DevolucionesAdmin();
-        dev.setVisible(true);    
-        
+        dev.setVisible(true);
+
     }//GEN-LAST:event_btnDevolucionesMousePressed
+
+    private void btnConsutarEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsutarEjemplaresMousePressed
+        // TODO add your handling code here:
+        dispose();
+        ConsultaEjemplaresAdmin lista = new ConsultaEjemplaresAdmin();
+        lista.setVisible(true);
+    }//GEN-LAST:event_btnConsutarEjemplaresMousePressed
 
     /**
      * @param args the command line arguments
@@ -415,20 +431,14 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
                 new ResultadoConsultaAdmin().setVisible(true);
             }
         });
-        
-        
-         
-        
-        
-        
+
     }
-    
-   
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAgregarEjemplar;
     private javax.swing.JPanel btnCerrarSesion;
+    private javax.swing.JButton btnConsutarEjemplares;
     private javax.swing.JPanel btnDevoluciones;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnListaEjemplares;
@@ -437,7 +447,7 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAgregarEjemplar;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblDevoluciones;
@@ -446,6 +456,6 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaRegistrados;
     private javax.swing.JLabel lblPrestamos;
     private javax.swing.JPanel lblTItulo;
-    private javax.swing.JTable tblConsulta;
+    public javax.swing.JList<String> lstEjemplares;
     // End of variables declaration//GEN-END:variables
 }

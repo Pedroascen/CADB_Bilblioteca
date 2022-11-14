@@ -2,8 +2,11 @@ package Controlador;
 
 import Modelo.LibroSQL;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 public class LibroCtrl {
+    //llamada al manejo de errores
+    static final Logger log = Logger.getLogger(LibroCtrl.class);
     //instacia a modelo
     LibroSQL librosql = new LibroSQL();
 
@@ -14,6 +17,7 @@ public class LibroCtrl {
             JOptionPane.showMessageDialog(null, "El registro se guardó con éxito.");
             return true;
         } else {
+            log.error("Error en metodo guardar.");
             JOptionPane.showMessageDialog(null, "El registro no se guardó...");
             return false;
         }

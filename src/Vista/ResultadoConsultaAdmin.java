@@ -59,7 +59,6 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEjemplares = new javax.swing.JList<>();
-        btnConsutarEjemplares = new javax.swing.JButton();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -177,6 +176,11 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         lblListaEjemplares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/icons8_menu_15px.png"))); // NOI18N
         lblListaEjemplares.setText("Consulta de ejemplares");
         lblListaEjemplares.setIconTextGap(6);
+        lblListaEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsutarEjemplaresMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnListaEjemplaresLayout = new javax.swing.GroupLayout(btnListaEjemplares);
         btnListaEjemplares.setLayout(btnListaEjemplaresLayout);
@@ -293,13 +297,6 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
         lstEjemplares.setSelectionBackground(new java.awt.Color(255, 255, 204));
         jScrollPane2.setViewportView(lstEjemplares);
 
-        btnConsutarEjemplares.setText("+ Consultar");
-        btnConsutarEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnConsutarEjemplaresMousePressed(evt);
-            }
-        });
-
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
         lblTItuloLayout.setHorizontalGroup(
@@ -309,20 +306,17 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
                 .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(lblTItuloLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTItuloLayout.createSequentialGroup()
                             .addComponent(lblListaRegistrados)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnConsutarEjemplares))
+                            .addGap(0, 0, Short.MAX_VALUE))
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(436, 436, 436))
         );
         lblTItuloLayout.setVerticalGroup(
             lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTItuloLayout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
-                .addGroup(lblTItuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblListaRegistrados)
-                    .addComponent(btnConsutarEjemplares))
+                .addContainerGap(101, Short.MAX_VALUE)
+                .addComponent(lblListaRegistrados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -438,7 +432,6 @@ public class ResultadoConsultaAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAgregarEjemplar;
     private javax.swing.JPanel btnCerrarSesion;
-    private javax.swing.JButton btnConsutarEjemplares;
     private javax.swing.JPanel btnDevoluciones;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnListaEjemplares;

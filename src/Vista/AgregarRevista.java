@@ -394,6 +394,11 @@ public class AgregarRevista extends javax.swing.JFrame {
 
         txtCantEjemplares.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantEjemplares.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+        txtCantEjemplares.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantEjemplaresKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout lblTItuloLayout = new javax.swing.GroupLayout(lblTItulo);
         lblTItulo.setLayout(lblTItuloLayout);
@@ -634,6 +639,14 @@ public class AgregarRevista extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtISSNKeyTyped
+
+    private void txtCantEjemplaresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantEjemplaresKeyTyped
+         //Validación para admitir solamente números
+        char c = evt.getKeyChar();
+        if (Character.isAlphabetic(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantEjemplaresKeyTyped
 
     /**
      * @param args the command line arguments

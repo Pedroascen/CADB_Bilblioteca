@@ -1,6 +1,3 @@
 Admin:
 User: admin
 contra: admin
-Profe:
-User: profesor
-contra: 12345 se cambió a profe

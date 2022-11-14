@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.DevolucionCtrl;
+
 /**
  *
  * @author Jazmine
@@ -46,7 +48,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         labelBienvenida1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblCarnet = new javax.swing.JLabel();
-        txtIDmaterial = new javax.swing.JTextField();
+        txtCodigoMaterial = new javax.swing.JTextField();
         lblIDMaterial = new javax.swing.JLabel();
         txtCarnet = new javax.swing.JTextField();
         btnDevolucion4 = new javax.swing.JPanel();
@@ -61,7 +63,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHome.setBackground(new java.awt.Color(28, 70, 120));
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnHomeMousePressed(evt);
@@ -94,7 +96,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 260, 48));
 
         btnCerrarSesion.setBackground(new java.awt.Color(28, 70, 120));
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMousePressed(evt);
@@ -128,7 +130,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 48));
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
-        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnPrestamosMousePressed(evt);
@@ -161,7 +163,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.add(btnPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 260, 48));
 
         btnListaEjemplares.setBackground(new java.awt.Color(28, 70, 120));
-        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnListaEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnListaEjemplaresMousePressed(evt);
@@ -194,7 +196,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.add(btnListaEjemplares, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 48));
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
-        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnDevolucionesMousePressed(evt);
@@ -227,7 +229,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         jPanel1.add(btnDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 260, 48));
 
         btnAgregarEjemplar.setBackground(new java.awt.Color(28, 70, 120));
-        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAgregarEjemplar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnAgregarEjemplarMousePressed(evt);
@@ -289,8 +291,8 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         lblCarnet.setForeground(new java.awt.Color(23, 59, 102));
         lblCarnet.setText("Carnet:");
 
-        txtIDmaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtIDmaterial.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtCodigoMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCodigoMaterial.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         lblIDMaterial.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblIDMaterial.setForeground(new java.awt.Color(23, 59, 102));
@@ -300,10 +302,10 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         txtCarnet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         btnDevolucion4.setBackground(new java.awt.Color(28, 70, 120));
-        btnDevolucion4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevolucion4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDevolucion4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnDevolucion4MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDevolucion4MouseClicked(evt);
             }
         });
 
@@ -345,7 +347,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
                         .addGap(118, 118, 118)
                         .addComponent(lblIDMaterial)
                         .addGap(18, 18, 18)
-                        .addComponent(txtIDmaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(lblCarnet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -369,7 +371,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIDMaterial)
-                    .addComponent(txtIDmaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCarnet)
                     .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63)
@@ -424,13 +426,8 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
 
-    private void btnDevolucion4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucion4MousePressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnDevolucion4MousePressed
-
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
-        // TODO add your handling code here:
+      
         
     }//GEN-LAST:event_btnDevolucionesMousePressed
 
@@ -448,6 +445,17 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeMousePressed
 
+    private void btnDevolucion4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucion4MouseClicked
+        DevolucionCtrl p = new DevolucionCtrl();
+        String materialId = txtCodigoMaterial.getText();
+        String carnetId = txtCarnet.getText();
+        p.Devolucion(materialId, carnetId);
+        limpiarInputs();
+    }//GEN-LAST:event_btnDevolucion4MouseClicked
+     public void limpiarInputs(){
+        txtCodigoMaterial.setText("");
+        txtCarnet.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -509,6 +517,6 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblPrestamos;
     public static javax.swing.JTextField txtCarnet;
-    public static javax.swing.JTextField txtIDmaterial;
+    public static javax.swing.JTextField txtCodigoMaterial;
     // End of variables declaration//GEN-END:variables
 }

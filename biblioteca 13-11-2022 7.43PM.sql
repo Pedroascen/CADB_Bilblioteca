@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 13-11-2022 a las 13:16:39
+-- Tiempo de generación: 14-11-2022 a las 01:43:39
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -36,7 +36,7 @@ CREATE TEMPORARY TABLE tmptable(`TipoMaterial` varchar(50), `codigoMaterial` var
 
 IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'Libro' THEN
 	INSERT INTO tmptable
-	SELECT 'Libro' AS TipoMaterial,  a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', NumeroPaginas, ', ', Editorial, ', ', Pais, ', ', ISBN, ', ', AnioPublicacion, ', ', Edicion, ', ', Idioma, ', ', Materia, ', ', Descripcion) AS MaterialInfo
+	SELECT 'Libro' AS TipoMaterial,  a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', Pais, ', ', Editorial, ', ', AnioPublicacion) AS MaterialInfo
 	FROM biblioteca.material AS a
 	INNER JOIN biblioteca.libro AS b ON a.codigoMaterial = b.codigoMaterialL
 	WHERE 
@@ -79,7 +79,7 @@ END IF;
 
 IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'Obra' THEN
 	INSERT INTO tmptable
-	SELECT 'Obra' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`, concat(`Autor(es)`, ', ', NumeroPaginas, ', ', Editorial, ', ', Pais, ', ', ISBN, ', ', AnioPublicacion, ', ', Edicion, ', ', Idioma, ', ', Genero) AS MaterialInfo
+	SELECT 'Obra' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`, concat(`Autor(es)`, ', ', Pais, ', ', Editorial, ', ', AnioPublicacion) AS MaterialInfo
 	FROM biblioteca.material AS a
 	INNER JOIN biblioteca.obra AS b ON a.codigoMaterial = b.codigoMaterialO
 	WHERE 
@@ -103,7 +103,7 @@ END IF;
 
 IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'Tesis' THEN
 	INSERT INTO tmptable
-	SELECT 'Tesis' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', Pais, ', ', Ciudad, ', ', Universidad, ', ', Carrera, ', ', Idioma, ', ', FechaPublicacion, ', ', NumeroPaginas, ', ', Descripcion, ', ', `Palabras clave`) AS MaterialInfo
+	SELECT 'Tesis' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', Ciudad, ', ', Pais, ', ', Ciudad, ', ', Universidad, ', ', FechaPublicacion) AS MaterialInfo
 	FROM biblioteca.material AS a
 	INNER JOIN biblioteca.tesis AS b ON a.codigoMaterial = b.codigoMaterialT
 	WHERE 
@@ -127,7 +127,7 @@ END IF;
 
 IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'CD' THEN
 	INSERT INTO tmptable
-	SELECT 'CD' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', pais_publicacion, ', ', ciudad_publicacion, ', ', anio_publicacion, ', ', volumen, ', ', idioma, ', ', tema) AS MaterialInfo
+	SELECT 'CD' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', ciudad_publicacion, ', ', pais_publicacion, ', ', anio_publicacion) AS MaterialInfo
 	FROM biblioteca.material AS a
 	INNER JOIN biblioteca.cd AS b ON a.codigoMaterial = b.codigoMaterialC
 	WHERE
@@ -160,7 +160,7 @@ DROP TABLE tmptable;
 END$$
 
 DROP PROCEDURE IF EXISTS `devolucion`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `devolucion` (`materialId` VARCHAR(10), `carnetId` VARCHAR(8))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `devolucion` (`materialId` VARCHAR(40), `carnetId` VARCHAR(40))  BEGIN
 DECLARE existsMaterial INT Default 0;
 DECLARE existsCarnet INT Default 0;
 DECLARE cPrestado INT Default 0;
@@ -170,6 +170,9 @@ DECLARE LateCharge double Default 0;
 
 SELECT count(*) INTO existsMaterial from material WHERE codigoMaterial = materialId;
 SELECT count(*) INTO existsCarnet from usuario WHERE carnet = carnetId;
+
+SET existsMaterial = IFNULL(existsMaterial, 0);
+SET existsCarnet = IFNULL(existsCarnet, 0);
 
 SELECT max(cantidadDisponibles) INTO cDisponible from material WHERE codigoMaterial = materialId;
 SELECT max(cantidadPrestados) INTO cPrestado from material WHERE codigoMaterial = materialId;
@@ -191,8 +194,8 @@ IF existsMaterial = 0 THEN
 ELSEIF existsCarnet = 0 THEN 
 	SELECT '¡Carnet inválido!' as Result, 0 PrestamoId;
 ELSEIF PrestamoId = 0 THEN 
-	SELECT '¡Préstamo no existe!' as Result, 0 PrestamoId;
-ELSE 
+	SELECT 'El préstamo no existe.' as Result, 0 PrestamoId;
+ELSEIF PrestamoId > 0 THEN
 	UPDATE `biblioteca`.`prestamo` SET 
     `fecha_devolucion` = CURDATE(), 
     `mora` = LateCharge, 
@@ -201,17 +204,19 @@ ELSE
     
     UPDATE `biblioteca`.`material` SET 
     `cantidadDisponibles` = (cDisponible + 1),  
-    `cantidadPrestados` = cPrestado
+    `cantidadPrestados` = cPrestado,
+    `estado` = 1
 	where codigoMaterial = materialId;
     
     IF LateCharge > 0 THEN
-		SELECT 	CONCAT('Devolución realizada con éxito. Favor cancelar en concepto de mora $', LateCharge) as Result, 
+		SELECT 	CONCAT('Devolución realizada. Favor cancelar en concepto de mora: $', LateCharge) as Result, 
 				PrestamoId AS PrestamoId;
 	ELSE
 		SELECT 'Devolución realizada con éxito.' as Result, PrestamoId AS PrestamoId;
 	END IF;
     
 END IF;
+
 END$$
 
 DROP PROCEDURE IF EXISTS `new_upd_cd`$$
@@ -224,7 +229,7 @@ IF LENGTH(codmaterial) = 0 THEN
 	SET lastID = IFNULL(lastID, 0) + 1;
     SET lcodmaterial = CONCAT('CDS', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
     
-    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadDisponibles`,`cantidadPrestados`, `estado`)
 	VALUES (lcodmaterial, titulo, 4, ufisica, cejemp, cejemp, 0, 1);
 
 	INSERT INTO `biblioteca`.`cd`(`IdCD`,`codigoMaterialC`,`Autor(es)`,`pais_publicacion`,`ciudad_publicacion`, `anio_publicacion`, `volumen`, `idioma`, `tema`)
@@ -280,7 +285,7 @@ IF LENGTH(codmaterial) = 0 THEN
 	SET lastID = IFNULL(lastID, 0) + 1;
     SET lcodmaterial = CONCAT('OBR', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
     
-    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadDisponibles`,`cantidadPrestados`, `estado`)
 	VALUES (lcodmaterial, titulo, 2, ufisica, cejemp, cejemp, 0, 1);
 
 	INSERT INTO `biblioteca`.`obra`(`IdObra`,`codigoMaterialO`,`Autor(es)`,`NumeroPaginas`,`Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `genero`)
@@ -307,7 +312,7 @@ IF LENGTH(codmaterial) = 0 THEN
 	SET lastID = IFNULL(lastID, 0) + 1;
     SET lcodmaterial = CONCAT('REV', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
     
-    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadDisponibles`,`cantidadPrestados`, `estado`)
 	VALUES (lcodmaterial, titulo, 3, ufisica, cejemp, cejemp, 0, 1);
 
 	INSERT INTO `biblioteca`.`revista`(`IdRevista`,`codigoMaterialR`,`Editorial`,`ISSN`,`Idioma`,`tamano`, `Periodicidad`, `FechaPublicacion`)
@@ -334,7 +339,7 @@ IF LENGTH(codmaterial) = 0 THEN
 	SET lastID = IFNULL(lastID, 0) + 1;
     SET lcodmaterial = CONCAT('TES', '', CONVERT( LPAD(CONVERT(lastID, CHAR(7)), 7, '0'), CHAR(10)));
     
-    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadPrestados`,`cantidadDisponibles`, `estado`)
+    INSERT INTO `biblioteca`.`material`(`codigoMaterial`,`Titulo`,`codigoTipoMaterial`,`ubicacionFisica`,`cantidadEjemplares`,`cantidadDisponibles`,`cantidadPrestados`, `estado`)
 	VALUES (lcodmaterial, titulo, 5, ufisica, cejemp, cejemp, 0, 1);
 
 	INSERT INTO `biblioteca`.`tesis`(`IdTesis`,`codigoMaterialT`,`Autor(es)`,`Pais`,`Ciudad`, `Universidad`, `Carrera`, `Idioma`, `FechaPublicacion`, `NumeroPaginas`, `Descripcion`, `Palabras clave`)
@@ -378,7 +383,7 @@ select CarnetID as CarnetID;
 END$$
 
 DROP PROCEDURE IF EXISTS `prestamo`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prestamo` (`materialId` VARCHAR(10), `carnetId` VARCHAR(8))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prestamo` (`materialId` VARCHAR(40), `carnetId` VARCHAR(40))  BEGIN
 DECLARE tiempolimit INT Default 0;
 DECLARE fechafin date;
 DECLARE lastID INT Default 0;
@@ -387,33 +392,52 @@ DECLARE existsMaterial INT Default 0;
 DECLARE existsCarnet INT Default 0;
 DECLARE cDisponible INT Default 0;
 DECLARE cPrestado INT Default 0;
+DECLARE LimiteDePrestamos INT Default 0;
+DECLARE CantidadPrestadoPorUser INT Default 0;
+DECLARE PrestamoActivo INT Default 0;
 
 SELECT privilegios.tiempo_limite INTO tiempolimit
 FROM  `biblioteca`.`usuario` 
 INNER JOIN `biblioteca`.`privilegios` ON `usuario`.`id_rol` = `privilegios`.`rol_id` 
 WHERE `usuario`.`carnet` = carnetId
-limit 1;
+LIMIT 1;
+
+SELECT privilegios.cant_prestamos INTO LimiteDePrestamos
+FROM  `biblioteca`.`usuario` 
+INNER JOIN `biblioteca`.`privilegios` ON `usuario`.`id_rol` = `privilegios`.`rol_id` 
+WHERE `usuario`.`carnet` = carnetId
+LIMIT 1;
 
 SELECT count(*) INTO existsMaterial from material WHERE codigoMaterial = materialId;
 SELECT count(*) INTO existsCarnet from usuario WHERE carnet = carnetId;
+SELECT count(*) INTO CantidadPrestadoPorUser from prestamo WHERE estado = 1 and carnet = carnetId;
+SELECT count(*) INTO PrestamoActivo from prestamo WHERE estado = 1 and carnet = carnetId AND codmaterial = materialId;
 
 SELECT max(id) INTO lastID from prestamo;
 SELECT max(cantidadDisponibles) INTO cDisponible from material WHERE codigoMaterial = materialId;
 SELECT max(cantidadPrestados) INTO cPrestado from material WHERE codigoMaterial = materialId;
 
+SET cDisponible = IFNULL(cDisponible, 0);
 SET cPrestado = IFNULL(cPrestado, 0) + 1;
 SET fechafin = DATE_ADD(CURDATE(), INTERVAL tiempolimit DAY);
 SET lastID = IFNULL(lastID, 0) + 1;
+SET CantidadPrestadoPorUser = IFNULL(CantidadPrestadoPorUser, 0);
+SET PrestamoActivo = IFNULL(PrestamoActivo, 0);
 
 IF existsMaterial = 0 THEN
 	SELECT '¡Código de material inválido!' as Result, 0 PrestamoId;
 ELSEIF existsCarnet = 0 THEN 
 	SELECT '¡Carnet inválido!' as Result, 0 PrestamoId;
+ELSEIF cDisponible = 0 THEN 
+	SELECT 'Lo sentimos. Este ejemplar no se encuentra disponible.' as Result, 0 PrestamoId;
+ELSEIF LimiteDePrestamos = CantidadPrestadoPorUser THEN 
+	SELECT 'Ha alcanzado su límite de préstamos, por lo que este préstamo no se puede efectuar.' as Result, 0 PrestamoId;
+ELSEIF PrestamoActivo > 0 THEN 
+	SELECT 'Ya tiene un préstamo activo para este mismo ejemplar.' as Result, 0 PrestamoId;
 ELSE 
 	INSERT INTO `biblioteca`.`prestamo`
 	(`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fin`, `estado`, `mora`,`fecha_devolucion`)
-	VALUES
-	(lastID, carnetId, materialId, CURDATE(), fechafin, 1, 0, null);
+	VALUES (lastID, carnetId, materialId, CURDATE(), fechafin, 1, 0, null);
 
 	UPDATE `biblioteca`.`material` SET `cantidadDisponibles` = (cDisponible - 1), `cantidadPrestados` = cPrestado 
 	WHERE `codigoMaterial` = materialId;
@@ -421,6 +445,13 @@ ELSE
     SELECT 'Préstamo realizado con éxito.' as Result, lastID AS PrestamoId;
 END IF;
 
+-- - Que al llegar cantidad disponible a 0, el estado cambie a 0 (en materiales).
+SELECT max(cantidadDisponibles) INTO cDisponible from material WHERE codigoMaterial = materialId;
+SET cDisponible = IFNULL(cDisponible, 0);
+
+IF cDisponible = 0 THEN
+	UPDATE `biblioteca`.`material` SET `estado` = 0 WHERE `codigoMaterial` = materialId;
+END IF;
 
 END$$
 
@@ -452,6 +483,13 @@ CREATE TABLE IF NOT EXISTS `cd` (
 --
 
 TRUNCATE TABLE `cd`;
+--
+-- Volcado de datos para la tabla `cd`
+--
+
+INSERT INTO `cd` (`IdCD`, `CodigoMaterialC`, `Autor(es)`, `pais_publicacion`, `ciudad_publicacion`, `anio_publicacion`, `volumen`, `idioma`, `tema`) VALUES
+(1, 'CDS0000001', 'AC/DC', 'USA', 'USA', 2002, 3, 'Ingles', 'T.N.T');
+
 -- --------------------------------------------------------
 
 --
@@ -486,8 +524,7 @@ TRUNCATE TABLE `libro`;
 --
 
 INSERT INTO `libro` (`IdLibro`, `codigoMaterialL`, `Autor(es)`, `NumeroPaginas`, `Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Materia`, `Descripcion`) VALUES
-(1, 'LIB0000001', 'Tim Ritchey', 336, 'Prentice Hall', 'España', 9788489660601, 1996, 1, 'Español', 'Programación', 'Enseña la dinámica de Java y cómo afectará a la red, el servidor y el usuario.'),
-(2, 'LIB0000002', 'David J. Barnes', 1028, 'Prentice Hall', 'Estados Unidos', 130869007, 2000, 1, 'Inglés', 'Programación', 'Una guía completa y bien organizada del versátil y popular lenguaje de programación orientado a objetos Java muestra cómo usarlo como herramienta principal en muchos aspectos diferentes del trabajo de programación.');
+(1, 'LIB0000001', 'Anonimo', 1000, 'Anonimo', 'España', 2003341234, 2006, 15, 'Español', 'Religioso', 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -519,11 +556,11 @@ TRUNCATE TABLE `material`;
 --
 
 INSERT INTO `material` (`codigoMaterial`, `Titulo`, `codigoTipoMaterial`, `ubicacionFisica`, `cantidadEjemplares`, `cantidadDisponibles`, `cantidadPrestados`, `estado`) VALUES
-('LIB0000001', 'Programando con Java', 1, 'E-44-7', 10, 0, 10, 1),
-('LIB0000002', 'Object-oriented programming with Java : an introduction', 1, 'E-44-5', 10, 10, 0, 1),
-('OBR0000001', 'Don Quijote de la Mancha', 2, 'E-10-1', 15, 15, 0, 1),
-('OBR0000002', 'Pride and Prejudice', 2, 'E-10-2', 20, 20, 0, 1),
-('OBR0000003', 'Prometeo Encadenado', 2, 'E-12', 15, 0, 15, 1);
+('CDS0000001', 'Clasicos Rock', 4, 'E-6', 10, 10, 0, 1),
+('LIB0000001', 'La Biblia', 1, 'E-1', 5, 5, 0, 1),
+('OBR0000001', 'Prometeo Encadenado', 2, 'E-2', 5, 5, 0, 1),
+('REV0000001', 'Salud', 3, 'E-4', 5, 4, 1, 1),
+('TES0000001', 'Test Psicologico', 5, 'E-2', 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -558,9 +595,7 @@ TRUNCATE TABLE `obra`;
 --
 
 INSERT INTO `obra` (`IdObra`, `codigoMaterialO`, `Autor(es)`, `NumeroPaginas`, `Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Genero`) VALUES
-(1, 'OBR0000001', 'Miguel De Cervantes Saavedra', 1342, 'Punto de Lectura', 'España', 8466320407, 2008, 1, 'Español', 'Ficción'),
-(2, 'OBR0000002', 'Jane Austen', 208, 'CreateSpace Independent Publishing Platform', 'Inglaterra', 1727118871, 2018, 2, 'Inglés', 'Novela'),
-(3, 'OBR0000003', 'Esquilo', 300, 'Editorial Salvadoreña Hermanos Unidos ', 'El Salvador ', 1256432612, 2006, 2, 'Español', 'Tragico');
+(1, 'OBR0000001', 'Esquilo', 300, 'Editorial Salvadoreña Hermanos Unidos', 'El Salvador', 2134456778, 2000, 2, 'Español', 'Epico');
 
 -- --------------------------------------------------------
 
@@ -581,7 +616,7 @@ CREATE TABLE IF NOT EXISTS `prestamo` (
   PRIMARY KEY (`id`),
   KEY `carnet_idx` (`carnet`),
   KEY `codmaterial_idx` (`codmaterial`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Truncar tablas antes de insertar `prestamo`
@@ -593,20 +628,8 @@ TRUNCATE TABLE `prestamo`;
 --
 
 INSERT INTO `prestamo` (`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fin`, `estado`, `mora`, `fecha_devolucion`) VALUES
-(1, 'RA220003', 'LIB0000002', '2022-11-11', '2022-11-18', 1, 0, NULL),
-(2, 'AA220005', 'LIB0000002', '2022-11-11', '2022-11-18', 0, 0, '2022-11-11'),
-(3, 'JS220007', 'LIB0000002', '2022-11-01', '2022-11-08', 0, 0.75, '2022-11-11'),
-(4, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(5, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(6, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(7, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(8, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(9, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(10, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(11, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(12, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(13, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12'),
-(14, 'RA220003', 'LIB0000001', '2022-11-12', '2022-11-19', 0, 0, '2022-11-12');
+(1, 'PH220009', 'TES0000001', '2022-11-13', '2022-11-20', 1, 0, NULL),
+(2, 'JS220007', 'REV0000001', '2022-11-13', '2022-11-20', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -660,6 +683,13 @@ CREATE TABLE IF NOT EXISTS `revista` (
 --
 
 TRUNCATE TABLE `revista`;
+--
+-- Volcado de datos para la tabla `revista`
+--
+
+INSERT INTO `revista` (`IdRevista`, `codigoMaterialR`, `Editorial`, `ISSN`, `Idioma`, `Tamano`, `Periodicidad`, `FechaPublicacion`) VALUES
+(1, 'REV0000001', 'La Prensa', 2001234001, 'Español', '25x30', '20 Jun', '2022-12-20');
+
 -- --------------------------------------------------------
 
 --
@@ -716,6 +746,13 @@ CREATE TABLE IF NOT EXISTS `tesis` (
 --
 
 TRUNCATE TABLE `tesis`;
+--
+-- Volcado de datos para la tabla `tesis`
+--
+
+INSERT INTO `tesis` (`IdTesis`, `codigoMaterialT`, `Autor(es)`, `Pais`, `Ciudad`, `Universidad`, `Carrera`, `Idioma`, `FechaPublicacion`, `NumeroPaginas`, `Descripcion`, `Palabras clave`) VALUES
+(1, 'TES0000001', 'Villafuerte', 'El Salvador', 'Ahuachapan', 'UES', 'Psicologia', 'Español', '2022-11-13', 945, 'Estudio sobre problemas sociales', 'Neuroartes');
+
 -- --------------------------------------------------------
 
 --
@@ -772,14 +809,11 @@ TRUNCATE TABLE `usuario`;
 --
 
 INSERT INTO `usuario` (`carnet`, `nombre`, `apellido`, `contrasena`, `id_rol`) VALUES
-('AA220004', 'Adriana', 'Abrego', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
-('AA220005', 'Adriana', 'Abrego', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
 ('AA220006', 'Adriana', 'Abrego', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
 ('admin', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1),
+('JP220008', 'Juan ', 'Peres', '8cb2237d0679ca88db6464eac60da96345513964', 3),
 ('JS220007', 'John', 'Smith', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
-('PA220008', 'Pedro Alexander', 'Ascencio Antonio', '8cb2237d0679ca88db6464eac60da96345513964', 1),
-('profesor', 'profesor', 'profesor', '8cb2237d0679ca88db6464eac60da96345513964', 2),
-('RA220003', 'Rocio', 'Abrego', '1234', 3);
+('PH220009', 'Pablo ', 'Humberto', '8cb2237d0679ca88db6464eac60da96345513964', 3);
 
 --
 -- Restricciones para tablas volcadas

@@ -509,7 +509,7 @@ public class ConsultaEjemplaresAdmin extends javax.swing.JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
 
         for (int i = 0; i < resultado.size(); i++){
-            String lineResult = "<html><div style='border: 1px solid black; padding: 5px; margin: 5px;'><h2 style='color: blue;'>"+ resultado.get(i).getTitulo() +"</h2><p style='color: black; font-size: 14px;'>"+ resultado.get(i).getMaterialInfo() +"</p></div></html>";
+            String lineResult = "<html><div style='border: 1px solid black; padding: 5px; margin: 5px; width: 500px'><h2 style='color: blue;'>"+ resultado.get(i).getTitulo() +"</h2><p style='color: black; font-size: 14px;'>"+ resultado.get(i).getMaterialInfo() +"</p><br><p style='color: black; font-size: 14px;'>"+ resultado.get(i).getCodigoMaterial() +"</p></div></html>";
             listModel.addElement(lineResult);
         }
  

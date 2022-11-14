@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.PrestamoCtrl;
+
 /**
  *
  * @author Jazmine
@@ -46,9 +48,9 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         labelBienvenida1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabelCarnet = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtCarnet = new javax.swing.JTextField();
         jLabelCarnet1 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
+        txtCodigoMaterial = new javax.swing.JTextField();
         btnPrestamo1 = new javax.swing.JPanel();
         lblPrestamo1 = new javax.swing.JLabel();
         iconUsuario = new javax.swing.JLabel();
@@ -61,7 +63,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHome.setBackground(new java.awt.Color(28, 70, 120));
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnHomeMousePressed(evt);
@@ -94,7 +96,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 260, 48));
 
         btnCerrarSesion.setBackground(new java.awt.Color(28, 70, 120));
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMousePressed(evt);
@@ -128,7 +130,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 48));
 
         btnPrestamos.setBackground(new java.awt.Color(28, 70, 120));
-        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblPrestamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         lblPrestamos.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,7 +158,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.add(btnPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 260, 48));
 
         btnListaEjemplares.setBackground(new java.awt.Color(28, 70, 120));
-        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaEjemplares.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnListaEjemplares.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnListaEjemplaresMousePressed(evt);
@@ -189,7 +191,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.add(btnListaEjemplares, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 48));
 
         btnDevoluciones.setBackground(new java.awt.Color(28, 70, 120));
-        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnDevolucionesMousePressed(evt);
@@ -222,7 +224,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jPanel1.add(btnDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 260, 48));
 
         btnAgregarEjemplar.setBackground(new java.awt.Color(28, 70, 120));
-        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarEjemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAgregarEjemplar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnAgregarEjemplarMousePressed(evt);
@@ -284,21 +286,21 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         jLabelCarnet.setForeground(new java.awt.Color(23, 59, 102));
         jLabelCarnet.setText("Carnet:");
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtCarnet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCarnet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         jLabelCarnet1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabelCarnet1.setForeground(new java.awt.Color(23, 59, 102));
         jLabelCarnet1.setText("ID del material:");
 
-        txtNombre1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNombre1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtCodigoMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCodigoMaterial.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         btnPrestamo1.setBackground(new java.awt.Color(28, 70, 120));
-        btnPrestamo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrestamo1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPrestamo1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnPrestamo1MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPrestamo1MouseClicked(evt);
             }
         });
 
@@ -340,11 +342,11 @@ public class PrestamosAdmin extends javax.swing.JFrame {
                         .addGap(121, 121, 121)
                         .addComponent(jLabelCarnet1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jLabelCarnet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -365,9 +367,9 @@ public class PrestamosAdmin extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCarnet1)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCarnet)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(121, Short.MAX_VALUE))
@@ -419,11 +421,6 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         agregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
 
-    private void btnPrestamo1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamo1MousePressed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnPrestamo1MousePressed
-
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
         // TODO add your handling code here:
         dispose();
@@ -438,6 +435,18 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeMousePressed
 
+    private void btnPrestamo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamo1MouseClicked
+        PrestamoCtrl p = new PrestamoCtrl();
+        String materialId = txtCodigoMaterial.getText();
+        String carnetId = txtCarnet.getText();
+        p.Prestamo(materialId, carnetId);
+        limpiarInputs();
+    }//GEN-LAST:event_btnPrestamo1MouseClicked
+    
+    public void limpiarInputs(){
+        txtCodigoMaterial.setText("");
+        txtCarnet.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -498,7 +507,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblPrestamo1;
     private javax.swing.JLabel lblPrestamos;
-    public static javax.swing.JTextField txtNombre;
-    public static javax.swing.JTextField txtNombre1;
+    public static javax.swing.JTextField txtCarnet;
+    public static javax.swing.JTextField txtCodigoMaterial;
     // End of variables declaration//GEN-END:variables
 }

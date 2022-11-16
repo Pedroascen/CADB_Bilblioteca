@@ -6,6 +6,8 @@
 package Vista;
 
 import Controlador.PrestamoCtrl;
+import Modelo.PrestamoSQL;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +15,18 @@ import Controlador.PrestamoCtrl;
  */
 public class PrestamosAdmin extends javax.swing.JFrame {
 
+    PrestamoSQL prestamossql = new PrestamoSQL();
+
     /**
      * Creates new form PrestamosAdmin
      */
     public PrestamosAdmin() {
         initComponents();
+        LlenarOpsCombox();
+        String opcion = "";
+        opcion = (String) jcbActiveInactive.getSelectedItem();
+        LlenarTabla(opcion);
+        
     }
 
     /**
@@ -53,6 +62,10 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         txtCodigoMaterial = new javax.swing.JTextField();
         btnPrestamo1 = new javax.swing.JPanel();
         lblPrestamo1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMaterialesDispo = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jcbActiveInactive = new javax.swing.JComboBox<>();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -280,7 +293,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Ingrese el ID del material que se desea prestar y el carnet del usuario correspondiente");
+        jLabel3.setText("Listado de Materiales");
 
         jLabelCarnet.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabelCarnet.setForeground(new java.awt.Color(23, 59, 102));
@@ -323,56 +336,88 @@ public class PrestamosAdmin extends javax.swing.JFrame {
             .addComponent(lblPrestamo1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
+        tblMaterialesDispo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblMaterialesDispo);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Ingrese el ID del material que se desea prestar y el carnet del usuario correspondiente");
+
+        jcbActiveInactive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jcbActiveInactive.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbActiveInactiveItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(labelBienvenida1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelBienvenida))
-                            .addComponent(jLabel3)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
                         .addComponent(jLabelCarnet1)
                         .addGap(18, 18, 18)
                         .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jLabelCarnet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(297, 297, 297))
+                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(248, 248, 248)
+                                .addComponent(labelBienvenida))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelBienvenida1)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBienvenida1)
-                    .addComponent(labelBienvenida))
+                .addGap(48, 48, 48)
+                .addComponent(labelBienvenida1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(66, 66, 66)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCarnet1)
-                    .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCarnet)
-                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
-                .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(labelBienvenida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelCarnet1)
+                        .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelCarnet)
+                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -441,12 +486,35 @@ public class PrestamosAdmin extends javax.swing.JFrame {
         String carnetId = txtCarnet.getText();
         p.Prestamo(materialId, carnetId);
         limpiarInputs();
+        tblMaterialesDispo.setModel(prestamossql.obtenerMaterialesDispo());
     }//GEN-LAST:event_btnPrestamo1MouseClicked
-    
-    public void limpiarInputs(){
+
+    private void jcbActiveInactiveItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbActiveInactiveItemStateChanged
+        String opcion = "";
+        opcion = (String) jcbActiveInactive.getSelectedItem();
+        LlenarTabla(opcion);
+    }//GEN-LAST:event_jcbActiveInactiveItemStateChanged
+
+    public void limpiarInputs() {
         txtCodigoMaterial.setText("");
         txtCarnet.setText("");
     }
+
+    private void LlenarOpsCombox() {
+        jcbActiveInactive.addItem("Activos");
+        jcbActiveInactive.addItem("Inactivos");
+    }
+
+    private void LlenarTabla(String opcion) {
+        if (opcion.equals("Activos")) {
+            tblMaterialesDispo.setModel(prestamossql.obtenerMaterialesDispo());
+        }
+        if (opcion.equals("Inactivos")) {
+            tblMaterialesDispo.setModel(prestamossql.obtenerMaterialesNoDispo());
+
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -493,11 +561,14 @@ public class PrestamosAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel iconUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCarnet;
     private javax.swing.JLabel jLabelCarnet1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcbActiveInactive;
     private javax.swing.JLabel labelBienvenida;
     private javax.swing.JLabel labelBienvenida1;
     private javax.swing.JLabel lblAgregarEjemplar;
@@ -507,6 +578,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblPrestamo1;
     private javax.swing.JLabel lblPrestamos;
+    private javax.swing.JTable tblMaterialesDispo;
     public static javax.swing.JTextField txtCarnet;
     public static javax.swing.JTextField txtCodigoMaterial;
     // End of variables declaration//GEN-END:variables

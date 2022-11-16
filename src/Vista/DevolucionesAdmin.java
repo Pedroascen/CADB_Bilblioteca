@@ -6,18 +6,24 @@
 package Vista;
 
 import Controlador.DevolucionCtrl;
+import Modelo.DevolucionSQL;
 
 /**
  *
  * @author Jazmine
  */
 public class DevolucionesAdmin extends javax.swing.JFrame {
-
+    DevolucionSQL devolucionsql = new DevolucionSQL();
     /**
      * Creates new form DevolucionesAdmin
      */
     public DevolucionesAdmin() {
         initComponents();
+        LlenarOpsCombox();
+        //llenado de tabla al cargar vista
+        String opcion = "";
+        opcion = (String) jcbActiveInactive.getSelectedItem();
+        LlenarTabla(opcion);
     }
 
     /**
@@ -29,6 +35,8 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         btnHome = new javax.swing.JPanel();
         lblListaEjemplares1 = new javax.swing.JLabel();
@@ -53,8 +61,25 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         txtCarnet = new javax.swing.JTextField();
         btnDevolucion4 = new javax.swing.JPanel();
         lblDevolucion4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblMaterialPrestado = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jcbActiveInactive = new javax.swing.JComboBox<>();
         iconUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -285,7 +310,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Ingrese el ID del material que se desea devolver y el carnet del usuario correspondiente");
+        jLabel3.setText("Materiales Prestados");
 
         lblCarnet.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(23, 59, 102));
@@ -328,55 +353,94 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
             .addComponent(lblDevolucion4, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
+        tblMaterialPrestado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblMaterialPrestado);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Ingrese el ID del material que se desea devolver y el carnet del usuario correspondiente");
+
+        jcbActiveInactive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jcbActiveInactive.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbActiveInactiveItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(labelBienvenida1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelBienvenida))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(lblIDMaterial)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(lblCarnet)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(btnDevolucion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelBienvenida1)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(lblIDMaterial)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(lblCarnet)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDevolucion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(labelBienvenida))))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBienvenida1)
-                    .addComponent(labelBienvenida))
+                .addGap(48, 48, 48)
+                .addComponent(labelBienvenida1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(66, 66, 66)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIDMaterial)
-                    .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCarnet)
-                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(btnDevolucion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(labelBienvenida)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblIDMaterial)
+                                .addComponent(txtCodigoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCarnet)
+                                .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnDevolucion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52))))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -427,8 +491,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarEjemplarMousePressed
 
     private void btnDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionesMousePressed
-      
-        
+
     }//GEN-LAST:event_btnDevolucionesMousePressed
 
     private void btnPrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrestamosMousePressed
@@ -451,10 +514,31 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
         String carnetId = txtCarnet.getText();
         p.Devolucion(materialId, carnetId);
         limpiarInputs();
+        tblMaterialPrestado.setModel(devolucionsql.obtenerPrestamosActive());
     }//GEN-LAST:event_btnDevolucion4MouseClicked
+
+    private void jcbActiveInactiveItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbActiveInactiveItemStateChanged
+        String opcion = "";
+        opcion = (String) jcbActiveInactive.getSelectedItem();
+        LlenarTabla(opcion);
+    }//GEN-LAST:event_jcbActiveInactiveItemStateChanged
      public void limpiarInputs(){
         txtCodigoMaterial.setText("");
         txtCarnet.setText("");
+    }
+     
+    private void LlenarOpsCombox() {
+        jcbActiveInactive.addItem("Activos");
+        jcbActiveInactive.addItem("Inactivos");
+    }
+     
+     private void LlenarTabla(String opcion) {
+        if (opcion.equals("Activos")) {
+            tblMaterialPrestado.setModel(devolucionsql.obtenerPrestamosActive());
+        }
+        if (opcion.equals("Inactivos")) {
+            tblMaterialPrestado.setModel(devolucionsql.obtenerTodosPrestamosActive());
+        }
     }
     /**
      * @param args the command line arguments
@@ -502,9 +586,14 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel iconUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jcbActiveInactive;
     private javax.swing.JLabel labelBienvenida;
     private javax.swing.JLabel labelBienvenida1;
     private javax.swing.JLabel lblAgregarEjemplar;
@@ -516,6 +605,7 @@ public class DevolucionesAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaEjemplares;
     private javax.swing.JLabel lblListaEjemplares1;
     private javax.swing.JLabel lblPrestamos;
+    private javax.swing.JTable tblMaterialPrestado;
     public static javax.swing.JTextField txtCarnet;
     public static javax.swing.JTextField txtCodigoMaterial;
     // End of variables declaration//GEN-END:variables

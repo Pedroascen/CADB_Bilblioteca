@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-11-2022 a las 01:43:39
+-- Tiempo de generación: 16-11-2022 a las 02:29:01
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -103,7 +103,7 @@ END IF;
 
 IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'Tesis' THEN
 	INSERT INTO tmptable
-	SELECT 'Tesis' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', Ciudad, ', ', Pais, ', ', Ciudad, ', ', Universidad, ', ', FechaPublicacion) AS MaterialInfo
+	SELECT 'Tesis' AS TipoMaterial, a.codigoMaterial, a.Titulo, `Autor(es)`,  concat(`Autor(es)`, ', ', Ciudad, ', ', Pais, ', ', Universidad, ', ', FechaPublicacion) AS MaterialInfo
 	FROM biblioteca.material AS a
 	INNER JOIN biblioteca.tesis AS b ON a.codigoMaterial = b.codigoMaterialT
 	WHERE 
@@ -524,7 +524,10 @@ TRUNCATE TABLE `libro`;
 --
 
 INSERT INTO `libro` (`IdLibro`, `codigoMaterialL`, `Autor(es)`, `NumeroPaginas`, `Editorial`, `Pais`, `ISBN`, `AnioPublicacion`, `Edicion`, `Idioma`, `Materia`, `Descripcion`) VALUES
-(1, 'LIB0000001', 'Anonimo', 1000, 'Anonimo', 'España', 2003341234, 2006, 15, 'Español', 'Religioso', 'Ninguna');
+(1, 'LIB0000001', 'Anonimo', 1000, 'Anonimo', 'España', 2003341234, 2006, 15, 'Español', 'Religioso', 'Ninguna'),
+(2, 'LIB0000002', 'Anonimo', 300, 'Hermanos Unidos', 'El Salvador', 2012345333, 2005, 1, 'Español', 'Literatura', 'Ninguna'),
+(3, 'LIB0000003', 'Anonimo', 600, 'Hrnos Unidos', 'El Salvador', 1234565665, 2006, 6, 'Español', 'Literatura', 'Historia de Fantasia'),
+(4, 'LIB0000004', 'Anonimo', 600, 'Hrnos Unidos', 'El Salvador', 1234345643, 2006, 2, 'Español', 'Literatura', 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -558,6 +561,9 @@ TRUNCATE TABLE `material`;
 INSERT INTO `material` (`codigoMaterial`, `Titulo`, `codigoTipoMaterial`, `ubicacionFisica`, `cantidadEjemplares`, `cantidadDisponibles`, `cantidadPrestados`, `estado`) VALUES
 ('CDS0000001', 'Clasicos Rock', 4, 'E-6', 10, 10, 0, 1),
 ('LIB0000001', 'La Biblia', 1, 'E-1', 5, 5, 0, 1),
+('LIB0000002', 'Don Quijote ', 1, 'E-3', 3, 3, 0, 1),
+('LIB0000003', 'El Mago de Oz', 1, 'E-2', 6, 6, 0, 1),
+('LIB0000004', 'Las Cronicas', 1, 'E-2', 5, 4, 1, 1),
 ('OBR0000001', 'Prometeo Encadenado', 2, 'E-2', 5, 5, 0, 1),
 ('REV0000001', 'Salud', 3, 'E-4', 5, 4, 1, 1),
 ('TES0000001', 'Test Psicologico', 5, 'E-2', 1, 0, 1, 0);
@@ -616,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `prestamo` (
   PRIMARY KEY (`id`),
   KEY `carnet_idx` (`carnet`),
   KEY `codmaterial_idx` (`codmaterial`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Truncar tablas antes de insertar `prestamo`
@@ -628,8 +634,12 @@ TRUNCATE TABLE `prestamo`;
 --
 
 INSERT INTO `prestamo` (`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fin`, `estado`, `mora`, `fecha_devolucion`) VALUES
-(1, 'PH220009', 'TES0000001', '2022-11-13', '2022-11-20', 1, 0, NULL),
-(2, 'JS220007', 'REV0000001', '2022-11-13', '2022-11-20', 1, 0, NULL);
+(1, 'PH220009', 'TES0000001', '2022-11-13', '2022-11-20', 0, 0, '2022-11-15'),
+(2, 'JS220007', 'REV0000001', '2022-11-13', '2022-11-20', 0, 0, '2022-11-15'),
+(3, 'PH220009', 'CDS0000001', '2022-11-15', '2022-11-22', 0, 0, '2022-11-15'),
+(4, 'AA220006', 'TES0000001', '2022-11-15', '2022-11-22', 1, 0, NULL),
+(5, 'PH220009', 'REV0000001', '2022-11-15', '2022-11-22', 1, 0, NULL),
+(6, 'PH220009', 'LIB0000004', '2022-11-15', '2022-11-22', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -813,7 +823,7 @@ INSERT INTO `usuario` (`carnet`, `nombre`, `apellido`, `contrasena`, `id_rol`) V
 ('admin', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1),
 ('JP220008', 'Juan ', 'Peres', '8cb2237d0679ca88db6464eac60da96345513964', 3),
 ('JS220007', 'John', 'Smith', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3),
-('PH220009', 'Pablo ', 'Humberto', '8cb2237d0679ca88db6464eac60da96345513964', 3);
+('PH220009', 'Pablo Roberto', 'Humberto', '8cb2237d0679ca88db6464eac60da96345513964', 3);
 
 --
 -- Restricciones para tablas volcadas

@@ -668,14 +668,15 @@ public class AgregarLibro extends javax.swing.JFrame {
         }
         //mandamos datos al controlador
         if (!titulo.equals("") && !ubfisica.equals("") && !cejemplar.equals("") && !autor.equals("") && !npaginas.equals("") && !editorial.equals("") && !pais.equals("") && !isbn.equals("") && !anio.equals("") && !edicion.equals("") && !idioma.equals("") && !materia.equals("") && !descripcion.equals("")) {
-            libroctrl.guardar_update(codMaterial, titulo, ubfisica, cejemplar, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion);
-            limpiarInputs();
+            if (libroctrl.save_update(codMaterial, titulo, ubfisica, cejemplar, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, materia, descripcion)) {
+                limpiarInputs();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
         }
     }//GEN-LAST:event_btnAgregarMousePressed
 
-    public void limpiarInputs(){
+    public void limpiarInputs() {
         txtTitulo.setText("");
         txtUbicacion.setText("");
         txtCantEjemplares.setText("");
@@ -690,7 +691,7 @@ public class AgregarLibro extends javax.swing.JFrame {
         txtMateria.setText("");
         txtDescripcion.setText("");
     }
-    
+
     private void btnListaEjemplaresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaEjemplaresMousePressed
         // TODO add your handling code here:
         dispose();

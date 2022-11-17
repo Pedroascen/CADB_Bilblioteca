@@ -1,6 +1,5 @@
 package Modelo;
 
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 public class UsuarioSQL extends Conexion {
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(UsuarioSQL.class);
 
     private final String SQL_SELECT = "SELECT u.carnet,u.nombre, u.apellido,r.nombre_rol FROM usuario AS u INNER JOIN rol AS r ON u.id_rol = r.id";
     private final String SQL_SELECT_BY_CARNET = "SELECT nombre,apellido,carnet,contrasena,id_rol FROM usuario WHERE carnet = ?";
@@ -43,8 +45,7 @@ public class UsuarioSQL extends Conexion {
             }
             return false;
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            System.err.println(sqle);
+            log.error("Error al logiarse: "+sqle);
             return false;
             //cerramos la conexion
         } finally {
@@ -71,8 +72,7 @@ public class UsuarioSQL extends Conexion {
             System.out.println("No Registros afectados: " + rows);
             return true;
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            System.err.println(sqle);
+            log.error("Error al registrar usuario: "+sqle);
             return false;
             //cerramos la conexion
         } finally {
@@ -107,9 +107,8 @@ public class UsuarioSQL extends Conexion {
             return true;
 
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasena + ":" + id_rol);
-            sqle.printStackTrace();
-            System.err.println(sqle);
+           //JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasena + ":" + id_rol);
+           log.error("Error al actualizar usuarios: "+sqle);
             return false;
             //cerramos la conexion
         } finally {
@@ -146,8 +145,7 @@ public class UsuarioSQL extends Conexion {
                 lstusr.add(idRol);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-
+           log.error("Error al consultar usuarios: "+sqle);
         } finally {
             Conexion.close(conn);
             Conexion.close(stmt);
@@ -187,8 +185,7 @@ public class UsuarioSQL extends Conexion {
                 dtm.addRow(fila);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-
+            log.error("Error al obtener usuarios: "+sqle);
         } finally {
             Conexion.close(conn);
             Conexion.close(stmt);

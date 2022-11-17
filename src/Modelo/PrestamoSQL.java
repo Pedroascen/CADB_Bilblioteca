@@ -11,13 +11,15 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Rocio Abrego
  */
 public class PrestamoSQL {
-
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(PrestamoSQL.class);
     //sentencias SQL
     private final String SQL_SELECT_MATERIAL_DISPO = "SELECT codigoMaterial, Titulo, ubicacionFisica, cantidadEjemplares, cantidadDisponibles FROM `material` WHERE estado=1";
     private final String SQL_SELECT_MATERIAL_NODISPO = "SELECT codigoMaterial, Titulo, ubicacionFisica, cantidadEjemplares, cantidadDisponibles FROM `material` WHERE estado=0";
@@ -41,8 +43,7 @@ public class PrestamoSQL {
             }
 
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            System.err.println(sqle);
+            log.error("Error al guardar registros de prestamo: "+sqle);
             //cerramos la conexión
         } finally {
             Conexion.close(stmt);
@@ -53,7 +54,7 @@ public class PrestamoSQL {
         return Result;
     }
 
-    //metodo para listar estudiantes en tablas
+    //metodo para listar materiales en tablas
     public DefaultTableModel obtenerMaterialesDispo() {
         //inicializacion de las variables
         DefaultTableModel dtm = new DefaultTableModel();
@@ -84,7 +85,7 @@ public class PrestamoSQL {
                 dtm.addRow(fila);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            log.error("Error al consultar los materiales disponibles: "+sqle);
 
         } finally {
             Conexion.close(conn);
@@ -93,8 +94,8 @@ public class PrestamoSQL {
         }
         return dtm;
     }
-    //metodo para listar estudiantes en tablas
-
+    
+    //metodo para listar materiales en tablas
     public DefaultTableModel obtenerMaterialesNoDispo() {
         //inicializacion de las variables
         DefaultTableModel dtm = new DefaultTableModel();
@@ -125,7 +126,7 @@ public class PrestamoSQL {
                 dtm.addRow(fila);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            log.error("Error al consultar los materiales no disponibles: "+sqle);
 
         } finally {
             Conexion.close(conn);

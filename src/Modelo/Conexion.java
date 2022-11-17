@@ -6,8 +6,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.apache.log4j.Logger;
 
 public class Conexion {
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(Conexion.class);
 
     //variables de tipo staticas de conexion a mysql
     private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -26,20 +29,21 @@ public class Conexion {
                 driver = (Driver) jdbcDriverClass.newInstance();
                 DriverManager.registerDriver(driver);
             } catch (Exception e) {
-                System.out.println("Error al cargar el driver JDBC");
+                log.fatal("Error al realizar la conexión: "+e);
                 e.printStackTrace();
             }
         }
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
     }
+    
     //metodo para cierre del resulset
-
     public static void close(ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
             }
         } catch (SQLException sqle) {
+            log.error("Error al cerrar el resultSet: "+sqle);
             sqle.printStackTrace();
         }
     }
@@ -51,6 +55,7 @@ public class Conexion {
                 stmt.close();
             }
         } catch (SQLException sqle) {
+            log.error("Error al cerrar Statement: "+sqle);
             sqle.printStackTrace();
         }
     }
@@ -62,6 +67,7 @@ public class Conexion {
                 conn.close();
             }
         } catch (SQLException sqle) {
+            log.error("Error al cerrar Connection: "+sqle);
             sqle.printStackTrace();
         }
     }

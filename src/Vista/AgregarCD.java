@@ -596,7 +596,7 @@ public class AgregarCD extends javax.swing.JFrame {
             anio_publi = "";
         }
         if (!titulo.equals("") && !ubfisica.equals("") && !cejemplar.equals("") && !autor.equals("") && !paispubli.equals("") && !ciudadpub.equals("") && !anio_publi.equals("") && !volumen.equals("") && !idioma.equals("") && !tema.equals("")) {
-            cdctrl.guardar_update(codMaterial, titulo, ubfisica, cejemplar, autor, paispubli, ciudadpub, anio_publi, volumen, idioma, tema);
+            cdctrl.save_update(codMaterial, titulo, ubfisica, cejemplar, autor, paispubli, ciudadpub, anio_publi, volumen, idioma, tema);
             limpiarInputs();
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");

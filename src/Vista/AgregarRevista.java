@@ -566,8 +566,8 @@ public class AgregarRevista extends javax.swing.JFrame {
         String fechapublicacion = txtFechaPub.getText();
         
         //JOptionPane.showMessageDialog(null, "Los datos son: ");
-        if (txtISSN.getText().length() > 10) {
-            JOptionPane.showMessageDialog(null, "El ISSN no puede ser mayor a 10 caracteres.");
+        if (txtISSN.getText().length() > 8) {
+            JOptionPane.showMessageDialog(null, "El ISSN no puede ser mayor a 8 caracteres.");
             txtISSN.setText("");
             issn = "";
         }
@@ -578,7 +578,7 @@ public class AgregarRevista extends javax.swing.JFrame {
         }
         
         if (!titulo.equals("") && !ufisica.equals("") && !cejemp.equals("") && !editorial.equals("") && !issn.equals("") && !idioma.equals("") && !tamano.equals("") && !periodicidad.equals("") && !fechapublicacion.equals("")) {
-            revistactrl.guardar_update(codMaterial, titulo, ufisica, cejemp, editorial, issn, idioma, tamano, periodicidad, fechapublicacion);
+            revistactrl.save_update(codMaterial, titulo, ufisica, cejemp, editorial, issn, idioma, tamano, periodicidad, fechapublicacion);
             limpiarInputs();
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");

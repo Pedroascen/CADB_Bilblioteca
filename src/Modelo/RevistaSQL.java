@@ -8,12 +8,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jazmine
  */
 public class RevistaSQL {
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(RevistaSQL.class);
 
      //Métodos para insertar y actualizar:
      public boolean insert_update (String codMaterial, String titulo, String ufisica, String cejemp, String editorial, String issn, String idioma, String tamano, String periodicidad, String fechapublicacion ){
@@ -32,7 +35,7 @@ public class RevistaSQL {
             //System.out.println("No Registros afectados: "+rows);
             return true;
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            log.error("Error al guardar registros de revista: "+sqle);
             return false;
         } finally{
             Conexion.close(stmt);

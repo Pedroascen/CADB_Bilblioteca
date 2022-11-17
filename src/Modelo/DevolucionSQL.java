@@ -11,12 +11,16 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Rocio Abrego
  */
 public class DevolucionSQL {
+
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(DevolucionSQL.class);
 
     //METODO PARA OBTENER LOS PRESTAMOS ACTIVOS
     private final String SQL_SELECT_PRESTAMOS_ACTIVE = "SELECT p.carnet,p.codmaterial,m.titulo,p.fecha_inicio,p.fecha_fin,p.mora,p.estado FROM prestamo AS p INNER JOIN material AS m ON p.codmaterial = m.codigoMaterial WHERE p.estado=1 ORDER BY fecha_fin DESC;";
@@ -41,8 +45,7 @@ public class DevolucionSQL {
             }
 
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            System.err.println(sqle);
+            log.error("insertar devolucion: " + sqle);
             //cerramos la conexion
         } finally {
             Conexion.close(stmt);
@@ -53,7 +56,7 @@ public class DevolucionSQL {
         return Result;
     }
 
-    //metodo para listar estudiantes en tablas
+    //metodo para listar prestamos en tablas
     public DefaultTableModel obtenerPrestamosActive() {
         //inicializacion de las variables
         DefaultTableModel dtm = new DefaultTableModel();
@@ -84,8 +87,7 @@ public class DevolucionSQL {
                 dtm.addRow(fila);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-
+            log.error("Error al listar los prestamos activos: " + sqle);
         } finally {
             Conexion.close(conn);
             Conexion.close(stmt);
@@ -93,8 +95,8 @@ public class DevolucionSQL {
         }
         return dtm;
     }
-    
-    //metodo para listar estudiantes en tablas
+
+    //metodo para listar prestamos en tablas
     public DefaultTableModel obtenerTodosPrestamosActive() {
         //inicializacion de las variables
         DefaultTableModel dtm = new DefaultTableModel();
@@ -125,8 +127,7 @@ public class DevolucionSQL {
                 dtm.addRow(fila);
             }
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
-
+            log.error("Error al listar todos los prestamos: " + sqle);
         } finally {
             Conexion.close(conn);
             Conexion.close(stmt);

@@ -657,7 +657,7 @@ public class AgregarObra extends javax.swing.JFrame {
         
         //Validando campos vacios
         if (!titulo.equals("") && !ufisica.equals("") && !cejemp.equals("") && !autor.equals("") && !npaginas.equals("") && !editorial.equals("") && !pais.equals("") && !isbn.equals("") && !anio.equals("") && !edicion.equals("") && !idioma.equals("") && !genero.equals("") ) {
-            obractrl.guardar_update(codMaterial, titulo, ufisica, cejemp, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, genero );
+            obractrl.save_update(codMaterial, titulo, ufisica, cejemp, autor, npaginas, editorial, pais, isbn, anio, edicion, idioma, genero );
             limpiarInputs();
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");

@@ -1,2 +1,4 @@
-2022-11-13 16:12:06 ERROR LibroCtrl:20 - Error en metodo guardar.
-2022-11-13 18:54:49 ERROR LibroCtrl:20 - Error en metodo guardar.
+2022-11-16 20:29:13 ERROR UsuarioSQL:48 - Error al logiarse: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2022-11-16 20:29:13 WARN  UsuarioCtrl:29 - Advertencia de inicio sesion.

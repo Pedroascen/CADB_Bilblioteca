@@ -1,11 +1,15 @@
 package Modelo;
 
+import static Modelo.LibroSQL.log;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class ObraSQL {
+    //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(ObraSQL.class);
    //declaracion de sentencias sql y procedimientos almacenados 
     private final String SQL_DELETE
             = "DELETE FROM libro WHERE codigoMaterialL=?";
@@ -27,7 +31,7 @@ public class ObraSQL {
             System.out.println("No Registros afectados: "+rows);
             return true;
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+             log.error("Error al guardar registros de obra: "+sqle);
             return false;
         } finally{
             Conexion.close(stmt);

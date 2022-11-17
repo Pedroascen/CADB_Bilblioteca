@@ -1,7 +1,11 @@
 package Modelo;
 
+import org.apache.log4j.Logger;
+
 
 public class Hash {
+     //Llamando a la libreria del framwork log4j que nos servirá para el manejo de errores.
+    static final Logger log = Logger.getLogger(Hash.class);
     /* Retorna un hash a partir de un tipo y un texto */
     public static String getHash(String txt, String hashType) {
         try {
@@ -13,7 +17,7 @@ public class Hash {
             }
             return sb.toString();
         } catch (java.security.NoSuchAlgorithmException e) {
-            System.out.println(e.getMessage());
+            log.warn("Error en el metodo getHash: "+e);
         }
         return null;
     }

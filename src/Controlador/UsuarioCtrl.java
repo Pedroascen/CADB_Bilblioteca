@@ -7,10 +7,12 @@ import Vista.Login;
 import Vista.ModificarUsuarios;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 public class UsuarioCtrl {
+     //llamada al manejo de errores
+    static final Logger log = Logger.getLogger(UsuarioCtrl.class);
     //instancia de la entidad
-
     UsuarioSQL usrsql = new UsuarioSQL();
 
     //metodo para iniciar sesion
@@ -24,6 +26,7 @@ public class UsuarioCtrl {
             //JOptionPane.showMessageDialog(null, "El usuario ingreso con exito.");
             return true;
         } else {
+            log.warn("Advertencia de inicio sesion.");
             JOptionPane.showMessageDialog(null, "No se pudo autentificar su identidad.\n Verifique su carnet y contraseña.");
             return false;
         }
@@ -48,7 +51,8 @@ public class UsuarioCtrl {
             JOptionPane.showMessageDialog(null, "El usuario: " + carnet + " se actualizo con exito.");
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasenia + ":" + id_rol);
+            log.error("Error al iniciar sesion.");
+            //JOptionPane.showMessageDialog(null, "" + carnet + ":" + nombre + ":" + apellido + ":" + contrasenia + ":" + id_rol);
             JOptionPane.showMessageDialog(null, "El registro no se pudo actualizar...");
             return false;
         }
@@ -59,6 +63,7 @@ public class UsuarioCtrl {
         if (usrsql.obtenerUsuarios().getColumnCount() > 0) {
             JOptionPane.showMessageDialog(null, "Hay usuarios que cargar." + usrsql.obtenerUsuarios().getColumnCount());
         } else {
+            log.error("Error al mostrar usuarios.");
             JOptionPane.showMessageDialog(null, "No hay registros que mostrar.");
         }
         return true;
@@ -86,6 +91,7 @@ public class UsuarioCtrl {
             //JOptionPane.showMessageDialog(null, "Hay usuarios que cargar." + id_rol);
             return true;
         } else {
+            log.warn("No se encontraron registros.");
             JOptionPane.showMessageDialog(null, "No hay registros que mostrar.");
             return false;
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 16-11-2022 a las 02:29:01
+-- Tiempo de generación: 17-11-2022 a las 02:39:27
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -504,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `libro` (
   `NumeroPaginas` int(11) NOT NULL,
   `Editorial` varchar(50) NOT NULL,
   `Pais` varchar(25) NOT NULL,
-  `ISBN` bigint(13) NOT NULL,
+  `ISBN` int(13) NOT NULL,
   `AnioPublicacion` year(4) NOT NULL,
   `Edicion` int(11) NOT NULL,
   `Idioma` varchar(15) NOT NULL,
@@ -527,7 +527,8 @@ INSERT INTO `libro` (`IdLibro`, `codigoMaterialL`, `Autor(es)`, `NumeroPaginas`,
 (1, 'LIB0000001', 'Anonimo', 1000, 'Anonimo', 'España', 2003341234, 2006, 15, 'Español', 'Religioso', 'Ninguna'),
 (2, 'LIB0000002', 'Anonimo', 300, 'Hermanos Unidos', 'El Salvador', 2012345333, 2005, 1, 'Español', 'Literatura', 'Ninguna'),
 (3, 'LIB0000003', 'Anonimo', 600, 'Hrnos Unidos', 'El Salvador', 1234565665, 2006, 6, 'Español', 'Literatura', 'Historia de Fantasia'),
-(4, 'LIB0000004', 'Anonimo', 600, 'Hrnos Unidos', 'El Salvador', 1234345643, 2006, 2, 'Español', 'Literatura', 'Ninguna');
+(4, 'LIB0000004', 'Anonimo', 600, 'Hrnos Unidos', 'El Salvador', 1234345643, 2006, 2, 'Español', 'Literatura', 'Ninguna'),
+(5, 'LIB0000005', 'Enrique Valdez', 500, 'Hrnos Unidos', 'El Salvador', 1234567712, 2005, 1, 'Español', 'Literatura', 'Narracion tipo fantasia');
 
 -- --------------------------------------------------------
 
@@ -562,11 +563,13 @@ INSERT INTO `material` (`codigoMaterial`, `Titulo`, `codigoTipoMaterial`, `ubica
 ('CDS0000001', 'Clasicos Rock', 4, 'E-6', 10, 10, 0, 1),
 ('LIB0000001', 'La Biblia', 1, 'E-1', 5, 5, 0, 1),
 ('LIB0000002', 'Don Quijote ', 1, 'E-3', 3, 3, 0, 1),
-('LIB0000003', 'El Mago de Oz', 1, 'E-2', 6, 6, 0, 1),
+('LIB0000003', 'El Mago de Oz', 1, 'E-2', 6, 5, 1, 1),
 ('LIB0000004', 'Las Cronicas', 1, 'E-2', 5, 4, 1, 1),
+('LIB0000005', 'Doroty', 1, 'E-4', 5, 5, 0, 1),
 ('OBR0000001', 'Prometeo Encadenado', 2, 'E-2', 5, 5, 0, 1),
 ('REV0000001', 'Salud', 3, 'E-4', 5, 4, 1, 1),
-('TES0000001', 'Test Psicologico', 5, 'E-2', 1, 0, 1, 0);
+('REV0000002', 'Salud', 3, 'E-5', 6, 6, 0, 1),
+('TES0000001', 'Test Psicologico', 5, 'E-2', 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -582,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `obra` (
   `NumeroPaginas` int(11) NOT NULL,
   `Editorial` varchar(45) NOT NULL,
   `Pais` varchar(25) NOT NULL,
-  `ISBN` bigint(13) NOT NULL,
+  `ISBN` int(13) NOT NULL,
   `AnioPublicacion` year(4) NOT NULL,
   `Edicion` int(11) NOT NULL,
   `Idioma` varchar(15) NOT NULL,
@@ -622,7 +625,7 @@ CREATE TABLE IF NOT EXISTS `prestamo` (
   PRIMARY KEY (`id`),
   KEY `carnet_idx` (`carnet`),
   KEY `codmaterial_idx` (`codmaterial`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Truncar tablas antes de insertar `prestamo`
@@ -637,9 +640,10 @@ INSERT INTO `prestamo` (`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fi
 (1, 'PH220009', 'TES0000001', '2022-11-13', '2022-11-20', 0, 0, '2022-11-15'),
 (2, 'JS220007', 'REV0000001', '2022-11-13', '2022-11-20', 0, 0, '2022-11-15'),
 (3, 'PH220009', 'CDS0000001', '2022-11-15', '2022-11-22', 0, 0, '2022-11-15'),
-(4, 'AA220006', 'TES0000001', '2022-11-15', '2022-11-22', 1, 0, NULL),
+(4, 'AA220006', 'TES0000001', '2022-11-15', '2022-11-22', 0, 0, '2022-11-16'),
 (5, 'PH220009', 'REV0000001', '2022-11-15', '2022-11-22', 1, 0, NULL),
-(6, 'PH220009', 'LIB0000004', '2022-11-15', '2022-11-22', 1, 0, NULL);
+(6, 'PH220009', 'LIB0000004', '2022-11-15', '2022-11-22', 1, 0, NULL),
+(7, 'JS220007', 'LIB0000003', '2022-11-16', '2022-11-23', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -698,7 +702,8 @@ TRUNCATE TABLE `revista`;
 --
 
 INSERT INTO `revista` (`IdRevista`, `codigoMaterialR`, `Editorial`, `ISSN`, `Idioma`, `Tamano`, `Periodicidad`, `FechaPublicacion`) VALUES
-(1, 'REV0000001', 'La Prensa', 2001234001, 'Español', '25x30', '20 Jun', '2022-12-20');
+(1, 'REV0000001', 'La Prensa', 2001234001, 'Español', '25x30', '20 Jun', '2022-12-20'),
+(2, 'REV0000002', 'ESE EDICIONES', 34569876, 'Español', '20x30', '24-jun', '2022-12-31');
 
 -- --------------------------------------------------------
 

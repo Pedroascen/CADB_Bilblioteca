@@ -650,7 +650,7 @@ public class AgregarTesis extends javax.swing.JFrame {
         }
         
         if (!titulo.equals("") && !ufisica.equals("") && !cejemp.equals("") && !autor.equals("") && !pais.equals("") && !ciudad.equals("") && !universidad.equals("") && !carrera.equals("") && !idioma.equals("")&& !fechaPublic.equals("")&& !numPaginas.equals("")&& !descripcion.equals("")&& !palabraClav.equals("")) {
-            tesisctrl.guardar_update(codMaterial, titulo, ufisica, cejemp, autor, pais, ciudad, universidad, carrera, idioma,fechaPublic, numPaginas, descripcion, palabraClav);
+            tesisctrl.save_update(codMaterial, titulo, ufisica, cejemp, autor, pais, ciudad, universidad, carrera, idioma,fechaPublic, numPaginas, descripcion, palabraClav);
             limpiarInputs();
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");

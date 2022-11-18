@@ -388,7 +388,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcbActiveInactive, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -417,7 +417,7 @@ public class PrestamosAdmin extends javax.swing.JFrame {
                         .addComponent(jLabelCarnet)
                         .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, -10, 700, 530));
@@ -501,15 +501,15 @@ public class PrestamosAdmin extends javax.swing.JFrame {
     }
 
     private void LlenarOpsCombox() {
-        jcbActiveInactive.addItem("Activos");
-        jcbActiveInactive.addItem("Inactivos");
+        jcbActiveInactive.addItem("Disponibles");
+        jcbActiveInactive.addItem("No disponibles");
     }
 
     private void LlenarTabla(String opcion) {
-        if (opcion.equals("Activos")) {
+        if (opcion.equals("Disponibles")) {
             tblMaterialesDispo.setModel(prestamossql.obtenerMaterialesDispo());
         }
-        if (opcion.equals("Inactivos")) {
+        if (opcion.equals("No disponibles")) {
             tblMaterialesDispo.setModel(prestamossql.obtenerMaterialesNoDispo());
 
         }

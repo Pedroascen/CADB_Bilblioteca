@@ -2,3 +2,4 @@
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 2022-11-16 20:29:13 WARN  UsuarioCtrl:29 - Advertencia de inicio sesion.
+2022-11-17 22:53:47 ERROR PrestamoSQL:46 - Error al guardar registros de prestamo: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'codigoMaterial' in 'where clause'

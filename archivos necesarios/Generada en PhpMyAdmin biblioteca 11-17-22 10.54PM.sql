@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-11-2022 a las 02:39:27
+-- Tiempo de generación: 18-11-2022 a las 04:54:04
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -27,6 +27,19 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `actualizar_mora`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_mora` ()  BEGIN
+UPDATE prestamo p
+JOIN 
+(
+	SELECT *
+	FROM (SELECT p.id, (DATEDIFF(CURDATE(), fecha_fin) * 0.25) as mora
+	FROM prestamo p WHERE p.estado = 1 ) AS a 
+	WHERE a.mora > 0
+) m ON p.id = m.id 
+SET p.mora = m.mora;
+END$$
+
 DROP PROCEDURE IF EXISTS `consulta_ejemplares`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consulta_ejemplares` (`pTitulo` VARCHAR(100), `pAutor` VARCHAR(100), `pTipoMaterial` VARCHAR(50), `pIdioma` VARCHAR(100), `pOrderby` VARCHAR(50))  BEGIN
 -- SI TIPO DE MATERIAL ESTA VACIO, MOSTRAR TODOS LOS RESULTADOS 
@@ -73,7 +86,7 @@ IF pTipoMaterial = 'Todos' OR pTipoMaterial = 'Revista' THEN
 		WHEN pIdioma = 'Todos' THEN 1
 		WHEN length(pIdioma) > 0 AND b.Idioma = pIdioma THEN 1
 		ELSE 0
-	END) = 1;
+	END) = 1 and length(`pAutor`) = 0;
 END IF;
 
 
@@ -395,6 +408,7 @@ DECLARE cPrestado INT Default 0;
 DECLARE LimiteDePrestamos INT Default 0;
 DECLARE CantidadPrestadoPorUser INT Default 0;
 DECLARE PrestamoActivo INT Default 0;
+DECLARE existsMora INT Default 0;
 
 SELECT privilegios.tiempo_limite INTO tiempolimit
 FROM  `biblioteca`.`usuario` 
@@ -412,6 +426,7 @@ SELECT count(*) INTO existsMaterial from material WHERE codigoMaterial = materia
 SELECT count(*) INTO existsCarnet from usuario WHERE carnet = carnetId;
 SELECT count(*) INTO CantidadPrestadoPorUser from prestamo WHERE estado = 1 and carnet = carnetId;
 SELECT count(*) INTO PrestamoActivo from prestamo WHERE estado = 1 and carnet = carnetId AND codmaterial = materialId;
+SELECT count(*) INTO existsMora from prestamo WHERE estado = 1 and carnet = carnetId AND mora > 0;
 
 SELECT max(id) INTO lastID from prestamo;
 SELECT max(cantidadDisponibles) INTO cDisponible from material WHERE codigoMaterial = materialId;
@@ -428,8 +443,10 @@ IF existsMaterial = 0 THEN
 	SELECT '¡Código de material inválido!' as Result, 0 PrestamoId;
 ELSEIF existsCarnet = 0 THEN 
 	SELECT '¡Carnet inválido!' as Result, 0 PrestamoId;
+ELSEIF existsMora > 0 THEN 
+	SELECT 'No se pueden realizar préstamos a este usuario ya que presenta mora.' as Result, 0 PrestamoId;
 ELSEIF cDisponible = 0 THEN 
-	SELECT 'Lo sentimos. Este ejemplar no se encuentra disponible.' as Result, 0 PrestamoId;
+	SELECT 'Este ejemplar no se encuentra disponible.' as Result, 0 PrestamoId;
 ELSEIF LimiteDePrestamos = CantidadPrestadoPorUser THEN 
 	SELECT 'Ha alcanzado su límite de préstamos, por lo que este préstamo no se puede efectuar.' as Result, 0 PrestamoId;
 ELSEIF PrestamoActivo > 0 THEN 
@@ -643,7 +660,7 @@ INSERT INTO `prestamo` (`id`, `carnet`, `codmaterial`, `fecha_inicio`, `fecha_fi
 (4, 'AA220006', 'TES0000001', '2022-11-15', '2022-11-22', 0, 0, '2022-11-16'),
 (5, 'PH220009', 'REV0000001', '2022-11-15', '2022-11-22', 1, 0, NULL),
 (6, 'PH220009', 'LIB0000004', '2022-11-15', '2022-11-22', 1, 0, NULL),
-(7, 'JS220007', 'LIB0000003', '2022-11-16', '2022-11-23', 1, 0, NULL);
+(7, 'JS220007', 'LIB0000003', '2022-11-01', '2022-11-08', 1, 2.25, NULL);
 
 -- --------------------------------------------------------
 

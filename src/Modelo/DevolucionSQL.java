@@ -58,14 +58,21 @@ public class DevolucionSQL {
 
     //metodo para listar prestamos en tablas
     public DefaultTableModel obtenerPrestamosActive() {
-        //inicializacion de las variables
+        //inicialización de las variables
         DefaultTableModel dtm = new DefaultTableModel();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        PreparedStatement stmt_mora = null;
+        ResultSet rs_mora = null;
         try {
             //se inicia la conexion con la base
             conn = Conexion.getConnection();
+            //llamando procedimiento almacenado para actualizar mora antes de mostrar los resultados en DefaultTable
+            stmt_mora = conn.prepareStatement("CALL `biblioteca`.`actualizar_mora`();");
+            //ejecutando procedimiento almacenado
+            rs_mora = stmt_mora.executeQuery();
+            
             //llamando sentencia sql
             stmt = conn.prepareStatement(SQL_SELECT_PRESTAMOS_ACTIVE);
             //ejecutando
